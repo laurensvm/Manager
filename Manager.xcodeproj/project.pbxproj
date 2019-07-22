@@ -7,13 +7,17 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		A977552622E5298B00407385 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A977552522E5298B00407385 /* AppDelegate.swift */; };
-		A977552822E5298B00407385 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A977552722E5298B00407385 /* ViewController.swift */; };
-		A977552B22E5298B00407385 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A977552922E5298B00407385 /* Main.storyboard */; };
 		A977552D22E5298C00407385 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A977552C22E5298C00407385 /* Assets.xcassets */; };
 		A977553022E5298C00407385 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A977552E22E5298C00407385 /* LaunchScreen.storyboard */; };
 		A977553B22E5298C00407385 /* ManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A977553A22E5298C00407385 /* ManagerTests.swift */; };
 		A977554622E5298C00407385 /* ManagerUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A977554522E5298C00407385 /* ManagerUITests.swift */; };
+		A977555522E529D300407385 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A977555322E529D300407385 /* LoginViewController.swift */; };
+		A977555622E529D300407385 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A977555422E529D300407385 /* AppDelegate.swift */; };
+		A977555B22E5350000407385 /* PhotoTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A977555A22E5350000407385 /* PhotoTableViewController.swift */; };
+		A977555E22E5359500407385 /* Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = A977555D22E5359500407385 /* Theme.swift */; };
+		A977556022E536A600407385 /* UIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = A977555F22E536A600407385 /* UIColor.swift */; };
+		A977556222E538E800407385 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A977556122E538E800407385 /* LoginView.swift */; };
+		A977556422E5547E00407385 /* UITextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = A977556322E5547E00407385 /* UITextField.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -35,9 +39,6 @@
 
 /* Begin PBXFileReference section */
 		A977552222E5298B00407385 /* Manager.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Manager.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		A977552522E5298B00407385 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		A977552722E5298B00407385 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		A977552A22E5298B00407385 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		A977552C22E5298C00407385 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		A977552F22E5298C00407385 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		A977553122E5298C00407385 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -47,6 +48,13 @@
 		A977554122E5298C00407385 /* ManagerUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ManagerUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		A977554522E5298C00407385 /* ManagerUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManagerUITests.swift; sourceTree = "<group>"; };
 		A977554722E5298C00407385 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		A977555322E529D300407385 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		A977555422E529D300407385 /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		A977555A22E5350000407385 /* PhotoTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoTableViewController.swift; sourceTree = "<group>"; };
+		A977555D22E5359500407385 /* Theme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Theme.swift; sourceTree = "<group>"; };
+		A977555F22E536A600407385 /* UIColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIColor.swift; sourceTree = "<group>"; };
+		A977556122E538E800407385 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
+		A977556322E5547E00407385 /* UITextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITextField.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -97,10 +105,12 @@
 		A977552422E5298B00407385 /* Manager */ = {
 			isa = PBXGroup;
 			children = (
-				A977552522E5298B00407385 /* AppDelegate.swift */,
-				A977552722E5298B00407385 /* ViewController.swift */,
-				A977552922E5298B00407385 /* Main.storyboard */,
+				A977555C22E5358600407385 /* Extensions */,
+				A977555922E534DC00407385 /* Model */,
+				A977555822E534D600407385 /* Controller */,
+				A977555722E534D000407385 /* View */,
 				A977552C22E5298C00407385 /* Assets.xcassets */,
+				A977555422E529D300407385 /* AppDelegate.swift */,
 				A977552E22E5298C00407385 /* LaunchScreen.storyboard */,
 				A977553122E5298C00407385 /* Info.plist */,
 			);
@@ -123,6 +133,40 @@
 				A977554722E5298C00407385 /* Info.plist */,
 			);
 			path = ManagerUITests;
+			sourceTree = "<group>";
+		};
+		A977555722E534D000407385 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				A977556122E538E800407385 /* LoginView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		A977555822E534D600407385 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				A977555322E529D300407385 /* LoginViewController.swift */,
+				A977555A22E5350000407385 /* PhotoTableViewController.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		A977555922E534DC00407385 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		A977555C22E5358600407385 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				A977555D22E5359500407385 /* Theme.swift */,
+				A977555F22E536A600407385 /* UIColor.swift */,
+				A977556322E5547E00407385 /* UITextField.swift */,
+			);
+			path = Extensions;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -193,6 +237,7 @@
 				TargetAttributes = {
 					A977552122E5298B00407385 = {
 						CreatedOnToolsVersion = 10.2.1;
+						LastSwiftMigration = 1020;
 					};
 					A977553522E5298C00407385 = {
 						CreatedOnToolsVersion = 10.2.1;
@@ -231,7 +276,6 @@
 			files = (
 				A977553022E5298C00407385 /* LaunchScreen.storyboard in Resources */,
 				A977552D22E5298C00407385 /* Assets.xcassets in Resources */,
-				A977552B22E5298B00407385 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -256,8 +300,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A977552822E5298B00407385 /* ViewController.swift in Sources */,
-				A977552622E5298B00407385 /* AppDelegate.swift in Sources */,
+				A977555622E529D300407385 /* AppDelegate.swift in Sources */,
+				A977556222E538E800407385 /* LoginView.swift in Sources */,
+				A977556422E5547E00407385 /* UITextField.swift in Sources */,
+				A977555E22E5359500407385 /* Theme.swift in Sources */,
+				A977555B22E5350000407385 /* PhotoTableViewController.swift in Sources */,
+				A977555522E529D300407385 /* LoginViewController.swift in Sources */,
+				A977556022E536A600407385 /* UIColor.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -293,14 +342,6 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
-		A977552922E5298B00407385 /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				A977552A22E5298B00407385 /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		A977552E22E5298C00407385 /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -432,6 +473,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				INFOPLIST_FILE = Manager/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -440,6 +482,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.laurensvm.Manager;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -449,6 +492,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				INFOPLIST_FILE = Manager/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
