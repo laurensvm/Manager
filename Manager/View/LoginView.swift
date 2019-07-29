@@ -8,9 +8,20 @@
 
 import UIKit
 
+
 class LoginView: UIView {
     
-    fileprivate let welcomeLabel: UILabel = {
+    weak var delegate: LoginViewDelegate?
+    
+    var username: String {
+        return usernameTextField.text ?? ""
+    }
+    
+    var password: String {
+        return passwordTextField.text ?? ""
+    }
+    
+    private lazy var welcomeLabel: UILabel = {
 		let lb = UILabel()
         lb.translatesAutoresizingMaskIntoConstraints = false
         lb.font = Theme.fonts.avenirBlack(size: 40)
@@ -20,7 +31,7 @@ class LoginView: UIView {
         return lb
     }()
     
-    let usernameTextField: UITextField = {
+    private lazy var usernameTextField: UITextField = {
         let tf = UITextField()
         tf.translatesAutoresizingMaskIntoConstraints = false
         tf.placeholder = "Username"
@@ -29,7 +40,7 @@ class LoginView: UIView {
         tf.setIcon(#imageLiteral(resourceName: "user"))
         
         tf.autocorrectionType = UITextAutocorrectionType.no
-        tf.keyboardType = UIKeyboardType.default
+        tf.keyboardType = UIKeyboardType.emailAddress
         tf.returnKeyType = UIReturnKeyType.done
         tf.clearButtonMode = UITextField.ViewMode.whileEditing
         tf.contentVerticalAlignment = UIControl.ContentVerticalAlignment.center
@@ -37,7 +48,7 @@ class LoginView: UIView {
         return tf
     }()
     
-    let passwordTextField: UITextField = {
+    private lazy var passwordTextField: UITextField = {
         let tf = UITextField()
         tf.translatesAutoresizingMaskIntoConstraints = false
         tf.placeholder = "Password"
@@ -54,14 +65,15 @@ class LoginView: UIView {
         return tf
     }()
     
-    let loginButton: UIButton = {
+    private lazy var loginButton: UIButton = {
         let lb = UIButton()
         lb.translatesAutoresizingMaskIntoConstraints = false
         lb.setTitle("Log In", for: [.normal])
         lb.setTitleColor(Theme.colors.lightBlue, for: [.normal])
         lb.titleLabel?.font = Theme.fonts.avenirBlack(size: 24)
-        lb.layer.cornerRadius = 16
+        lb.layer.cornerRadius = 6
         lb.backgroundColor = .white
+        lb.addTarget(self, action: #selector(didTapLoginButton(_:)), for: .touchUpInside)
         return lb
     }()
     
@@ -108,5 +120,11 @@ class LoginView: UIView {
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+}
+
+private extension LoginView {
+    @objc func didTapLoginButton(_ button: UIButton) {
+        delegate?.loginView(self, didTapLoginButton: button)
     }
 }

@@ -10,9 +10,7 @@ import UIKit
 
 
 
-class LoginViewController: UIViewController {
-    
-    let loginView: LoginView = LoginView()
+class LoginViewController: ViewController<LoginView> {
     
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return .lightContent
@@ -20,20 +18,14 @@ class LoginViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        setupViews()
+        customView.delegate = self
     }
-    
-    fileprivate func setupViews() {
-        self.view.addSubview(self.loginView)
-        
-        // Autolayout
-        self.loginView.topAnchor.constraint(equalTo: self.view.topAnchor).isActive = true
-        self.loginView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor).isActive = true
-        self.loginView.leftAnchor.constraint(equalTo: self.view.leftAnchor).isActive = true
-        self.loginView.rightAnchor.constraint(equalTo: self.view.rightAnchor).isActive = true
-        
+}
+
+extension LoginViewController: LoginViewDelegate {
+    func loginView(_ view: LoginView, didTapLoginButton button: UIButton) {
+        print("Username: \(customView.username)")
+        print("Password: \(customView.password)")
     }
-
-
 }
 
