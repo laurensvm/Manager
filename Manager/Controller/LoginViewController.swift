@@ -21,11 +21,17 @@ class LoginViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupViews()
-        self.view.backgroundColor = Theme.colors.lightBlue
     }
     
     fileprivate func setupViews() {
-        self.view.addSubview(loginView)
+        self.view.addSubview(self.loginView)
+        
+        // Autolayout
+        self.loginView.topAnchor.constraint(equalTo: self.view.topAnchor).isActive = true
+        self.loginView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor).isActive = true
+        self.loginView.leftAnchor.constraint(equalTo: self.view.leftAnchor).isActive = true
+        self.loginView.rightAnchor.constraint(equalTo: self.view.rightAnchor).isActive = true
+        
     }
 
 
