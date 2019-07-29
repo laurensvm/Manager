@@ -21,6 +21,15 @@ class LoginView: UIView {
         return passwordTextField.text ?? ""
     }
     
+    lazy var indicatorView: UIActivityIndicatorView = {
+        let ind = UIActivityIndicatorView(style: .whiteLarge)
+        ind.color = Theme.colors.lightGrey
+        ind.translatesAutoresizingMaskIntoConstraints = false
+        ind.hidesWhenStopped = true
+        ind.center = self.center
+        return ind
+    }()
+    
     private lazy var welcomeLabel: UILabel = {
 		let lb = UILabel()
         lb.translatesAutoresizingMaskIntoConstraints = false
@@ -92,30 +101,42 @@ class LoginView: UIView {
         self.addSubview(self.passwordTextField)
         self.addSubview(self.loginButton)
         
+        // This indicatorView wheel starts spinning on API call
+        self.addSubview(self.indicatorView)
+        self.bringSubviewToFront(self.indicatorView)
+        
         // Set autolayout constraints
         
         // Welcome label
         self.welcomeLabel.topAnchor.constraint(equalTo: self.topAnchor, constant: 200).isActive = true
         self.welcomeLabel.leftAnchor.constraint(equalTo: self.leftAnchor, constant: 16).isActive = true
         self.welcomeLabel.rightAnchor.constraint(equalTo: self.rightAnchor, constant: 16).isActive = true
-        
+
         // Username Textfield
         self.usernameTextField.topAnchor.constraint(equalTo: welcomeLabel.bottomAnchor, constant: 64).isActive = true
         self.usernameTextField.leftAnchor.constraint(equalTo: self.leftAnchor, constant: 16).isActive = true
         self.usernameTextField.rightAnchor.constraint(equalTo: self.rightAnchor, constant: -16).isActive = true
         self.usernameTextField.heightAnchor.constraint(equalToConstant: 50).isActive = true
-        
+
         // Password Textfield
         self.passwordTextField.topAnchor.constraint(equalTo: usernameTextField.bottomAnchor, constant: 16).isActive = true
         self.passwordTextField.leftAnchor.constraint(equalTo: self.leftAnchor, constant: 16).isActive = true
         self.passwordTextField.rightAnchor.constraint(equalTo: self.rightAnchor, constant: -16).isActive = true
         self.passwordTextField.heightAnchor.constraint(equalToConstant: 50).isActive = true
-        
+
         // Login Button
         self.loginButton.topAnchor.constraint(equalTo: passwordTextField.bottomAnchor, constant: 64).isActive = true
         self.loginButton.leftAnchor.constraint(equalTo: self.leftAnchor, constant: 16).isActive = true
         self.loginButton.rightAnchor.constraint(equalTo: self.rightAnchor, constant: -16).isActive = true
         self.loginButton.heightAnchor.constraint(equalToConstant: 50).isActive = true
+        
+        // Indicator View
+        self.indicatorView.centerYAnchor.constraint(equalTo: self.centerYAnchor).isActive = true
+        self.indicatorView.centerXAnchor.constraint(equalTo: self.centerXAnchor).isActive = true
+        self.indicatorView.widthAnchor.constraint(equalToConstant: 75).isActive = true
+        self.indicatorView.heightAnchor.constraint(equalToConstant: 75).isActive = true
+        
+
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -125,6 +146,7 @@ class LoginView: UIView {
 
 private extension LoginView {
     @objc func didTapLoginButton(_ button: UIButton) {
+        indicatorView.startAnimating()
         delegate?.loginView(self, didTapLoginButton: button)
     }
 }

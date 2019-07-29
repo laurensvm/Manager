@@ -111,6 +111,7 @@
 		A977552422E5298B00407385 /* Manager */ = {
 			isa = PBXGroup;
 			children = (
+				A9BA332D22EEBB17004FCE5E /* Networking */,
 				A977555C22E5358600407385 /* Helpers */,
 				A977555922E534DC00407385 /* Model */,
 				A977555822E534D600407385 /* Controller */,
@@ -176,6 +177,45 @@
 				A9BA332B22EEAA25004FCE5E /* Protocols.swift */,
 			);
 			path = Helpers;
+			sourceTree = "<group>";
+		};
+		A9BA332D22EEBB17004FCE5E /* Networking */ = {
+			isa = PBXGroup;
+			children = (
+				A9BA333122EEBB3C004FCE5E /* Encoding */,
+				A9BA333022EEBB38004FCE5E /* Service */,
+				A9BA332F22EEBB29004FCE5E /* Manager */,
+				A9BA332E22EEBB21004FCE5E /* EndPoint */,
+			);
+			path = Networking;
+			sourceTree = "<group>";
+		};
+		A9BA332E22EEBB21004FCE5E /* EndPoint */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = EndPoint;
+			sourceTree = "<group>";
+		};
+		A9BA332F22EEBB29004FCE5E /* Manager */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Manager;
+			sourceTree = "<group>";
+		};
+		A9BA333022EEBB38004FCE5E /* Service */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Service;
+			sourceTree = "<group>";
+		};
+		A9BA333122EEBB3C004FCE5E /* Encoding */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Encoding;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
