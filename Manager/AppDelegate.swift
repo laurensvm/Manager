@@ -16,7 +16,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         
-        let rootViewController = LoginViewController()
+//        var networkManager = NetworkManager()
+        
+//        let rootViewController = LoginViewController()
+        let rootViewController = HomeViewController()
+//        let rootViewController = MainTabBarController()
+        
         
         window = UIWindow(frame: UIScreen.main.bounds)
         window?.rootViewController = rootViewController

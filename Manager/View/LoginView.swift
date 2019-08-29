@@ -34,9 +34,9 @@ class LoginView: UIView {
 		let lb = UILabel()
         lb.translatesAutoresizingMaskIntoConstraints = false
         lb.font = Theme.fonts.avenirBlack(size: 40)
-        lb.textColor = .white
+        lb.textColor = Theme.colors.baseBlack
         lb.numberOfLines = 0
-        lb.text = "Login"
+        lb.text = "File Manager"
         return lb
     }()
     
@@ -78,17 +78,17 @@ class LoginView: UIView {
         let lb = UIButton()
         lb.translatesAutoresizingMaskIntoConstraints = false
         lb.setTitle("Log In", for: [.normal])
-        lb.setTitleColor(Theme.colors.lightBlue, for: [.normal])
+        lb.setTitleColor(Theme.colors.baseBlack, for: [.normal])
         lb.titleLabel?.font = Theme.fonts.avenirBlack(size: 24)
         lb.layer.cornerRadius = 6
-        lb.backgroundColor = .white
+        lb.backgroundColor = Theme.colors.baseOrange
         lb.addTarget(self, action: #selector(didTapLoginButton(_:)), for: .touchUpInside)
         return lb
     }()
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        self.backgroundColor = Theme.colors.lightBlue
+        self.backgroundColor = .white
         self.translatesAutoresizingMaskIntoConstraints = false
         
         setupViews()

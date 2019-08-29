@@ -12,6 +12,8 @@ import UIKit
 
 class LoginViewController: ViewController<LoginView> {
     
+//    var networkManager: NetworkManager!
+    
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return .lightContent
     }
@@ -19,6 +21,15 @@ class LoginViewController: ViewController<LoginView> {
     override func viewDidLoad() {
         super.viewDidLoad()
         customView.delegate = self
+    }
+    
+    init() {
+        super.init(nibName: nil, bundle: nil)
+//        self.networkManager = networkManager
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
     }
 }
 

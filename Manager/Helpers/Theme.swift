@@ -22,6 +22,10 @@ class Theme {
             return UIFont(name: "Avenir-Medium", size: size)!
         }
         
+        class func avenir(size: CGFloat) -> UIFont {
+            return UIFont(name: "Avenir", size: size)!
+        }
+        
         class func furutaMedium(size: CGFloat) -> UIFont {
             return UIFont(name: "Futura-Medium", size: size)!
         }
@@ -35,9 +39,12 @@ class Theme {
     }
     
     class colors {
-        static let baseOrange: UIColor = UIColor(rgbColorCodeRed: 253, green: 173, blue: 70, alpha: 1)
-        static let baseGrey: UIColor = UIColor(rgbColorCodeRed: 61, green: 62, blue: 74, alpha: 1)
-        static let lightGrey: UIColor = UIColor(rgbColorCodeRed: 82, green: 87, blue: 99, alpha: 1)
-        static let lightBlue: UIColor = UIColor(rgbColorCodeRed: 84, green: 188, blue: 231, alpha: 1)
+        static let baseBlack: UIColor = UIColor(rgbColorCodeRed: 13, green: 9, blue: 6, alpha: 1)
+        static let lightGrey: UIColor = UIColor(rgbColorCodeRed: 182, green: 181, blue: 180, alpha: 1)
+        static let superLightGrey: UIColor = UIColor(rgbColorCodeRed: 246, green: 246, blue: 244, alpha: 1)
+        static let baseOrange: UIColor = UIColor(rgbColorCodeRed: 253, green: 211, blue: 42, alpha: 1)
+        static let lightOrange: UIColor = UIColor(rgbColorCodeRed: 255, green: 217, blue: 146, alpha: 1)
+//        static let baseGrey: UIColor = UIColor(rgbColorCodeRed: 61, green: 62, blue: 74, alpha: 1)
+//        static let lightBlue: UIColor = UIColor(rgbColorCodeRed: 84, green: 188, blue: 231, alpha: 1)
     }
 }

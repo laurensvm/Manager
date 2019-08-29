@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		A971AF6C2316217700BAA34D /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A971AF6B2316217700BAA34D /* HomeViewController.swift */; };
+		A971AF6E231621B800BAA34D /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A971AF6D231621B800BAA34D /* HomeView.swift */; };
+		A971AF7223162BD800BAA34D /* HomeViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A971AF7123162BD800BAA34D /* HomeViewCell.swift */; };
 		A977552D22E5298C00407385 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A977552C22E5298C00407385 /* Assets.xcassets */; };
 		A977553022E5298C00407385 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A977552E22E5298C00407385 /* LaunchScreen.storyboard */; };
 		A977553B22E5298C00407385 /* ManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A977553A22E5298C00407385 /* ManagerTests.swift */; };
@@ -19,8 +22,12 @@
 		A977556222E538E800407385 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A977556122E538E800407385 /* LoginView.swift */; };
 		A977556422E5547E00407385 /* UITextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = A977556322E5547E00407385 /* UITextField.swift */; };
 		A977556622E5681F00407385 /* UIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A977556522E5681F00407385 /* UIView.swift */; };
+		A988D2222317ECA9004EDB42 /* HomeViewTab.swift in Sources */ = {isa = PBXBuildFile; fileRef = A988D2212317ECA9004EDB42 /* HomeViewTab.swift */; };
+		A988D2282317F5C0004EDB42 /* MainTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A988D2272317F5C0004EDB42 /* MainTabBarController.swift */; };
 		A9BA332A22EEA7E6004FCE5E /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9BA332922EEA7E6004FCE5E /* ViewController.swift */; };
 		A9BA332C22EEAA25004FCE5E /* Protocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9BA332B22EEAA25004FCE5E /* Protocols.swift */; };
+		A9F4036A22F696B900209D17 /* Token.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9F4036922F696B900209D17 /* Token.swift */; };
+		A9F4036C22F6970100209D17 /* Error.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9F4036B22F6970100209D17 /* Error.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -41,6 +48,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		A971AF6B2316217700BAA34D /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
+		A971AF6D231621B800BAA34D /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
+		A971AF7123162BD800BAA34D /* HomeViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewCell.swift; sourceTree = "<group>"; };
 		A977552222E5298B00407385 /* Manager.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Manager.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A977552C22E5298C00407385 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		A977552F22E5298C00407385 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -59,8 +69,12 @@
 		A977556122E538E800407385 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		A977556322E5547E00407385 /* UITextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITextField.swift; sourceTree = "<group>"; };
 		A977556522E5681F00407385 /* UIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIView.swift; sourceTree = "<group>"; };
+		A988D2212317ECA9004EDB42 /* HomeViewTab.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewTab.swift; sourceTree = "<group>"; };
+		A988D2272317F5C0004EDB42 /* MainTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarController.swift; sourceTree = "<group>"; };
 		A9BA332922EEA7E6004FCE5E /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		A9BA332B22EEAA25004FCE5E /* Protocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Protocols.swift; sourceTree = "<group>"; };
+		A9F4036922F696B900209D17 /* Token.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Token.swift; sourceTree = "<group>"; };
+		A9F4036B22F6970100209D17 /* Error.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Error.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -146,6 +160,8 @@
 			isa = PBXGroup;
 			children = (
 				A977556122E538E800407385 /* LoginView.swift */,
+				A971AF6D231621B800BAA34D /* HomeView.swift */,
+				A971AF7123162BD800BAA34D /* HomeViewCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -155,6 +171,8 @@
 			children = (
 				A977555322E529D300407385 /* LoginViewController.swift */,
 				A977555A22E5350000407385 /* PhotoTableViewController.swift */,
+				A971AF6B2316217700BAA34D /* HomeViewController.swift */,
+				A988D2272317F5C0004EDB42 /* MainTabBarController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -162,6 +180,9 @@
 		A977555922E534DC00407385 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				A9F4036922F696B900209D17 /* Token.swift */,
+				A9F4036B22F6970100209D17 /* Error.swift */,
+				A988D2212317ECA9004EDB42 /* HomeViewTab.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -182,40 +203,8 @@
 		A9BA332D22EEBB17004FCE5E /* Networking */ = {
 			isa = PBXGroup;
 			children = (
-				A9BA333122EEBB3C004FCE5E /* Encoding */,
-				A9BA333022EEBB38004FCE5E /* Service */,
-				A9BA332F22EEBB29004FCE5E /* Manager */,
-				A9BA332E22EEBB21004FCE5E /* EndPoint */,
 			);
 			path = Networking;
-			sourceTree = "<group>";
-		};
-		A9BA332E22EEBB21004FCE5E /* EndPoint */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = EndPoint;
-			sourceTree = "<group>";
-		};
-		A9BA332F22EEBB29004FCE5E /* Manager */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Manager;
-			sourceTree = "<group>";
-		};
-		A9BA333022EEBB38004FCE5E /* Service */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Service;
-			sourceTree = "<group>";
-		};
-		A9BA333122EEBB3C004FCE5E /* Encoding */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Encoding;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -350,14 +339,21 @@
 			buildActionMask = 2147483647;
 			files = (
 				A977556622E5681F00407385 /* UIView.swift in Sources */,
+				A971AF6E231621B800BAA34D /* HomeView.swift in Sources */,
+				A971AF7223162BD800BAA34D /* HomeViewCell.swift in Sources */,
 				A977555622E529D300407385 /* AppDelegate.swift in Sources */,
 				A977556222E538E800407385 /* LoginView.swift in Sources */,
+				A9F4036C22F6970100209D17 /* Error.swift in Sources */,
+				A9F4036A22F696B900209D17 /* Token.swift in Sources */,
+				A988D2222317ECA9004EDB42 /* HomeViewTab.swift in Sources */,
 				A9BA332A22EEA7E6004FCE5E /* ViewController.swift in Sources */,
 				A977556422E5547E00407385 /* UITextField.swift in Sources */,
 				A9BA332C22EEAA25004FCE5E /* Protocols.swift in Sources */,
 				A977555E22E5359500407385 /* Theme.swift in Sources */,
 				A977555B22E5350000407385 /* PhotoTableViewController.swift in Sources */,
 				A977555522E529D300407385 /* LoginViewController.swift in Sources */,
+				A988D2282317F5C0004EDB42 /* MainTabBarController.swift in Sources */,
+				A971AF6C2316217700BAA34D /* HomeViewController.swift in Sources */,
 				A977556022E536A600407385 /* UIColor.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
