@@ -21,6 +21,7 @@ class FolderCell: UICollectionViewCell {
     
     lazy var folderName: UILabel = {
         let lb = UILabel()
+        lb.sizeToFit()
         lb.textAlignment = NSTextAlignment.center
         lb.translatesAutoresizingMaskIntoConstraints = false
         lb.font = Theme.fonts.avenir(size: 12)
@@ -46,8 +47,10 @@ class FolderCell: UICollectionViewCell {
         self.folderImageView.widthAnchor.constraint(equalToConstant: 75).isActive = true
         
         self.folderName.centerXAnchor.constraint(equalTo: self.centerXAnchor).isActive = true
-        self.folderName.topAnchor.constraint(equalTo: self.folderImageView.bottomAnchor, constant: 8).isActive = true
-//        self.folderName.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: 0).isActive = true
+        self.folderName.topAnchor.constraint(equalTo: self.folderImageView.bottomAnchor, constant: 4).isActive = true
+        self.folderName.leftAnchor.constraint(equalTo: self.leftAnchor, constant: 4).isActive = true
+        self.folderName.rightAnchor.constraint(equalTo: self.rightAnchor, constant: -4).isActive = true
+        self.folderName.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -4).isActive = true
     }
     
     required init?(coder aDecoder: NSCoder) {

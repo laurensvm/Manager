@@ -120,7 +120,7 @@ class DocumentsView: UIView {
         // BreadCrumb
         self.breadCrumb.topAnchor.constraint(equalTo: viewTitleLabel.bottomAnchor, constant: 16).isActive = true
         self.breadCrumb.leftAnchor.constraint(equalTo: self.leftAnchor, constant: 32).isActive = true
-        self.breadCrumb.rightAnchor.constraint(equalTo: self.rightAnchor, constant: 16).isActive = true
+        self.breadCrumb.rightAnchor.constraint(equalTo: self.rightAnchor, constant: -32).isActive = true
         self.breadCrumb.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: 32)
         
     }

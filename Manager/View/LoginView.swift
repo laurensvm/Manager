@@ -66,6 +66,7 @@ class LoginView: UIView {
         tf.setIcon(#imageLiteral(resourceName: "password"))
         tf.isSecureTextEntry = true
         tf.autocorrectionType = UITextAutocorrectionType.no
+        tf.autocapitalizationType = UITextAutocapitalizationType.none
         tf.keyboardType = UIKeyboardType.default
         tf.returnKeyType = UIReturnKeyType.done
         tf.clearButtonMode = UITextField.ViewMode.whileEditing
