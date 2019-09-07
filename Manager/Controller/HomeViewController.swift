@@ -20,6 +20,7 @@ class HomeViewController: ViewController<HomeView> {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
 
         customView.delegate = self
         customView.didLoadDelegate()
@@ -66,7 +67,9 @@ extension HomeViewController: HomeViewDelegate {
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        print(indexPath.item)
+        let vc = UIViewController()
+        vc.view.backgroundColor = .white
+        navigationController?.pushViewController(vc, animated: true)
     }
     
 }

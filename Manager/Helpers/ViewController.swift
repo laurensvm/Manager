@@ -11,6 +11,7 @@ import UIKit
 class ViewController<V: UIView>: UIViewController {
     override func loadView() {
         view = V()
+        
     }
     
     var customView: V {

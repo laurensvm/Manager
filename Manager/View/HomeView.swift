@@ -13,18 +13,18 @@ class HomeView: UIView {
     weak var delegate: HomeViewDelegate!
     let homeViewCellId = "homeViewCellId"
 	
-    private lazy var navigationBar: UINavigationBar = {
-        let nb = UINavigationBar()
-        nb.translatesAutoresizingMaskIntoConstraints = false
-        nb.prefersLargeTitles = true
-        nb.backgroundColor = .white
-        nb.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
-        nb.shadowImage = UIImage()
-        
-        // Set icons here
-        
-        return nb
-    }()
+//    private lazy var navigationBar: UINavigationBar = {
+//        let nb = UINavigationBar()
+//        nb.translatesAutoresizingMaskIntoConstraints = false
+//        nb.prefersLargeTitles = true
+//        nb.backgroundColor = .white
+//        nb.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
+//        nb.shadowImage = UIImage()
+//
+//        // Set icons here
+//
+//        return nb
+//    }()
     
     private lazy var viewTitleLabel: UILabel = {
         let lb = UILabel()
@@ -49,8 +49,7 @@ class HomeView: UIView {
     override init(frame: CGRect) {
         super.init(frame: frame)
         self.backgroundColor = .white
-        self.translatesAutoresizingMaskIntoConstraints = false
-        
+        self.translatesAutoresizingMaskIntoConstraints = true
         setupViews()
     }
     
@@ -59,25 +58,26 @@ class HomeView: UIView {
         collectionView.dataSource = delegate
         
         // Collection View
-        self.collectionView.topAnchor.constraint(equalTo: viewTitleLabel.bottomAnchor, constant: 64).isActive = true
+//        self.collectionView.topAnchor.constraint(equalTo: self.topAnchor, constant: 164).isActive = true
         self.collectionView.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 16).isActive = true
         self.collectionView.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -16).isActive = true
+        self.collectionView.centerYAnchor.constraint(equalTo: self.centerYAnchor, constant: 50).isActive = true
         self.collectionView.heightAnchor.constraint(equalToConstant: delegate.collectionViewHeight()).isActive = true
     }
 	
     private func setupViews() {
-        self.addSubview(navigationBar)
+//        self.addSubview(navigationBar)
         self.addSubview(viewTitleLabel)
         self.addSubview(collectionView)
         
         // Navigationbar
-        self.navigationBar.topAnchor.constraint(equalTo: self.topAnchor, constant: 0).isActive = true
-        self.navigationBar.leftAnchor.constraint(equalTo: self.leftAnchor, constant: 0).isActive = true
-        self.navigationBar.rightAnchor.constraint(equalTo: self.rightAnchor, constant: 0).isActive = true
-        self.navigationBar.heightAnchor.constraint(equalToConstant: 100).isActive = true
+//        self.navigationBar.topAnchor.constraint(equalTo: self.topAnchor, constant: 0).isActive = true
+//        self.navigationBar.leftAnchor.constraint(equalTo: self.leftAnchor, constant: 0).isActive = true
+//        self.navigationBar.rightAnchor.constraint(equalTo: self.rightAnchor, constant: 0).isActive = true
+//        self.navigationBar.heightAnchor.constraint(equalToConstant: 100).isActive = true
         
         // View Title label
-        self.viewTitleLabel.topAnchor.constraint(equalTo: navigationBar.bottomAnchor, constant: 8).isActive = true
+        self.viewTitleLabel.topAnchor.constraint(equalTo: self.topAnchor, constant: 100).isActive = true
         self.viewTitleLabel.leftAnchor.constraint(equalTo: self.leftAnchor, constant: 16).isActive = true
         self.viewTitleLabel.rightAnchor.constraint(equalTo: self.rightAnchor, constant: 16).isActive = true
 

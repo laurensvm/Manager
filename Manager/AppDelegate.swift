@@ -18,13 +18,26 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
 //        var networkManager = NetworkManager()
         
-//        let rootViewController = LoginViewController()
+
         let rootViewController = HomeViewController()
-//        let rootViewController = MainTabBarController()
+        rootViewController.tabBarItem = UITabBarItem(title: "Home", image: #imageLiteral(resourceName: "dashboard"), tag: 0)
+        let rootViewController2 = PhotoTableViewController()
+        rootViewController2.tabBarItem = UITabBarItem(title: "Documents", image: #imageLiteral(resourceName: "folder"), tag: 1)
+        let rootViewController3 = HomeViewController()
+        rootViewController3.tabBarItem = UITabBarItem(title: "Recent", image: #imageLiteral(resourceName: "clock"), tag: 2)
+        let rootViewController4 = HomeViewController()
+        rootViewController4.tabBarItem = UITabBarItem(title: "Settings", image: #imageLiteral(resourceName: "menu"), tag: 3)
+        let tabBarController = BubbleTabBarController()
         
+        let navigationBarController = UINavigationController(navigationBarClass: CustomNavigationBar.self, toolbarClass: nil)
+        navigationBarController.viewControllers = [rootViewController]
         
+        tabBarController.viewControllers = [navigationBarController, rootViewController2, rootViewController3, rootViewController4]
+        tabBarController.tabBar.tintColor = Theme.colors.baseOrange
         window = UIWindow(frame: UIScreen.main.bounds)
-        window?.rootViewController = rootViewController
+        window?.rootViewController = tabBarController
+        
+        
         window?.makeKeyAndVisible()
         
         return true

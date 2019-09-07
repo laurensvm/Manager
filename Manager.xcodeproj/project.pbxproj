@@ -26,6 +26,11 @@
 		A988D2282317F5C0004EDB42 /* MainTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A988D2272317F5C0004EDB42 /* MainTabBarController.swift */; };
 		A9BA332A22EEA7E6004FCE5E /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9BA332922EEA7E6004FCE5E /* ViewController.swift */; };
 		A9BA332C22EEAA25004FCE5E /* Protocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9BA332B22EEAA25004FCE5E /* Protocols.swift */; };
+		A9DE7DA123231A4800B5EE03 /* CBTabBarButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9DE7D9E23231A4800B5EE03 /* CBTabBarButton.swift */; };
+		A9DE7DA223231A4800B5EE03 /* BubbleTabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9DE7D9F23231A4800B5EE03 /* BubbleTabBar.swift */; };
+		A9DE7DA323231A4800B5EE03 /* BubbleTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9DE7DA023231A4800B5EE03 /* BubbleTabBarController.swift */; };
+		A9DE7DA523231DEB00B5EE03 /* CustomNavigationBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9DE7DA423231DEB00B5EE03 /* CustomNavigationBar.swift */; };
+		A9DE7DA92323304E00B5EE03 /* CustomNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9DE7DA82323304E00B5EE03 /* CustomNavigationController.swift */; };
 		A9F4036A22F696B900209D17 /* Token.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9F4036922F696B900209D17 /* Token.swift */; };
 		A9F4036C22F6970100209D17 /* Error.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9F4036B22F6970100209D17 /* Error.swift */; };
 /* End PBXBuildFile section */
@@ -73,6 +78,11 @@
 		A988D2272317F5C0004EDB42 /* MainTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarController.swift; sourceTree = "<group>"; };
 		A9BA332922EEA7E6004FCE5E /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		A9BA332B22EEAA25004FCE5E /* Protocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Protocols.swift; sourceTree = "<group>"; };
+		A9DE7D9E23231A4800B5EE03 /* CBTabBarButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CBTabBarButton.swift; sourceTree = "<group>"; };
+		A9DE7D9F23231A4800B5EE03 /* BubbleTabBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BubbleTabBar.swift; sourceTree = "<group>"; };
+		A9DE7DA023231A4800B5EE03 /* BubbleTabBarController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BubbleTabBarController.swift; sourceTree = "<group>"; };
+		A9DE7DA423231DEB00B5EE03 /* CustomNavigationBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomNavigationBar.swift; sourceTree = "<group>"; };
+		A9DE7DA82323304E00B5EE03 /* CustomNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomNavigationController.swift; sourceTree = "<group>"; };
 		A9F4036922F696B900209D17 /* Token.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Token.swift; sourceTree = "<group>"; };
 		A9F4036B22F6970100209D17 /* Error.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Error.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -125,6 +135,7 @@
 		A977552422E5298B00407385 /* Manager */ = {
 			isa = PBXGroup;
 			children = (
+				A977555A22E5350000407385 /* PhotoTableViewController.swift */,
 				A9BA332D22EEBB17004FCE5E /* Networking */,
 				A977555C22E5358600407385 /* Helpers */,
 				A977555922E534DC00407385 /* Model */,
@@ -159,9 +170,12 @@
 		A977555722E534D000407385 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				A9DE7D9F23231A4800B5EE03 /* BubbleTabBar.swift */,
+				A9DE7D9E23231A4800B5EE03 /* CBTabBarButton.swift */,
 				A977556122E538E800407385 /* LoginView.swift */,
 				A971AF6D231621B800BAA34D /* HomeView.swift */,
 				A971AF7123162BD800BAA34D /* HomeViewCell.swift */,
+				A9DE7DA423231DEB00B5EE03 /* CustomNavigationBar.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -170,9 +184,10 @@
 			isa = PBXGroup;
 			children = (
 				A977555322E529D300407385 /* LoginViewController.swift */,
-				A977555A22E5350000407385 /* PhotoTableViewController.swift */,
 				A971AF6B2316217700BAA34D /* HomeViewController.swift */,
+				A9DE7DA023231A4800B5EE03 /* BubbleTabBarController.swift */,
 				A988D2272317F5C0004EDB42 /* MainTabBarController.swift */,
+				A9DE7DA82323304E00B5EE03 /* CustomNavigationController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -338,19 +353,24 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A9DE7DA92323304E00B5EE03 /* CustomNavigationController.swift in Sources */,
 				A977556622E5681F00407385 /* UIView.swift in Sources */,
 				A971AF6E231621B800BAA34D /* HomeView.swift in Sources */,
 				A971AF7223162BD800BAA34D /* HomeViewCell.swift in Sources */,
 				A977555622E529D300407385 /* AppDelegate.swift in Sources */,
 				A977556222E538E800407385 /* LoginView.swift in Sources */,
 				A9F4036C22F6970100209D17 /* Error.swift in Sources */,
+				A9DE7DA523231DEB00B5EE03 /* CustomNavigationBar.swift in Sources */,
 				A9F4036A22F696B900209D17 /* Token.swift in Sources */,
+				A9DE7DA323231A4800B5EE03 /* BubbleTabBarController.swift in Sources */,
 				A988D2222317ECA9004EDB42 /* HomeViewTab.swift in Sources */,
+				A9DE7DA123231A4800B5EE03 /* CBTabBarButton.swift in Sources */,
 				A9BA332A22EEA7E6004FCE5E /* ViewController.swift in Sources */,
 				A977556422E5547E00407385 /* UITextField.swift in Sources */,
 				A9BA332C22EEAA25004FCE5E /* Protocols.swift in Sources */,
 				A977555E22E5359500407385 /* Theme.swift in Sources */,
 				A977555B22E5350000407385 /* PhotoTableViewController.swift in Sources */,
+				A9DE7DA223231A4800B5EE03 /* BubbleTabBar.swift in Sources */,
 				A977555522E529D300407385 /* LoginViewController.swift in Sources */,
 				A988D2282317F5C0004EDB42 /* MainTabBarController.swift in Sources */,
 				A971AF6C2316217700BAA34D /* HomeViewController.swift in Sources */,
