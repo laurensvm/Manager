@@ -12,12 +12,5 @@ class CustomNavigationController: UINavigationController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        setupBackBarButton()
-
-    }
-    
-    private func setupBackBarButton() {
-        self.navigationItem.backBarButtonItem?.title = ""
-        
     }
 }

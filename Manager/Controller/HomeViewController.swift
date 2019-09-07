@@ -20,8 +20,7 @@ class HomeViewController: ViewController<HomeView> {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-
+		self.controllerTitle = "Home"
         customView.delegate = self
         customView.didLoadDelegate()
     }
@@ -36,13 +35,13 @@ class HomeViewController: ViewController<HomeView> {
 
 }
 
-extension HomeViewController: HomeViewDelegate {
+extension HomeViewController: CollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return categories.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: self.customView.homeViewCellId, for: indexPath) as! HomeViewCell
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: self.customView.homeViewCellId, for: indexPath) as! HomeCell
         
         let category = categories[indexPath.item]
         
@@ -67,9 +66,10 @@ extension HomeViewController: HomeViewDelegate {
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let vc = UIViewController()
-        vc.view.backgroundColor = .white
-        navigationController?.pushViewController(vc, animated: true)
+        if indexPath.item == 0 {
+            let vc = PhotoViewController()
+            navigationController?.pushViewController(vc, animated: true)
+        }
     }
     
 }

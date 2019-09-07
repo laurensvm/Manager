@@ -9,7 +9,7 @@
 
 import UIKit
 
-class HomeViewCell: UICollectionViewCell {
+class HomeCell: UICollectionViewCell {
     
     private lazy var pictureView: UIView = {
         let v = UIView()

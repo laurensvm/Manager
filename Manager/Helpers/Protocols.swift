@@ -12,9 +12,18 @@ protocol LoginViewDelegate: class {
     func loginView(_ view: LoginView, didTapLoginButton button: UIButton)
 }
 
-protocol HomeViewDelegate: UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
+protocol CollectionViewDelegate: UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     func collectionViewHeight() -> CGFloat
 }
+
+protocol PhotoViewDelegate: UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
+    
+}
+
+protocol BreadCrumbViewController {
+    func getViewControllerTitle() -> String
+}
+
 
 // Protocol which will handle the delegation of the keyboard
 // methods to the ViewController
