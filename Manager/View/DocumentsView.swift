@@ -86,7 +86,7 @@ class DocumentsView: UIView {
         self.collectionView.delegate = delegate
         
         // CollectionView
-        self.collectionView.topAnchor.constraint(equalTo: self.viewTitleLabel.bottomAnchor, constant: 64).isActive = true
+        self.collectionView.topAnchor.constraint(equalTo: self.breadCrumb.bottomAnchor, constant: 48).isActive = true
         self.collectionView.leftAnchor.constraint(equalTo: self.leftAnchor, constant: 32).isActive = true
         self.collectionView.rightAnchor.constraint(equalTo: self.rightAnchor, constant: -32).isActive = true
         self.collectionView.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: 16).isActive = true
@@ -130,8 +130,10 @@ class DocumentsView: UIView {
             self.emptyDirectory.isHidden = true
             self.emptyDirectoryImageView.isHidden = true
             
-        } else {
+            self.collectionView.isHidden = false
             
+        } else {
+            self.collectionView.isHidden = true
             
             self.emptyDirectory.isHidden = false
             self.emptyDirectoryImageView.isHidden = false

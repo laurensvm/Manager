@@ -13,7 +13,7 @@ class HomeViewController: ViewController<HomeView> {
     private let categories: [HomeViewTab] = [
         HomeViewTab(name: "Photos", imageName: "photos", capacity: 40, size: 19),
         HomeViewTab(name: "Videos", imageName: "videos", capacity: 20, size: 5),
-        HomeViewTab(name: "Music", imageName: "music", capacity: 30, size: 15)
+        HomeViewTab(name: "Music", imageName: "music", capacity: 30, size: 28)
     ]
     private let collectionViewCellHeight: CGFloat = 82
     private let collectionViewSpacing: CGFloat = 16

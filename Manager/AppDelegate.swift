@@ -17,11 +17,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         
 //        var networkManager = NetworkManager()
+        
+        // General NavigationBar appearance
         let BarButtonItemAppearance = UIBarButtonItem.appearance()
         let attributes = [NSAttributedString.Key.font:  UIFont(name: "Helvetica-Bold", size: 0.1)!, NSAttributedString.Key.foregroundColor: UIColor.clear]
         BarButtonItemAppearance.setTitleTextAttributes(attributes, for: .normal)
         BarButtonItemAppearance.setTitleTextAttributes(attributes, for: .highlighted)
         
+        // Temporary fill up for the tabbar controller
         let rootViewController3 = HomeViewController()
         rootViewController3.tabBarItem = UITabBarItem(title: "Recent", image: #imageLiteral(resourceName: "clock"), tag: 2)
         let rootViewController4 = HomeViewController()
@@ -35,7 +38,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         homeViewNavigationController.viewControllers = [homeViewController]
         
         // Setup documents view with navigation controller
-        let documentsViewController = DocumentsViewController(withControllerTitle: "Documents", andDirectories: ["Foto's", "Video's", "Cracks", "Personal", "Education", "Werk"])
+        let documentsViewController = DocumentsViewController(withControllerTitle: "Documents", andDirectories: ["Foto's", "Video's", "Cracks", "Personal", "Education", "Werk", "Sport", "Public", "Etc"])
         documentsViewController.tabBarItem = UITabBarItem(title: "Documents", image: #imageLiteral(resourceName: "folder"), tag: 1)
         let documentsViewNavigationController = CustomNavigationController(navigationBarClass: CustomNavigationBar.self, toolbarClass: nil)
         documentsViewNavigationController.viewControllers = [documentsViewController]

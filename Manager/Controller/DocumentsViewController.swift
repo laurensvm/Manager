@@ -63,6 +63,7 @@ extension DocumentsViewController: CollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let directory = directories[indexPath.item]
         let documentsViewController = DocumentsViewController(withControllerTitle: directory, andDirectories: ["Wojo", "Nieuwe"])
+//        documentsViewController.customView.containsSubDirectories = false
         self.navigationController?.pushViewController(documentsViewController, animated: true)
     }
     
