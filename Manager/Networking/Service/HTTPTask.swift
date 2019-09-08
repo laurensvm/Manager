@@ -18,6 +18,7 @@ public enum HTTPTask {
         urlParameters: Parameters?,
         additionalHeaders: HTTPHeaders?
     )
+    case requestHeaders(headers: HTTPHeaders?)
     
     // Add download and upload tasks here later
 }

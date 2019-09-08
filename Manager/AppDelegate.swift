@@ -38,7 +38,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         homeViewNavigationController.viewControllers = [homeViewController]
         
         // Setup documents view with navigation controller
-        let documentsViewController = DocumentsViewController(withControllerTitle: "Documents", andDirectories: ["Foto's", "Video's", "Cracks", "Personal", "Education", "Werk", "Sport", "Public", "Etc"])
+        let documentsViewController = DocumentsViewController(withNetworkManager: networkManager, andControllerTitle	: "Documents")
         documentsViewController.tabBarItem = UITabBarItem(title: "Documents", image: #imageLiteral(resourceName: "folder"), tag: 1)
         let documentsViewNavigationController = CustomNavigationController(navigationBarClass: CustomNavigationBar.self, toolbarClass: nil)
         documentsViewNavigationController.viewControllers = [documentsViewController]

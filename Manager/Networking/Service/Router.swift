@@ -49,6 +49,8 @@ class Router<EndPoint: EndPointType>: NetworkRouter {
                 try self.configureParameters(bodyParameters: bodyParameters,
                                              urlParameters: urlParameters,
                                              request: &request)
+            case .requestHeaders(headers: let headers):
+                self.addAdditionalHeaders(headers, request: &request)
             }
             return request
             
