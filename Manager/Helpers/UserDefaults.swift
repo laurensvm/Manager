@@ -28,7 +28,11 @@ extension UserDefaults {
     
     func getUserProperties() throws -> Credentials {
         guard let username = string(forKey: "username"),
-            let password = string(forKey: "password") else { fatalError("To be implemented") }
+            let password = string(forKey: "password") else {
+                // TO BE IMPLEMENTED
+//                fatalError("Implement me (LoginViewController should appear)")
+                return Credentials(username: "theexission@gmail.com", password: "passwd01", token: nil)
+        }
         let token = getToken()
         
         return Credentials(username: username, password: password, token: token)

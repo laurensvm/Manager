@@ -102,7 +102,7 @@ class DocumentsView: View {
  		configureActiveViews()
         
         // View Title label
-        self.viewTitleLabel.topAnchor.constraint(equalTo: self.topAnchor, constant: 100).isActive = true
+        self.viewTitleLabel.topAnchor.constraint(equalTo: self.topAnchor, constant: 50).isActive = true
         self.viewTitleLabel.leftAnchor.constraint(equalTo: self.leftAnchor, constant: 32).isActive = true
         self.viewTitleLabel.rightAnchor.constraint(equalTo: self.rightAnchor, constant: 16).isActive = true
         

@@ -55,7 +55,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         window?.rootViewController = tabBarController
         window?.makeKeyAndVisible()
         
-        UserDefaults.standard.setLoggedInStatus(value: false)
+        UserDefaults.standard.setLoggedInStatus(value: true)
         if !UserDefaults.standard.isLoggedIn() {
             let loginViewController = LoginViewController(networkManager: networkManager)
             tabBarController.present(loginViewController, animated: false, completion: nil)
