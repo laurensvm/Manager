@@ -8,7 +8,7 @@
 
 import UIKit
 
-class DocumentsView: UIView {
+class DocumentsView: View {
     
     weak var delegate: CollectionViewDelegate!
     let folderCellId = "folderCellId"

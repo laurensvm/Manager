@@ -8,7 +8,7 @@
 
 import UIKit
 
-class PhotoView: UIView {
+class PhotoView: View {
     
     weak var delegate: CollectionViewDelegate!
     let photoCellId = "photoCellId"
