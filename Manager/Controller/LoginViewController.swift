@@ -35,9 +35,20 @@ class LoginViewController: ViewController<LoginView> {
 
 extension LoginViewController: LoginViewDelegate {
     func loginView(_ view: LoginView, didTapLoginButton button: UIButton) {
-        self.networkManager.login(withUsername: customView.username.lowercased(), andPassword: customView.password, completion: { token, error in
-            if token != nil {
-                print(token?.token)
+        
+        // Add keychain integration here
+        let username = customView.username.lowercased()
+        let password = customView.password
+        
+        self.networkManager.login(withUsername: username, andPassword: password, completion: { token, error in
+            
+            if let token = token {
+                
+                // Set keychain updates and userdefaults
+                // TO-DO: Fix with secure way instead of userdefaults !
+                UserDefaults.standard.setLoggedInStatus(value: true)
+                UserDefaults.standard.setUserProperties(credentials: Credentials(username: username, password: password, token: token))
+                
                 DispatchQueue.main.async {
                     self.customView.indicatorView.stopAnimating()
                     self.dismiss(animated: true, completion: nil)
@@ -51,8 +62,6 @@ extension LoginViewController: LoginViewDelegate {
             }
             
         })
-//        print("Username: \(customView.username)")
-//        print("Password: \(customView.password)")
     }
 }
 

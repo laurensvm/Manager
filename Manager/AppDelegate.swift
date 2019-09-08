@@ -16,8 +16,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         
-        var networkManager = NetworkManager()
-        var token: String? = nil
+        let networkManager = NetworkManager()
         
         // General NavigationBar appearance
         let BarButtonItemAppearance = UIBarButtonItem.appearance()
@@ -39,7 +38,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         homeViewNavigationController.viewControllers = [homeViewController]
         
         // Setup documents view with navigation controller
-        let documentsViewController = DocumentsViewController(withControllerTitle: "Documents", andDirectories: ["Foto'sennoganderezooiwateenlangetiteajeuzus", "Video's", "Cracks", "Personal", "Education", "Werk", "Sport", "Public", "Etc"])
+        let documentsViewController = DocumentsViewController(withControllerTitle: "Documents", andDirectories: ["Foto's", "Video's", "Cracks", "Personal", "Education", "Werk", "Sport", "Public", "Etc"])
         documentsViewController.tabBarItem = UITabBarItem(title: "Documents", image: #imageLiteral(resourceName: "folder"), tag: 1)
         let documentsViewNavigationController = CustomNavigationController(navigationBarClass: CustomNavigationBar.self, toolbarClass: nil)
         documentsViewNavigationController.viewControllers = [documentsViewController]
@@ -52,16 +51,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         ]
         tabBarController.tabBar.tintColor = Theme.colors.baseOrange
         
-        let loginViewController = LoginViewController(networkManager: networkManager)
-        
-        
         window = UIWindow(frame: UIScreen.main.bounds)
         window?.rootViewController = tabBarController
-        
-        if token == nil {
-            homeViewController.present(loginViewController, animated: true, completion: nil)
-        }
         window?.makeKeyAndVisible()
+        
+        if !UserDefaults.standard.isLoggedIn() {
+            let loginViewController = LoginViewController(networkManager: networkManager)
+            tabBarController.present(loginViewController, animated: false, completion: nil)
+        }
         
         return true
     }

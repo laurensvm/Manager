@@ -52,6 +52,10 @@
 		A9DE7DDE2323C5D900B5EE03 /* MovieModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9DE7DDD2323C5D900B5EE03 /* MovieModel.swift */; };
 		A9DE7DE02323C66C00B5EE03 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9DE7DDF2323C66C00B5EE03 /* NetworkManager.swift */; };
 		A9DE7DE22323D4A300B5EE03 /* BasicAuthEncoding.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9DE7DE12323D4A300B5EE03 /* BasicAuthEncoding.swift */; };
+		A9DE7DE4232474A000B5EE03 /* Credentials.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9DE7DE3232474A000B5EE03 /* Credentials.swift */; };
+		A9DE7DE6232474D400B5EE03 /* KeyChainError.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9DE7DE5232474D400B5EE03 /* KeyChainError.swift */; };
+		A9DE7DE8232475B400B5EE03 /* KeyChain.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9DE7DE7232475B400B5EE03 /* KeyChain.swift */; };
+		A9DE7DEA23248C3000B5EE03 /* UserDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9DE7DE923248C3000B5EE03 /* UserDefaults.swift */; };
 		A9F4036A22F696B900209D17 /* Token.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9F4036922F696B900209D17 /* Token.swift */; };
 /* End PBXBuildFile section */
 
@@ -124,6 +128,10 @@
 		A9DE7DDD2323C5D900B5EE03 /* MovieModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieModel.swift; sourceTree = "<group>"; };
 		A9DE7DDF2323C66C00B5EE03 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		A9DE7DE12323D4A300B5EE03 /* BasicAuthEncoding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasicAuthEncoding.swift; sourceTree = "<group>"; };
+		A9DE7DE3232474A000B5EE03 /* Credentials.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Credentials.swift; sourceTree = "<group>"; };
+		A9DE7DE5232474D400B5EE03 /* KeyChainError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyChainError.swift; sourceTree = "<group>"; };
+		A9DE7DE7232475B400B5EE03 /* KeyChain.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyChain.swift; sourceTree = "<group>"; };
+		A9DE7DE923248C3000B5EE03 /* UserDefaults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaults.swift; sourceTree = "<group>"; };
 		A9F4036922F696B900209D17 /* Token.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Token.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -241,6 +249,8 @@
 				A9F4036922F696B900209D17 /* Token.swift */,
 				A988D2212317ECA9004EDB42 /* HomeViewTab.swift */,
 				A9DE7DDD2323C5D900B5EE03 /* MovieModel.swift */,
+				A9DE7DE3232474A000B5EE03 /* Credentials.swift */,
+				A9DE7DE7232475B400B5EE03 /* KeyChain.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -255,6 +265,7 @@
 				A977556522E5681F00407385 /* UIView.swift */,
 				A9BA332922EEA7E6004FCE5E /* ViewController.swift */,
 				A9BA332B22EEAA25004FCE5E /* Protocols.swift */,
+				A9DE7DE923248C3000B5EE03 /* UserDefaults.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -334,6 +345,7 @@
 			isa = PBXGroup;
 			children = (
 				A9DE7DD12323BE2700B5EE03 /* NetworkError.swift */,
+				A9DE7DE5232474D400B5EE03 /* KeyChainError.swift */,
 			);
 			path = Errors;
 			sourceTree = "<group>";
@@ -476,16 +488,19 @@
 				A9DE7DAB2323390200B5EE03 /* PhotoViewController.swift in Sources */,
 				A9DE7DDC2323C5B600B5EE03 /* AuthenticationEndPoint.swift in Sources */,
 				A971AF6E231621B800BAA34D /* HomeView.swift in Sources */,
+				A9DE7DE8232475B400B5EE03 /* KeyChain.swift in Sources */,
 				A9DE7DDA2323C13300B5EE03 /* Router.swift in Sources */,
 				A971AF7223162BD800BAA34D /* HomeCell.swift in Sources */,
 				A977555622E529D300407385 /* AppDelegate.swift in Sources */,
 				A977556222E538E800407385 /* LoginView.swift in Sources */,
 				A9DE7DA523231DEB00B5EE03 /* CustomNavigationBar.swift in Sources */,
 				A9DE7DDE2323C5D900B5EE03 /* MovieModel.swift in Sources */,
+				A9DE7DEA23248C3000B5EE03 /* UserDefaults.swift in Sources */,
 				A9F4036A22F696B900209D17 /* Token.swift in Sources */,
 				A9DE7DC32323978700B5EE03 /* FolderCell.swift in Sources */,
 				A9DE7DCB2323BCC700B5EE03 /* HTTPMethod.swift in Sources */,
 				A9DE7DB323235F5400B5EE03 /* CollectionViewHeader.swift in Sources */,
+				A9DE7DE4232474A000B5EE03 /* Credentials.swift in Sources */,
 				A9DE7DC1232390A300B5EE03 /* DocumentsView.swift in Sources */,
 				A9DE7DE02323C66C00B5EE03 /* NetworkManager.swift in Sources */,
 				A9DE7DA323231A4800B5EE03 /* BubbleTabBarController.swift in Sources */,
@@ -501,6 +516,7 @@
 				A9DE7DAD2323392500B5EE03 /* PhotoView.swift in Sources */,
 				A9DE7DCF2323BDAB00B5EE03 /* ParameterEncoding.swift in Sources */,
 				A9BA332C22EEAA25004FCE5E /* Protocols.swift in Sources */,
+				A9DE7DE6232474D400B5EE03 /* KeyChainError.swift in Sources */,
 				A977555E22E5359500407385 /* Theme.swift in Sources */,
 				A977555B22E5350000407385 /* PhotoTableViewController.swift in Sources */,
 				A9DE7DA223231A4800B5EE03 /* BubbleTabBar.swift in Sources */,
