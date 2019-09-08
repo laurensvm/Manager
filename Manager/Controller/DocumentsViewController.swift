@@ -19,10 +19,10 @@ class DocumentsViewController: ViewController<DocumentsView> {
         customView.didLoadDelegate()
         populateBreadCrumbTrail()
         
-        networkManager?.getDirectoriesInRoot(completion: { data, error in
+        networkManager?.getDirectories(inDirectory: self.controllerTitle, completion: { data, error in
             self.directories = data?["directories"] ?? []
             DispatchQueue.main.async {
-                self.customView.collectionView.reloadData()
+                self.customView.containsSubDirectories = !self.directories.isEmpty
             }
         })
     }

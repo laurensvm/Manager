@@ -153,4 +153,46 @@ class NetworkManager: NSObject {
         }
     }
     
+    func getDirectories(inDirectory directory: String, completion: @escaping (_ directories: [String:[String]]?, _ error: String?) -> ()) {
+        
+        if directory == "Documents" {
+            getDirectoriesInRoot(completion: completion)
+        } else {
+            
+            self.checkTokenBeforeRequest()
+            
+            if let token = self.token {
+                
+                filesystemRouter.request(.getDirectories(directory: directory, token: token), completion: { data, response, error in
+                    
+                    if error != nil {
+                        completion(nil, "Check network connection. Server could be down as well.")
+                    }
+                    
+                    if let response = response as? HTTPURLResponse {
+                        let result = self.handleNetworkResponse(response)
+                        switch result {
+                        case .success:
+                            guard let responseData = data else {
+                                completion(nil, NetworkResponse.noData.rawValue)
+                                return
+                            }
+                            
+                            do {
+                                let jsonData = try JSONSerialization.jsonObject(with: responseData, options: []) as! [String: [String]]
+                                
+                                completion(jsonData, nil)
+                            } catch {
+                                completion(nil, NetworkResponse.unableToDecode.rawValue)
+                            }
+                        case .failure(let networkFailureError):
+                            completion(nil, networkFailureError)
+                        }
+                    }
+                })
+            }
+            
+        }
+    }
+    
 }

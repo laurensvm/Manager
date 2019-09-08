@@ -138,6 +138,8 @@ class DocumentsView: View {
             self.emptyDirectory.isHidden = false
             self.emptyDirectoryImageView.isHidden = false
         }
+        
+        self.collectionView.reloadData()
     }
     
     required init?(coder aDecoder: NSCoder) {

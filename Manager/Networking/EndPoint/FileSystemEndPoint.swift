@@ -10,6 +10,7 @@ import Foundation
 
 public enum FileSystemApi {
     case getDirectoriesInRoot(token: Token)
+    case getDirectories(directory: String, token: Token)
 }
 
 extension FileSystemApi: EndPointType {
@@ -27,17 +28,28 @@ extension FileSystemApi: EndPointType {
         switch self {
         case .getDirectoriesInRoot:
             return "root/"
-            
+        case .getDirectories(directory: let directory, token: _):
+            return "\(directory)/"
         }
     }
     
     var httpMethod: HTTPMethod {
-        return .get
+        switch self {
+        case .getDirectoriesInRoot:
+            return .get
+        case .getDirectories:
+            return .get
+        }
     }
     
     var task: HTTPTask {
         switch self {
         case .getDirectoriesInRoot(token: let token):
+            return .requestHeaders(headers: [
+                "Authorization": BasicAuthEncoding.encode(username: token.token, andPassword: ""),
+                "Content-Type": "application/json"
+                ])
+        case .getDirectories(directory: _, token: let token):
             return .requestHeaders(headers: [
                 "Authorization": BasicAuthEncoding.encode(username: token.token, andPassword: ""),
                 "Content-Type": "application/json"
