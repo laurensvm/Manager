@@ -16,7 +16,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         
-//        var networkManager = NetworkManager()
+        let networkManager = NetworkManager()
         
         // General NavigationBar appearance
         let BarButtonItemAppearance = UIBarButtonItem.appearance()
@@ -54,6 +54,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         window = UIWindow(frame: UIScreen.main.bounds)
         window?.rootViewController = tabBarController
         window?.makeKeyAndVisible()
+        
+        UserDefaults.standard.setLoggedInStatus(value: false)
+        if !UserDefaults.standard.isLoggedIn() {
+            let loginViewController = LoginViewController(networkManager: networkManager)
+            tabBarController.present(loginViewController, animated: false, completion: nil)
+        }
         
         return true
     }

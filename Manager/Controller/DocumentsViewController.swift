@@ -11,6 +11,7 @@ import UIKit
 class DocumentsViewController: ViewController<DocumentsView> {
     
     lazy var directories: [String] = []
+    var networkManager: NetworkManager?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -19,10 +20,16 @@ class DocumentsViewController: ViewController<DocumentsView> {
         populateBreadCrumbTrail()
     }
     
-    init(withControllerTitle controllerTitle: String = "Documents", andDirectories directories: [String] = []) {
+    init(withControllerTitle controllerTitle: String = "Documents", andDirectories directories: [String]) {
         super.init(nibName: nil, bundle: nil)
         self.controllerTitle = controllerTitle
         self.directories = directories
+    }
+    
+    init(withNetworkManager networkManager: NetworkManager, andControllerTitle controllerTitle: String = "Documents") {
+        super.init(nibName: nil, bundle: nil)
+        self.networkManager = networkManager
+        self.controllerTitle = controllerTitle
     }
     
     required init?(coder aDecoder: NSCoder) {

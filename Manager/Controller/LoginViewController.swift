@@ -12,7 +12,7 @@ import UIKit
 
 class LoginViewController: ViewController<LoginView> {
     
-//    var networkManager: NetworkManager!
+    var networkManager: NetworkManager!
     
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return .lightContent
@@ -23,9 +23,9 @@ class LoginViewController: ViewController<LoginView> {
         customView.delegate = self
     }
     
-    init() {
+    init(networkManager: NetworkManager) {
         super.init(nibName: nil, bundle: nil)
-//        self.networkManager = networkManager
+        self.networkManager = networkManager
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -35,8 +35,33 @@ class LoginViewController: ViewController<LoginView> {
 
 extension LoginViewController: LoginViewDelegate {
     func loginView(_ view: LoginView, didTapLoginButton button: UIButton) {
-        print("Username: \(customView.username)")
-        print("Password: \(customView.password)")
+        
+        // Add keychain integration here
+        let username = customView.username.lowercased()
+        let password = customView.password
+        
+        self.networkManager.login(withUsername: username, andPassword: password, completion: { token, error in
+            
+            if let token = token {
+                
+                // Set keychain updates and userdefaults
+                // TO-DO: Fix with secure way instead of userdefaults !
+                UserDefaults.standard.setLoggedInStatus(value: true)
+                UserDefaults.standard.setUserProperties(credentials: Credentials(username: username, password: password, token: token))
+                
+                DispatchQueue.main.async {
+                    self.customView.indicatorView.stopAnimating()
+                    self.dismiss(animated: true, completion: nil)
+                }
+            }
+            if error != nil {
+                print(error!)
+            }
+            DispatchQueue.main.async {
+                self.customView.indicatorView.stopAnimating()
+            }
+            
+        })
     }
 }
 

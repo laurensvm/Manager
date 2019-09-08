@@ -9,7 +9,7 @@
 import UIKit
 
 
-class LoginView: UIView {
+class LoginView: View {
     
     weak var delegate: LoginViewDelegate?
     
@@ -20,15 +20,6 @@ class LoginView: UIView {
     var password: String {
         return passwordTextField.text ?? ""
     }
-    
-    lazy var indicatorView: UIActivityIndicatorView = {
-        let ind = UIActivityIndicatorView(style: .whiteLarge)
-        ind.color = Theme.colors.lightGrey
-        ind.translatesAutoresizingMaskIntoConstraints = false
-        ind.hidesWhenStopped = true
-        ind.center = self.center
-        return ind
-    }()
     
     private lazy var welcomeLabel: UILabel = {
 		let lb = UILabel()
@@ -66,6 +57,7 @@ class LoginView: UIView {
         tf.setIcon(#imageLiteral(resourceName: "password"))
         tf.isSecureTextEntry = true
         tf.autocorrectionType = UITextAutocorrectionType.no
+        tf.autocapitalizationType = UITextAutocapitalizationType.none
         tf.keyboardType = UIKeyboardType.default
         tf.returnKeyType = UIReturnKeyType.done
         tf.clearButtonMode = UITextField.ViewMode.whileEditing
@@ -101,10 +93,6 @@ class LoginView: UIView {
         self.addSubview(self.passwordTextField)
         self.addSubview(self.loginButton)
         
-        // This indicatorView wheel starts spinning on API call
-        self.addSubview(self.indicatorView)
-        self.bringSubviewToFront(self.indicatorView)
-        
         // Set autolayout constraints
         
         // Welcome label
@@ -130,12 +118,6 @@ class LoginView: UIView {
         self.loginButton.rightAnchor.constraint(equalTo: self.rightAnchor, constant: -16).isActive = true
         self.loginButton.heightAnchor.constraint(equalToConstant: 50).isActive = true
         
-        // Indicator View
-        self.indicatorView.centerYAnchor.constraint(equalTo: self.centerYAnchor).isActive = true
-        self.indicatorView.centerXAnchor.constraint(equalTo: self.centerXAnchor).isActive = true
-        self.indicatorView.widthAnchor.constraint(equalToConstant: 75).isActive = true
-        self.indicatorView.heightAnchor.constraint(equalToConstant: 75).isActive = true
-        
 
     }
     
@@ -146,7 +128,7 @@ class LoginView: UIView {
 
 private extension LoginView {
     @objc func didTapLoginButton(_ button: UIButton) {
-        indicatorView.startAnimating()
+        self.animateIndicatorView()
         delegate?.loginView(self, didTapLoginButton: button)
     }
 }
