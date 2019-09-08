@@ -17,7 +17,6 @@ protocol CollectionViewDelegate: UICollectionViewDataSource, UICollectionViewDel
 }
 
 protocol PhotoViewDelegate: UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
-    
 }
 
 protocol BreadCrumbViewController {

@@ -20,6 +20,7 @@ class CustomNavigationBar: UINavigationBar {
     }
     
     private func configure() {
+        self.isTranslucent = false
         self.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
         self.shadowImage = UIImage()
         self.tintColor = Theme.colors.baseBlack

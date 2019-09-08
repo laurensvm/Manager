@@ -11,4 +11,5 @@ import Foundation
 public struct Token: Decodable {
     let expiration: Int
     let token: String
+    let date: Date = Date()
 }

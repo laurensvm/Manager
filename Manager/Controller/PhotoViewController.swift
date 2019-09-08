@@ -17,12 +17,9 @@ class PhotoViewController: ViewController<PhotoView> {
         self.controllerTitle = "Photos"
         
         customView.delegate = self
-        
-        let layout = customView.collectionView.collectionViewLayout as? UICollectionViewFlowLayout
-        layout?.sectionHeadersPinToVisibleBounds = true
         customView.didLoadDelegate()
-        populateBreadCrumbTrail()
         
+        populateBreadCrumbTrail()
     }
     
     init() {
@@ -65,13 +62,12 @@ extension PhotoViewController: CollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
 
         let header = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: self.customView.headerId, for: indexPath) as! CollectionViewHeader
-//        header.backgroundColor = .red
         header.breadCrumb.attributedText = self.formatBreadCrumb(withTrail: customView.breadCrumbTrail)
         return header
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
-        return CGSize(width: self.customView.frame.width, height: 220 - 64)
+        return CGSize(width: self.customView.frame.width, height: 170)
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {

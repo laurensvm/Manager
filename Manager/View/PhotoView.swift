@@ -21,7 +21,7 @@ class PhotoView: View {
         cvLayout.minimumLineSpacing = 8
         cvLayout.minimumInteritemSpacing = 8
         cvLayout.sectionInset = UIEdgeInsets(top: 8, left: 0, bottom: 8, right: 0)
-        cvLayout.sectionHeadersPinToVisibleBounds = true
+        cvLayout.sectionHeadersPinToVisibleBounds = false
         
         // CollectionView
         let cv = UICollectionView(frame: .zero, collectionViewLayout: cvLayout)
@@ -47,7 +47,7 @@ class PhotoView: View {
         collectionView.dataSource = delegate
         
         // Collection View
-        self.collectionView.topAnchor.constraint(equalTo: self.topAnchor, constant: 64).isActive = true
+        self.collectionView.topAnchor.constraint(equalTo: self.topAnchor, constant: 0).isActive = true
         self.collectionView.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 8).isActive = true
         self.collectionView.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -8).isActive = true
         self.collectionView.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: 0).isActive = true

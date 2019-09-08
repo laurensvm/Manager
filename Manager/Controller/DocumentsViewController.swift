@@ -18,6 +18,13 @@ class DocumentsViewController: ViewController<DocumentsView> {
         customView.delegate = self
         customView.didLoadDelegate()
         populateBreadCrumbTrail()
+        
+        networkManager?.getDirectories(inDirectory: self.controllerTitle, completion: { data, error in
+            self.directories = data?["directories"] ?? []
+            DispatchQueue.main.async {
+                self.customView.containsSubDirectories = !self.directories.isEmpty
+            }
+        })
     }
     
     init(withControllerTitle controllerTitle: String = "Documents", andDirectories directories: [String]) {
@@ -26,7 +33,7 @@ class DocumentsViewController: ViewController<DocumentsView> {
         self.directories = directories
     }
     
-    init(withNetworkManager networkManager: NetworkManager, andControllerTitle controllerTitle: String = "Documents") {
+    init(withNetworkManager networkManager: NetworkManager?, andControllerTitle controllerTitle: String = "Documents") {
         super.init(nibName: nil, bundle: nil)
         self.networkManager = networkManager
         self.controllerTitle = controllerTitle
@@ -69,8 +76,7 @@ extension DocumentsViewController: CollectionViewDelegate {
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let directory = directories[indexPath.item]
-        let documentsViewController = DocumentsViewController(withControllerTitle: directory, andDirectories: ["Wojo", "Nieuwe"])
-//        documentsViewController.customView.containsSubDirectories = false
+        let documentsViewController = DocumentsViewController(withNetworkManager: self.networkManager, andControllerTitle: directory)
         self.navigationController?.pushViewController(documentsViewController, animated: true)
     }
     

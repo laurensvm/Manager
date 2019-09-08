@@ -9,10 +9,6 @@
 import Foundation
 
 
-enum NetworkEnvironment {
-    case production
-}
-
 public enum AuthenticationApi {
     case getToken(username: String, password: String)
 }
@@ -20,9 +16,7 @@ public enum AuthenticationApi {
 extension AuthenticationApi: EndPointType {
     
     var environmentBaseURL: String {
-        switch NetworkManager.environment {
-        case .production: return "http://127.0.0.1:5000/"
-        }
+         return "http://127.0.0.1:5000/"
     }
     
     var baseURL: URL {
@@ -45,12 +39,10 @@ extension AuthenticationApi: EndPointType {
     var task: HTTPTask {
         switch self {
         case .getToken(username: let username, password: let password):
-            return .requestParametersAndHeaders(bodyParameters: nil,
-                                                urlParameters: nil,
-                                                additionalHeaders: [
-                                                    "Authorization": BasicAuthEncoding.encode(username: username, andPassword: password),
-                                                    "Content-Type": "application/json"
-                                                ])
+            return .requestHeaders(headers: [
+                "Authorization": BasicAuthEncoding.encode(username: username, andPassword: password),
+                "Content-Type": "application/json"
+                ])
         }
     }
     

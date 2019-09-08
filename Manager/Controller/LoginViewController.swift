@@ -40,22 +40,14 @@ extension LoginViewController: LoginViewDelegate {
         let username = customView.username.lowercased()
         let password = customView.password
         
-        self.networkManager.login(withUsername: username, andPassword: password, completion: { token, error in
+        self.networkManager.getToken(withUsername: username, andPassword: password, completion: { token, error in
             
-            if let token = token {
-                
-                // Set keychain updates and userdefaults
-                // TO-DO: Fix with secure way instead of userdefaults !
-                UserDefaults.standard.setLoggedInStatus(value: true)
-                UserDefaults.standard.setUserProperties(credentials: Credentials(username: username, password: password, token: token))
-                
-                DispatchQueue.main.async {
-                    self.customView.indicatorView.stopAnimating()
-                    self.dismiss(animated: true, completion: nil)
-                }
-            }
             if error != nil {
                 print(error!)
+            } else {
+                DispatchQueue.main.async {
+                    self.dismiss(animated: true, completion: nil)
+                }
             }
             DispatchQueue.main.async {
                 self.customView.indicatorView.stopAnimating()
