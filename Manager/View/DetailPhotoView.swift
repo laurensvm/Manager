@@ -10,50 +10,83 @@ import UIKit
 
 class DetailPhotoView: UIView {
     
+    var delegate: DetailPhotoDelegate?
+    
+    var tapGestureRecognizer = UITapGestureRecognizer()
+    var swipeUpGestureRecognizer = UISwipeGestureRecognizer()
+    var swipeDownGestureRecognizer = UISwipeGestureRecognizer()
+    
+    var bottomConstraint: NSLayoutConstraint!
+    var heightConstraint: NSLayoutConstraint!
+    var topConstraint: NSLayoutConstraint!
+    
     let imageView: UIImageView = {
         let iv = UIImageView()
-        iv.clipsToBounds = true
+        iv.clipsToBounds = false
         iv.translatesAutoresizingMaskIntoConstraints = false
-        iv.contentMode = UIView.ContentMode.scaleAspectFill
-        
-        // Customize shadows and corner radius
-        iv.layer.cornerRadius = 5
-//        iv.layer.shadowPath = UIBezierPath(rect: iv.bounds).cgPath
-//        iv.layer.shadowRadius = 10
-//        iv.layer.shadowOffset = .zero
-//        iv.layer.shadowOpacity = 1
+        iv.contentMode = UIView.ContentMode.scaleAspectFit
         return iv
     }()
     
     override init(frame: CGRect) {
         super.init(frame: frame)
         self.backgroundColor = .white
-        self.frame = CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height)
         self.translatesAutoresizingMaskIntoConstraints = true
-
         
         setupViews()
         setConstraints()
     }
     
+    func didLoadDelegate() {
+        // Add gesture recognizer
+        self.tapGestureRecognizer.addTarget(delegate!, action: #selector(delegate!.didTapView(_:)))
+        self.addGestureRecognizer(self.tapGestureRecognizer)
+        
+        self.swipeUpGestureRecognizer.direction = .up
+        self.swipeUpGestureRecognizer.addTarget(delegate!, action: #selector(delegate!.didSwipeUp(_:)))
+        self.addGestureRecognizer(swipeUpGestureRecognizer)
+        
+        self.swipeDownGestureRecognizer.direction = .down
+        self.swipeDownGestureRecognizer.addTarget(delegate!, action: #selector(delegate!.didSwipeDown(_:)))
+        self.addGestureRecognizer(swipeDownGestureRecognizer)
+        
+    }
+    
     private func setupViews() {
         self.addSubview(imageView)
-        
-        // We do this for the animation. Set constraints after the animation is finished
-        self.imageView.frame = CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height)
-        
-		
     }
     
     func setConstraints() {
-        self.imageView.topAnchor.constraint(equalTo: self.topAnchor, constant: 0).isActive = true
-        self.imageView.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: 0).isActive = true
         self.imageView.leftAnchor.constraint(equalTo: self.leftAnchor, constant: 0).isActive = true
         self.imageView.rightAnchor.constraint(equalTo: self.rightAnchor, constant: 0).isActive = true
+        
+        topConstraint = self.imageView.topAnchor.constraint(equalTo: self.topAnchor, constant: 0)
+        topConstraint.isActive = true
+        bottomConstraint = self.imageView.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: 0)
+        bottomConstraint.isActive = true
+//        heightConstraint = self.imageView.heightAnchor.constraint(equalToConstant: 250)
     }
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    func didSwipeUp() {
+        bottomConstraint.constant = -250
+        topConstraint.constant = -250
+        
+        UIView.animate(withDuration: 0.3, delay: 0, options: .curveEaseInOut, animations: {
+            self.layoutIfNeeded()
+        }, completion: nil)
+    }
+    
+    func didSwipeDown() {
+        bottomConstraint.constant = 0
+        topConstraint.constant = 0
+        
+        UIView.animate(withDuration: 0.3, delay: 0, options: .curveEaseInOut, animations: {
+            self.layoutIfNeeded()
+        }, completion: nil)
     }
     
     

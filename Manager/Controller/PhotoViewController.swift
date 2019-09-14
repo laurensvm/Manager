@@ -10,6 +10,8 @@ import UIKit
 
 class PhotoViewController: ViewController<PhotoView> {
     
+    private let transition = DetailViewTransition()
+    
     let imageNames: [String] = ["ana_cheri_bed_3.0", "ana_cheri_waiting", "ana_cheri_bed_2.0", "ana_cheri_in_bed", "ana_cheri_bed_3.0", "ana_cheri_waiting", "ana_cheri_bed_2.0", "ana_cheri_in_bed", "ana_cheri_bed_3.0", "ana_cheri_waiting", "ana_cheri_bed_2.0", "ana_cheri_in_bed", "ana_cheri_bed_3.0", "ana_cheri_waiting", "ana_cheri_bed_2.0", "ana_cheri_in_bed"]
     
     override func viewDidLoad() {
@@ -71,10 +73,28 @@ extension PhotoViewController: CollectionViewDelegate {
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+    	
+//        if let cell = collectionView.cellForItem(at: indexPath) {
+//            transition.originFrame = cell.frame
+//        }
+        
+        // Animation        
         let image = UIImage(named: self.imageNames[indexPath.item])
         let detailPhotoViewController = DetailPhotoViewController(image: image)
         
-        present(detailPhotoViewController, animated: true, completion: nil)
+        detailPhotoViewController.transitioningDelegate = self
+        
+        // Change to true for an animation
+//        self.present(detailPhotoViewController, animated: true, completion: nil)
+        
+        self.navigationController?.pushViewController(detailPhotoViewController, animated: true)
     }
     
+}
+
+extension PhotoViewController: UIViewControllerTransitioningDelegate {
+    func animationController(forPresented presented: UIViewController, presenting: UIViewController, source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+        
+        return transition
+    }
 }

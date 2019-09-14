@@ -23,6 +23,12 @@ protocol BreadCrumbViewController {
     func getViewControllerTitle() -> String
 }
 
+@objc protocol DetailPhotoDelegate {
+    @objc func didTapView(_ sender: UITapGestureRecognizer?)
+    @objc func didSwipeUp(_ sender: UISwipeGestureRecognizer?)
+    @objc func didSwipeDown(_ sender: UISwipeGestureRecognizer?)
+}
+
 
 // Protocol which will handle the delegation of the keyboard
 // methods to the ViewController
