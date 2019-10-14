@@ -53,7 +53,7 @@ extension AppDelegate {
         homeViewNavigationController.viewControllers = [homeViewController]
         
         // Setup documents view with navigation controller
-        let documentsViewController = DocumentsViewController(withNetworkManager: networkManager, andControllerTitle    : "Documents")
+        let documentsViewController = DocumentsViewController(withNetworkManager: networkManager, andControllerTitle    : "Documents", andPath: "")
         documentsViewController.tabBarItem = UITabBarItem(title: "Documents", image: #imageLiteral(resourceName: "folder"), tag: 1)
         let documentsViewNavigationController = CustomNavigationController(navigationBarClass: CustomNavigationBar.self, toolbarClass: nil)
         documentsViewNavigationController.viewControllers = [documentsViewController]

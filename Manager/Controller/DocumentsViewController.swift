@@ -11,6 +11,8 @@ import UIKit
 class DocumentsViewController: ViewController<DocumentsView> {
     
     lazy var directories: [String] = []
+    
+    private var path: String?
     var networkManager: NetworkManager?
     
     override func viewDidLoad() {
@@ -20,7 +22,12 @@ class DocumentsViewController: ViewController<DocumentsView> {
         customView.didLoadDelegate()
         populateBreadCrumbTrail()
         
-        networkManager?.getDirectories(inDirectory: "nieuwe", completion: { data, error in
+        
+        if path == nil {
+            path = self.controllerTitle
+        }
+        
+        networkManager?.getDirectories(inDirectory: path!, completion: { data, error in
             if let directories = data?["directories"] {
                 directories.forEach({ _, json in
                     self.directories.append(json.stringValue)
@@ -38,10 +45,11 @@ class DocumentsViewController: ViewController<DocumentsView> {
         self.directories = directories
     }
     
-    init(withNetworkManager networkManager: NetworkManager?, andControllerTitle controllerTitle: String = "Documents") {
+    init(withNetworkManager networkManager: NetworkManager?, andControllerTitle controllerTitle: String = "Documents", andPath path: String?) {
         super.init(nibName: nil, bundle: nil)
         self.networkManager = networkManager
         self.controllerTitle = controllerTitle
+        self.path = path
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -81,7 +89,7 @@ extension DocumentsViewController: CollectionViewDelegate {
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let directory = directories[indexPath.item]
-        let documentsViewController = DocumentsViewController(withNetworkManager: self.networkManager, andControllerTitle: directory)
+        let documentsViewController = DocumentsViewController(withNetworkManager: self.networkManager, andControllerTitle: directory, andPath: nil)
         self.navigationController?.pushViewController(documentsViewController, animated: true)
     }
     
