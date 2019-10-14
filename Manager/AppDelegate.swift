@@ -12,15 +12,16 @@ import UIKit
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
+    var networkManager = NetworkManager()
 
-
-    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
+    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions:
+        [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         
         setupApplicationHierarchy()
         
         // Handle the document uploads from the PHAsset library here
         DispatchQueue.global(qos: DispatchQoS.QoSClass.background).async {
-            let photoManager = PhotoManager()
+            let photoManager = PhotoManager(withNetworkManager: self.networkManager)
             photoManager.beginImportingAssets()
         }
         
@@ -31,7 +32,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 extension AppDelegate {
     private func setupApplicationHierarchy() {
-        let networkManager = NetworkManager()
         
         // General NavigationBar appearance
         let BarButtonItemAppearance = UIBarButtonItem.appearance()
@@ -53,7 +53,7 @@ extension AppDelegate {
         homeViewNavigationController.viewControllers = [homeViewController]
         
         // Setup documents view with navigation controller
-        let documentsViewController = DocumentsViewController(withNetworkManager: networkManager, andControllerTitle    : "Documents", andPath: "")
+        let documentsViewController = DocumentsViewController(withNetworkManager: networkManager, andControllerTitle    : "Documents", andPath: nil)
         documentsViewController.tabBarItem = UITabBarItem(title: "Documents", image: #imageLiteral(resourceName: "folder"), tag: 1)
         let documentsViewNavigationController = CustomNavigationController(navigationBarClass: CustomNavigationBar.self, toolbarClass: nil)
         documentsViewNavigationController.viewControllers = [documentsViewController]

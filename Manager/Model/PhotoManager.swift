@@ -11,10 +11,11 @@ import Photos
 
 class PhotoManager: NSObject {
     
-    override init() {
+    private var networkManager: NetworkManager!
+    
+    init(withNetworkManager networkManager: NetworkManager) {
         super.init()
-        
-//        NetworkingManager()
+        self.networkManager = networkManager
     }
     
     func beginImportingAssets() {

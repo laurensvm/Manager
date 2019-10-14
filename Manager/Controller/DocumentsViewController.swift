@@ -15,6 +15,13 @@ class DocumentsViewController: ViewController<DocumentsView> {
     private var path: String?
     private var networkManager: NetworkManager?
     
+    private func getPath() -> String {
+        if let path = path {
+            return path + "/"
+        }
+        return ""
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         customView.delegate = self
@@ -22,12 +29,7 @@ class DocumentsViewController: ViewController<DocumentsView> {
         customView.didLoadDelegate()
         populateBreadCrumbTrail()
         
-        
-        if path == nil {
-            path = self.controllerTitle
-        }
-        
-        networkManager?.getDirectories(inDirectory: path!, completion: { data, error in
+        networkManager?.getDirectories(inDirectory: getPath(), completion: { data, error in
             if let directories = data?["directories"] {
                 directories.forEach({ _, json in
                     self.directories.append(json.stringValue)
@@ -89,7 +91,7 @@ extension DocumentsViewController: CollectionViewDelegate {
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let directory = directories[indexPath.item]
-        let documentsViewController = DocumentsViewController(withNetworkManager: self.networkManager, andControllerTitle: directory, andPath: nil)
+        let documentsViewController = DocumentsViewController(withNetworkManager: self.networkManager, andControllerTitle: directory, andPath: getPath() + directory)
         self.navigationController?.pushViewController(documentsViewController, animated: true)
     }
     
