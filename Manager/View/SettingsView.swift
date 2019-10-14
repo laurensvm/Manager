@@ -20,6 +20,11 @@ class SettingsView: View {
         return lb
     }()
     
+    private lazy var tableView: UITableView = {
+       let tv = UITableView()
+        return tv
+    }()
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         self.backgroundColor = .white
