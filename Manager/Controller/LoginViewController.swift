@@ -36,11 +36,17 @@ class LoginViewController: ViewController<LoginView> {
 extension LoginViewController: LoginViewDelegate {
     func loginView(_ view: LoginView, didTapLoginButton button: UIButton) {
         
-        // Add keychain integration here
         let username = customView.username.lowercased()
         let password = customView.password
         
-        networkManager.credentialManager.setCredentials(username: username, password: password)
+        networkManager.credentialManager.login(username: username, password: password, completion: { successful in
+            DispatchQueue.main.async {
+                self.customView.indicatorView.stopAnimating()
+                if successful {
+                    self.dismiss(animated: true, completion: nil)
+                }
+            }
+        })
     }
 }
 

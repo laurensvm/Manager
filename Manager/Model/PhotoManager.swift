@@ -14,7 +14,7 @@ class PhotoManager: NSObject {
     override init() {
         super.init()
         
-        NetworkingManager()
+//        NetworkingManager()
     }
     
     func beginImportingAssets() {

@@ -10,6 +10,8 @@ import UIKit
 
 class HomeViewController: ViewController<HomeView> {
     
+    var networkManager: NetworkManager?
+    
     private let categories: [HomeViewTab] = [
         HomeViewTab(name: "Photos", imageName: "photos", capacity: 40, size: 19),
         HomeViewTab(name: "Videos", imageName: "videos", capacity: 20, size: 5),
@@ -26,8 +28,9 @@ class HomeViewController: ViewController<HomeView> {
         
     }
     
-    init() {
+    init(withNetworkManager networkManager: NetworkManager) {
         super.init(nibName: nil, bundle: nil)
+        self.networkManager = networkManager
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -68,8 +71,16 @@ extension HomeViewController: CollectionViewDelegate {
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if indexPath.item == 0 {
-            let vc = PhotoViewController()
-            navigationController?.pushViewController(vc, animated: true)
+            if let networkManager = self.networkManager {
+                let vc = PhotoViewController(withNetworkManager: networkManager)
+                networkManager.getImageList(amount: 100, completion: { (images, error) in
+                    if let images = images {
+            			vc.images = images
+                    }
+                })
+
+                navigationController?.pushViewController(vc, animated: true)
+            }
         }
     }
     

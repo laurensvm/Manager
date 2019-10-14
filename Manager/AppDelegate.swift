@@ -40,14 +40,14 @@ extension AppDelegate {
         BarButtonItemAppearance.setTitleTextAttributes(attributes, for: .highlighted)
         
         // Temporary fill up for the tabbar controller
-        let rootViewController3 = HomeViewController()
+        let rootViewController3 = HomeViewController(withNetworkManager: networkManager)
         rootViewController3.tabBarItem = UITabBarItem(title: "Recent", image: #imageLiteral(resourceName: "clock"), tag: 2)
-        let rootViewController4 = HomeViewController()
+        let rootViewController4 = HomeViewController(withNetworkManager: networkManager)
         rootViewController4.tabBarItem = UITabBarItem(title: "Settings", image: #imageLiteral(resourceName: "menu"), tag: 3)
         let tabBarController = BubbleTabBarController()
         
         // Setup home view with navigation controller
-        let homeViewController = HomeViewController()
+        let homeViewController = HomeViewController(withNetworkManager: networkManager)
         homeViewController.tabBarItem = UITabBarItem(title: "Home", image: #imageLiteral(resourceName: "dashboard"), tag: 0)
         let homeViewNavigationController = CustomNavigationController(navigationBarClass: CustomNavigationBar.self, toolbarClass: nil)
         homeViewNavigationController.viewControllers = [homeViewController]

@@ -9,9 +9,9 @@
 import Foundation
 
 public enum FileSystemApi {
-    case getDirectoriesInRoot
     case getDirectories(directory: String)
-    case postImage(image: Data)
+    case getImageList(amount: Int)
+    case getImage(url: String)
 }
 
 extension FileSystemApi: EndPointType {
@@ -27,38 +27,34 @@ extension FileSystemApi: EndPointType {
     
     var path: String {
         switch self {
-        case .getDirectoriesInRoot:
-            return ""
         case .getDirectories:
             return ""
-        case .postImage:
-            return "images/post/"
+        case .getImageList:
+            return "image-list/"
+        case .getImage(let url):
+            return "image/\(url)"
         }
     }
     
     var httpMethod: HTTPMethod {
         switch self {
-        case .getDirectoriesInRoot:
-            return .get
         case .getDirectories:
             return .post
-        case .postImage:
-            return .post
+        case .getImageList:
+            return .get
+        case .getImage:
+            return .get
         }
     }
     
     var task: HTTPTask {
         switch self {
-        case .getDirectoriesInRoot:
-            return .request
-//            return .requestHeaders(headers: [
-//                "Authorization": BasicAuthEncoding.encode(username: tokenString, andPassword: ""),
-//                "Content-Type": "application/json"
-//                ])
         case .getDirectories(directory: let directory):
             return .requestParameters(bodyParameters: ["directory": directory], urlParameters: nil)
-        case .postImage(image: let image):
-            return .requestParameters(bodyParameters: nil, urlParameters: nil)
+        case .getImageList(let amount):
+            return .requestParameters(bodyParameters: nil, urlParameters: ["amount": amount])
+        case .getImage:
+            return .request
         }
     }
     

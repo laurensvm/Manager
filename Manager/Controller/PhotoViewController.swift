@@ -10,22 +10,33 @@ import UIKit
 
 class PhotoViewController: ViewController<PhotoView> {
     
+    private var networkManager: NetworkManager?
+    
     private let transition = DetailViewTransition()
     
-    let imageNames: [String] = ["ana_cheri_bed_3.0", "ana_cheri_waiting", "ana_cheri_bed_2.0", "ana_cheri_in_bed", "ana_cheri_bed_3.0", "ana_cheri_waiting", "ana_cheri_bed_2.0", "ana_cheri_in_bed", "ana_cheri_bed_3.0", "ana_cheri_waiting", "ana_cheri_bed_2.0", "ana_cheri_in_bed", "ana_cheri_bed_3.0", "ana_cheri_waiting", "ana_cheri_bed_2.0", "ana_cheri_in_bed"]
+    var images: [Image] = [] {
+        didSet {
+            DispatchQueue.main.async {
+                self.customView.collectionView.reloadData()
+            }
+        }
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.controllerTitle = "Photos"
         
+        // Setup datasources and delegates
         customView.delegate = self
         customView.didLoadDelegate()
+        customView.collectionView.prefetchDataSource = self
         
         populateBreadCrumbTrail()
     }
     
-    init() {
+    init(withNetworkManager networkManager: NetworkManager) {
         super.init(nibName: nil, bundle: nil)
+        self.networkManager = networkManager
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -47,12 +58,20 @@ extension PhotoViewController: CollectionViewDelegate {
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return imageNames.count
+        return images.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: self.customView.photoCellId, for: indexPath) as! PhotoCell
-        cell.imageView.image = UIImage(named: imageNames[indexPath.item])
+        
+        let image = images[indexPath.item]
+        
+        cell.imageView.image = image.image
+        
+        if image.image == nil && !image.isFetching {
+            self.collectionView(collectionView, prefetchItemsAt: [indexPath])
+        }
+        
         return cell
     }
     
@@ -74,20 +93,22 @@ extension PhotoViewController: CollectionViewDelegate {
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
     	
-//        if let cell = collectionView.cellForItem(at: indexPath) {
-//            transition.originFrame = cell.frame
-//        }
+        if let cell = collectionView.cellForItem(at: indexPath) {
+            transition.originFrame = cell.frame
+        }
         
         // Animation        
-        let image = UIImage(named: self.imageNames[indexPath.item])
-        let detailPhotoViewController = DetailPhotoViewController(image: image)
+        if let image = images[indexPath.item].image {
+            let detailPhotoViewController = DetailPhotoViewController(image: image)
+            detailPhotoViewController.transitioningDelegate = self
+            
+//            Change to true for an animation
+//            self.present(detailPhotoViewController, animated: true, completion: nil)
+            
+            self.navigationController?.pushViewController(detailPhotoViewController, animated: true)
+
+        }
         
-        detailPhotoViewController.transitioningDelegate = self
-        
-        // Change to true for an animation
-//        self.present(detailPhotoViewController, animated: true, completion: nil)
-        
-        self.navigationController?.pushViewController(detailPhotoViewController, animated: true)
     }
     
 }
@@ -97,4 +118,26 @@ extension PhotoViewController: UIViewControllerTransitioningDelegate {
         
         return transition
     }
+}
+
+extension PhotoViewController: UICollectionViewDataSourcePrefetching {
+    func collectionView(_ collectionView: UICollectionView, prefetchItemsAt indexPaths: [IndexPath]) {
+        for idx in indexPaths {
+            let image = images[idx.item]
+            guard let imageURL = image.imageURL,
+                 image.image == nil,
+                !image.isFetching else { return }
+            
+            image.isFetching = true
+            networkManager?.getImage(url: imageURL, completion: { data in
+                image.image = UIImage(data: data)
+                DispatchQueue.main.async {
+                    self.customView.collectionView.reloadItems(at: [idx])
+                }
+                
+            })
+        }
+    }
+    
+    
 }

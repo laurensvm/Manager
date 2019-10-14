@@ -13,7 +13,7 @@ class DocumentsViewController: ViewController<DocumentsView> {
     lazy var directories: [String] = []
     
     private var path: String?
-    var networkManager: NetworkManager?
+    private var networkManager: NetworkManager?
     
     override func viewDidLoad() {
         super.viewDidLoad()

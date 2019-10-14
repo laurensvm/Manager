@@ -63,9 +63,33 @@ class CredentialManager: NSObject {
         refreshTokenIfNeeded()
     }
     
+    func login(username: String, password: String, completion: @escaping (Bool) -> ()) {
+        
+        setCredentials(username: username, password: password)
+        
+        delegate?.getToken(completion: { error, token in
+            if error != nil {
+                print("Error: \(error!)")
+            }
+            
+            if let token = token {
+                self.token = token
+                completion(true)
+            } else {
+                completion(false)
+            }
+            
+        })
+    }
+    
     func getCredentials() -> URLCredential? {
         guard let credentials = storage.defaultCredential(for: protectionSpace) else { return nil }
         return credentials
+    }
+    
+    func removeCredentials() {
+        guard let credentials = storage.defaultCredential(for: protectionSpace) else { return }
+        storage.remove(credentials, for: protectionSpace)
     }
     
     func getTokenString() -> String? {

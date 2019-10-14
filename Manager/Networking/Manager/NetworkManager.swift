@@ -116,4 +116,49 @@ class NetworkManager: NSObject {
         })
     }
     
+    func getImageList(amount: Int, completion: @escaping (_ imageList: [Image]?, _ error: String?) -> ()) {
+        self.filesystemRouter.request(.getImageList(amount: amount), completion: { data, response, error in
+            if error != nil {
+                completion(nil, "\(NetworkError.noConnection)")
+            }
+            
+            if let response = response as? HTTPURLResponse {
+                let result = self.handleNetworkResponse(response)
+                switch result {
+                case .success:
+                    guard let responseData = data else {
+                        completion(nil, NetworkResponse.noData.rawValue)
+                        return
+                    }
+                    
+                    let images = try? JSONDecoder().decode([Image].self, from: responseData)
+                    
+                    completion(images, nil)
+                case .failure(let networkFailureError):
+                    completion(nil, networkFailureError)
+                }
+                
+            }
+        })
+    }
+    
+    func getImage(url: String, completion: @escaping (_ data: Data) -> ()) {
+        self.filesystemRouter.request(.getImage(url: url), completion: { data, response, error in
+            if let response = response as? HTTPURLResponse {
+                let result = self.handleNetworkResponse(response)
+                switch result {
+                case .success:
+                    guard let responseData = data else {
+                        return
+                    }
+                    
+                    completion(responseData)
+                case .failure:
+                    return
+                }
+                
+            }
+        })
+    }
+    
 }
