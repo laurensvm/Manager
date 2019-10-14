@@ -8,8 +8,16 @@
 
 import Foundation
 
-struct Credentials {
-    var username: String
-    var password: String
+class Credentials: URLCredential {
     var token: Token?
+    
+    override init() {
+        super.init()
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    
 }

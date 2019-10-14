@@ -23,6 +23,7 @@ class HomeViewController: ViewController<HomeView> {
 		self.controllerTitle = "Home"
         customView.delegate = self
         customView.didLoadDelegate()
+        
     }
     
     init() {

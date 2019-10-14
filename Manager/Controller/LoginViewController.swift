@@ -40,20 +40,7 @@ extension LoginViewController: LoginViewDelegate {
         let username = customView.username.lowercased()
         let password = customView.password
         
-        self.networkManager.getToken(withUsername: username, andPassword: password, completion: { token, error in
-            
-            if error != nil {
-                print(error!)
-            } else {
-                DispatchQueue.main.async {
-                    self.dismiss(animated: true, completion: nil)
-                }
-            }
-            DispatchQueue.main.async {
-                self.customView.indicatorView.stopAnimating()
-            }
-            
-        })
+        networkManager.credentialManager.setCredentials(username: username, password: password)
     }
 }
 

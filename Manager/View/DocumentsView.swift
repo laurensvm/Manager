@@ -11,6 +11,8 @@ import UIKit
 class DocumentsView: View {
     
     weak var delegate: CollectionViewDelegate!
+    weak var documentsDelegate: DocumentsDelegate!
+    
     let folderCellId = "folderCellId"
     var containsSubDirectories: Bool = true {
         didSet {
@@ -27,6 +29,15 @@ class DocumentsView: View {
         lb.numberOfLines = 0
         lb.text = "Documents"
         return lb
+    }()
+    
+    lazy var addDirectoryButton: UIButton = {
+        let bt = UIButton()
+        bt.translatesAutoresizingMaskIntoConstraints = false
+        bt.setTitleColor(.black, for: .normal)
+        bt.setTitle("Add", for: .normal)
+        bt.addTarget(documentsDelegate, action: #selector(documentsDelegate.addDirectory(_:)), for: .touchUpInside)
+        return bt
     }()
     
     lazy var breadCrumb: UILabel = {
@@ -98,13 +109,15 @@ class DocumentsView: View {
         self.addSubview(emptyDirectoryImageView)
         self.addSubview(collectionView)
         self.addSubview(breadCrumb)
+        self.addSubview(addDirectoryButton)
         
  		configureActiveViews()
         
         // View Title label
         self.viewTitleLabel.topAnchor.constraint(equalTo: self.topAnchor, constant: 50).isActive = true
         self.viewTitleLabel.leftAnchor.constraint(equalTo: self.leftAnchor, constant: 32).isActive = true
-        self.viewTitleLabel.rightAnchor.constraint(equalTo: self.rightAnchor, constant: 16).isActive = true
+        self.viewTitleLabel.rightAnchor.constraint(equalTo: addDirectoryButton.leftAnchor, constant: 16).isActive = true
+    
         
         // Empty directory
         self.emptyDirectory.topAnchor.constraint(equalTo: self.emptyDirectoryImageView.bottomAnchor, constant: 16).isActive = true
@@ -122,6 +135,13 @@ class DocumentsView: View {
         self.breadCrumb.leftAnchor.constraint(equalTo: self.leftAnchor, constant: 32).isActive = true
         self.breadCrumb.rightAnchor.constraint(equalTo: self.rightAnchor, constant: -32).isActive = true
         self.breadCrumb.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: 32)
+        
+        // Add Directory Button
+        self.addDirectoryButton.rightAnchor.constraint(equalTo: self.rightAnchor, constant: -16).isActive = true
+        self.addDirectoryButton.centerYAnchor.constraint(equalTo: viewTitleLabel.centerYAnchor).isActive = true
+        self.addDirectoryButton.topAnchor.constraint(equalTo: self.topAnchor, constant: 50).isActive = true
+        self.addDirectoryButton.widthAnchor.constraint(equalToConstant: 50).isActive = true
+        
         
     }
     

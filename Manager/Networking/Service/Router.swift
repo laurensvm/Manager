@@ -9,12 +9,14 @@
 import Foundation
 
 class Router<EndPoint: EndPointType>: NetworkRouter {
+    var credentialsManagerDelegate: CredentialManager?
     private var task: URLSessionTask?
     
     func request(_ route: EndPoint, completion: @escaping NetworkRouterCompletion) {
         let session = URLSession.shared
         do {
             let request = try self.buildRequest(from: route)
+            
             task = session.dataTask(with: request, completionHandler: { data, response, error in
                 completion(data, response, error)
             })
@@ -35,6 +37,12 @@ class Router<EndPoint: EndPointType>: NetworkRouter {
                                  timeoutInterval: 10.0
         						)
         request.httpMethod = route.httpMethod.rawValue
+        
+        let credentialEncoding = BasicAuthEncoding.encode(
+            username: credentialsManagerDelegate?.getTokenString() ?? "",
+            andPassword: "")
+        request.setValue(credentialEncoding, forHTTPHeaderField: "Authorization")
+        
         
         do {
             switch route.task {

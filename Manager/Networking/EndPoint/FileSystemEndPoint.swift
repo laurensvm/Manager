@@ -9,8 +9,9 @@
 import Foundation
 
 public enum FileSystemApi {
-    case getDirectoriesInRoot(token: Token)
-    case getDirectories(directory: String, token: Token)
+    case getDirectoriesInRoot
+    case getDirectories(directory: String)
+    case postImage(image: Data)
 }
 
 extension FileSystemApi: EndPointType {
@@ -27,9 +28,11 @@ extension FileSystemApi: EndPointType {
     var path: String {
         switch self {
         case .getDirectoriesInRoot:
-            return "root/"
-        case .getDirectories(directory: let directory, token: _):
-            return "\(directory)/"
+            return ""
+        case .getDirectories:
+            return ""
+        case .postImage:
+            return "images/post/"
         }
     }
     
@@ -38,22 +41,24 @@ extension FileSystemApi: EndPointType {
         case .getDirectoriesInRoot:
             return .get
         case .getDirectories:
-            return .get
+            return .post
+        case .postImage:
+            return .post
         }
     }
     
     var task: HTTPTask {
         switch self {
-        case .getDirectoriesInRoot(token: let token):
-            return .requestHeaders(headers: [
-                "Authorization": BasicAuthEncoding.encode(username: token.token, andPassword: ""),
-                "Content-Type": "application/json"
-                ])
-        case .getDirectories(directory: _, token: let token):
-            return .requestHeaders(headers: [
-                "Authorization": BasicAuthEncoding.encode(username: token.token, andPassword: ""),
-                "Content-Type": "application/json"
-                ])
+        case .getDirectoriesInRoot:
+            return .request
+//            return .requestHeaders(headers: [
+//                "Authorization": BasicAuthEncoding.encode(username: tokenString, andPassword: ""),
+//                "Content-Type": "application/json"
+//                ])
+        case .getDirectories(directory: let directory):
+            return .requestParameters(bodyParameters: ["directory": directory], urlParameters: nil)
+        case .postImage(image: let image):
+            return .requestParameters(bodyParameters: nil, urlParameters: nil)
         }
     }
     

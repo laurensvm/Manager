@@ -12,6 +12,10 @@ protocol LoginViewDelegate: class {
     func loginView(_ view: LoginView, didTapLoginButton button: UIButton)
 }
 
+@objc protocol DocumentsDelegate: class {
+    @objc func addDirectory(_ button: UIButton)
+}
+
 protocol CollectionViewDelegate: UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     func collectionViewHeight() -> CGFloat
 }

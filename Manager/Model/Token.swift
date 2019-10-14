@@ -8,8 +8,27 @@
 
 import Foundation
 
-public struct Token: Decodable {
+public struct Token: Codable {
     let expiration: Int
-    let token: String
+    let string: String
     let date: Date = Date()
+    
+    enum CodingKeys: String, CodingKey {
+        case string = "token"
+        case expiration
+    }
+    
+    func isExpired() -> Bool {
+    	if Int(date.timeIntervalSinceNow) > expiration {
+            return true
+        }
+        return false
+    }
+    
+    func willExpireInLessThanAMinute() -> Bool {
+        if Int(date.timeIntervalSinceNow) > expiration - 60 {
+            return true
+        }
+        return false
+    }
 }

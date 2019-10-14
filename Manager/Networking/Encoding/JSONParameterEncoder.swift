@@ -13,8 +13,10 @@ public struct JSONParameterEncoder: ParameterEncoder {
         do {
             let jsonAsData = try JSONSerialization.data(withJSONObject: parameters, options: .prettyPrinted)
             urlRequest.httpBody = jsonAsData
+            
+            urlRequest.setValue("application/json", forHTTPHeaderField: "Accept")
             if urlRequest.value(forHTTPHeaderField: "Content-Type") == nil {
-                urlRequest.setValue("application/x-www-form-urlencoded; charset=utf-8", forHTTPHeaderField: "Content-Type")
+                urlRequest.setValue("application/json", forHTTPHeaderField: "Content-Type")
             }
         } catch {
             throw NetworkError.encodingFailed

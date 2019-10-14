@@ -16,11 +16,14 @@ class DocumentsViewController: ViewController<DocumentsView> {
     override func viewDidLoad() {
         super.viewDidLoad()
         customView.delegate = self
+        customView.documentsDelegate = self
         customView.didLoadDelegate()
         populateBreadCrumbTrail()
         
         networkManager?.getDirectories(inDirectory: self.controllerTitle, completion: { data, error in
-            self.directories = data?["directories"] ?? []
+            if let directories = data?["directories"] as? [String] {
+                self.directories = directories
+            }
             DispatchQueue.main.async {
                 self.customView.containsSubDirectories = !self.directories.isEmpty
             }
@@ -80,5 +83,12 @@ extension DocumentsViewController: CollectionViewDelegate {
         self.navigationController?.pushViewController(documentsViewController, animated: true)
     }
     
+    
+}
+
+extension DocumentsViewController: DocumentsDelegate {
+    @objc func addDirectory(_ button: UIButton) {
+        print("Make call to server to add a new document + present controller that inputs name")
+    }
     
 }

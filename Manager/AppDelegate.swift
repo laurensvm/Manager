@@ -16,6 +16,21 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         
+        setupApplicationHierarchy()
+        
+        // Handle the document uploads from the PHAsset library here
+        DispatchQueue.global(qos: DispatchQoS.QoSClass.background).async {
+            let photoManager = PhotoManager()
+            photoManager.beginImportingAssets()
+        }
+        
+        return true
+    }
+    
+}
+
+extension AppDelegate {
+    private func setupApplicationHierarchy() {
         let networkManager = NetworkManager()
         
         // General NavigationBar appearance
@@ -38,7 +53,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         homeViewNavigationController.viewControllers = [homeViewController]
         
         // Setup documents view with navigation controller
-        let documentsViewController = DocumentsViewController(withNetworkManager: networkManager, andControllerTitle	: "Documents")
+        let documentsViewController = DocumentsViewController(withNetworkManager: networkManager, andControllerTitle    : "Documents")
         documentsViewController.tabBarItem = UITabBarItem(title: "Documents", image: #imageLiteral(resourceName: "folder"), tag: 1)
         let documentsViewNavigationController = CustomNavigationController(navigationBarClass: CustomNavigationBar.self, toolbarClass: nil)
         documentsViewNavigationController.viewControllers = [documentsViewController]
@@ -51,17 +66,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         ]
         tabBarController.tabBar.tintColor = Theme.colors.baseOrange
         
-        window = UIWindow(frame: UIScreen.main.bounds)
-        window?.rootViewController = tabBarController
-        window?.makeKeyAndVisible()
+        self.window = UIWindow(frame: UIScreen.main.bounds)
+        self.window?.rootViewController = tabBarController
+        self.window?.makeKeyAndVisible()
         
-        UserDefaults.standard.setLoggedInStatus(value: true)
-        if !UserDefaults.standard.isLoggedIn() {
+        if !networkManager.credentialManager.hasValidCredentials() {
             let loginViewController = LoginViewController(networkManager: networkManager)
             tabBarController.present(loginViewController, animated: false, completion: nil)
         }
-        
-        return true
     }
 
 }

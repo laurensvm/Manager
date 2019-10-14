@@ -12,4 +12,6 @@ public enum NetworkError: String, Error {
     case parametersNil = "The parameters were nil."
     case encodingFailed = "The parameter encoding has failed."
     case missingURL = "URL is nil."
+    case noCredentials = "No credentials were found."
+    case noConnection = "Check network connection. Server could be down as well."
 }
