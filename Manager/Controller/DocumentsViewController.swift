@@ -20,9 +20,11 @@ class DocumentsViewController: ViewController<DocumentsView> {
         customView.didLoadDelegate()
         populateBreadCrumbTrail()
         
-        networkManager?.getDirectories(inDirectory: self.controllerTitle, completion: { data, error in
-            if let directories = data?["directories"] as? [String] {
-                self.directories = directories
+        networkManager?.getDirectories(inDirectory: "nieuwe", completion: { data, error in
+            if let directories = data?["directories"] {
+                directories.forEach({ _, json in
+                    self.directories.append(json.stringValue)
+                })
             }
             DispatchQueue.main.async {
                 self.customView.containsSubDirectories = !self.directories.isEmpty
