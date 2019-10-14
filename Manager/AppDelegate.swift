@@ -42,8 +42,6 @@ extension AppDelegate {
         // Temporary fill up for the tabbar controller
         let rootViewController3 = HomeViewController(withNetworkManager: networkManager)
         rootViewController3.tabBarItem = UITabBarItem(title: "Recent", image: #imageLiteral(resourceName: "clock"), tag: 2)
-        let rootViewController4 = HomeViewController(withNetworkManager: networkManager)
-        rootViewController4.tabBarItem = UITabBarItem(title: "Settings", image: #imageLiteral(resourceName: "menu"), tag: 3)
         let tabBarController = BubbleTabBarController()
         
         // Setup home view with navigation controller
@@ -58,11 +56,18 @@ extension AppDelegate {
         let documentsViewNavigationController = CustomNavigationController(navigationBarClass: CustomNavigationBar.self, toolbarClass: nil)
         documentsViewNavigationController.viewControllers = [documentsViewController]
         
+        // Setup settings view with navigation controller
+        let settingsViewController = SettingsViewController(withNetworkManager: networkManager)
+        settingsViewController.tabBarItem = UITabBarItem(title: "Settings", image: #imageLiteral(resourceName: "menu"), tag: 3)
+        let settingsViewNavigationController = CustomNavigationController(navigationBarClass: CustomNavigationBar.self,
+                                                                          toolbarClass: nil)
+        settingsViewNavigationController.viewControllers = [settingsViewController]
+        
         tabBarController.viewControllers = [
             homeViewNavigationController,
             documentsViewNavigationController,
             rootViewController3,
-            rootViewController4
+            settingsViewNavigationController
         ]
         tabBarController.tabBar.tintColor = Theme.colors.baseOrange
         

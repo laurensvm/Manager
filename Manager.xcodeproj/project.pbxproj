@@ -27,6 +27,8 @@
 		A9BA332A22EEA7E6004FCE5E /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9BA332922EEA7E6004FCE5E /* ViewController.swift */; };
 		A9BA332C22EEAA25004FCE5E /* Protocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9BA332B22EEAA25004FCE5E /* Protocols.swift */; };
 		A9BD60AD235405F4006263D5 /* CredentialManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9BD60AC235405F4006263D5 /* CredentialManager.swift */; };
+		A9BD60AF23549FB2006263D5 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9BD60AE23549FB2006263D5 /* SettingsViewController.swift */; };
+		A9BD60B32354A014006263D5 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9BD60B22354A014006263D5 /* SettingsView.swift */; };
 		A9DE7DA123231A4800B5EE03 /* CBTabBarButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9DE7D9E23231A4800B5EE03 /* CBTabBarButton.swift */; };
 		A9DE7DA223231A4800B5EE03 /* BubbleTabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9DE7D9F23231A4800B5EE03 /* BubbleTabBar.swift */; };
 		A9DE7DA323231A4800B5EE03 /* BubbleTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9DE7DA023231A4800B5EE03 /* BubbleTabBarController.swift */; };
@@ -114,6 +116,8 @@
 		A9BA332922EEA7E6004FCE5E /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		A9BA332B22EEAA25004FCE5E /* Protocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Protocols.swift; sourceTree = "<group>"; };
 		A9BD60AC235405F4006263D5 /* CredentialManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CredentialManager.swift; sourceTree = "<group>"; };
+		A9BD60AE23549FB2006263D5 /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
+		A9BD60B22354A014006263D5 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		A9DE7D9E23231A4800B5EE03 /* CBTabBarButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CBTabBarButton.swift; sourceTree = "<group>"; };
 		A9DE7D9F23231A4800B5EE03 /* BubbleTabBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BubbleTabBar.swift; sourceTree = "<group>"; };
 		A9DE7DA023231A4800B5EE03 /* BubbleTabBarController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BubbleTabBarController.swift; sourceTree = "<group>"; };
@@ -259,6 +263,7 @@
 				A9DE7DAC2323392500B5EE03 /* PhotoView.swift */,
 				A9DE7DBA2323795300B5EE03 /* DetailPhotoView.swift */,
 				A9DE7DC0232390A300B5EE03 /* DocumentsView.swift */,
+				A9BD60B22354A014006263D5 /* SettingsView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -274,6 +279,7 @@
 				A9DE7DB82323792E00B5EE03 /* DetailPhotoViewController.swift */,
 				A9DE7DBE2323907C00B5EE03 /* DocumentsViewController.swift */,
 				A9F74124234B359A00C8513D /* NetworkAlertController.swift */,
+				A9BD60AE23549FB2006263D5 /* SettingsViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -622,6 +628,7 @@
 				A9DE7DA523231DEB00B5EE03 /* CustomNavigationBar.swift in Sources */,
 				A9DE7DDE2323C5D900B5EE03 /* Image.swift in Sources */,
 				A9DE7DEA23248C3000B5EE03 /* UserDefaults.swift in Sources */,
+				A9BD60B32354A014006263D5 /* SettingsView.swift in Sources */,
 				A9F4036A22F696B900209D17 /* Token.swift in Sources */,
 				A9DE7DEC2324967900B5EE03 /* View.swift in Sources */,
 				A9DE7DC32323978700B5EE03 /* FolderCell.swift in Sources */,
@@ -637,6 +644,7 @@
 				A9DE7DD42323BE7F00B5EE03 /* URLParameterEncoder.swift in Sources */,
 				A9DE7DCD2323BCF800B5EE03 /* HTTPTask.swift in Sources */,
 				A9DE7DA123231A4800B5EE03 /* CBTabBarButton.swift in Sources */,
+				A9BD60AF23549FB2006263D5 /* SettingsViewController.swift in Sources */,
 				A9DE7DC92323BC7000B5EE03 /* EndPointType.swift in Sources */,
 				A9BA332A22EEA7E6004FCE5E /* ViewController.swift in Sources */,
 				A977556422E5547E00407385 /* UITextField.swift in Sources */,
