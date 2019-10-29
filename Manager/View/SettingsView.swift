@@ -21,7 +21,7 @@ class SettingsView: View {
     }()
     
     private lazy var tableView: UITableView = {
-       let tv = UITableView()
+        let tv = UITableView()
         return tv
     }()
     

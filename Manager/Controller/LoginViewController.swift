@@ -44,6 +44,9 @@ extension LoginViewController: LoginViewDelegate {
                 self.customView.indicatorView.stopAnimating()
                 if successful {
                     self.dismiss(animated: true, completion: nil)
+                } else {
+                    let alertViewController = AlertViewController(withMessage:"Error: Could not connect to server")
+                    self.present(alertViewController, animated: false, completion: nil)
                 }
             }
         })

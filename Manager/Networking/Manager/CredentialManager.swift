@@ -117,7 +117,10 @@ class CredentialManager: NSObject {
     
     func hasValidCredentials() -> Bool {
         if let _ = storage.defaultCredential(for: protectionSpace) {
-            return true
+            if let _ = self.token?.string {
+                return true
+            }
+            return false
         }
         return false
     }

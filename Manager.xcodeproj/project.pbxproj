@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		7A7E2312CD6CFB94A55EF94D /* libPods-ManagerUITests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 743D3AFB32101160A6C4DCF5 /* libPods-ManagerUITests.a */; };
 		7C59CE6051A1A6DAB7816489 /* libPods-ManagerTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 17635363A3CCC8C41F968343 /* libPods-ManagerTests.a */; };
+		A90707DC2367CFD000CE5AED /* AlertViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A90707DB2367CFD000CE5AED /* AlertViewController.swift */; };
+		A90707DE2367D00200CE5AED /* AlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A90707DD2367D00200CE5AED /* AlertView.swift */; };
 		A971AF6C2316217700BAA34D /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A971AF6B2316217700BAA34D /* HomeViewController.swift */; };
 		A971AF6E231621B800BAA34D /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A971AF6D231621B800BAA34D /* HomeView.swift */; };
 		A971AF7223162BD800BAA34D /* HomeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A971AF7123162BD800BAA34D /* HomeCell.swift */; };
@@ -92,6 +94,8 @@
 		7F2F9DA794F01A25EA3F868F /* Pods-ManagerUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ManagerUITests.release.xcconfig"; path = "Target Support Files/Pods-ManagerUITests/Pods-ManagerUITests.release.xcconfig"; sourceTree = "<group>"; };
 		9A14668D771D32033168F85A /* Pods-ManagerTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ManagerTests.release.xcconfig"; path = "Target Support Files/Pods-ManagerTests/Pods-ManagerTests.release.xcconfig"; sourceTree = "<group>"; };
 		A243F3FC2102FE24B30C0B4B /* Pods-Manager.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Manager.release.xcconfig"; path = "Target Support Files/Pods-Manager/Pods-Manager.release.xcconfig"; sourceTree = "<group>"; };
+		A90707DB2367CFD000CE5AED /* AlertViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertViewController.swift; sourceTree = "<group>"; };
+		A90707DD2367D00200CE5AED /* AlertView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertView.swift; sourceTree = "<group>"; };
 		A971AF6B2316217700BAA34D /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		A971AF6D231621B800BAA34D /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		A971AF7123162BD800BAA34D /* HomeCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeCell.swift; sourceTree = "<group>"; };
@@ -264,6 +268,7 @@
 				A9DE7DBA2323795300B5EE03 /* DetailPhotoView.swift */,
 				A9DE7DC0232390A300B5EE03 /* DocumentsView.swift */,
 				A9BD60B22354A014006263D5 /* SettingsView.swift */,
+				A90707DD2367D00200CE5AED /* AlertView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -280,6 +285,7 @@
 				A9DE7DBE2323907C00B5EE03 /* DocumentsViewController.swift */,
 				A9F74124234B359A00C8513D /* NetworkAlertController.swift */,
 				A9BD60AE23549FB2006263D5 /* SettingsViewController.swift */,
+				A90707DB2367CFD000CE5AED /* AlertViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -634,10 +640,12 @@
 				A9DE7DC32323978700B5EE03 /* FolderCell.swift in Sources */,
 				A9DE7DCB2323BCC700B5EE03 /* HTTPMethod.swift in Sources */,
 				A9DE7DB323235F5400B5EE03 /* CollectionViewHeader.swift in Sources */,
+				A90707DE2367D00200CE5AED /* AlertView.swift in Sources */,
 				A9DE7DC1232390A300B5EE03 /* DocumentsView.swift in Sources */,
 				A9F74125234B359A00C8513D /* NetworkAlertController.swift in Sources */,
 				A9DE7DE02323C66C00B5EE03 /* NetworkManager.swift in Sources */,
 				A9DE7DA323231A4800B5EE03 /* BubbleTabBarController.swift in Sources */,
+				A90707DC2367CFD000CE5AED /* AlertViewController.swift in Sources */,
 				A9DE7DBF2323907C00B5EE03 /* DocumentsViewController.swift in Sources */,
 				A988D2222317ECA9004EDB42 /* HomeViewTab.swift in Sources */,
 				A9DE7DD22323BE2700B5EE03 /* NetworkError.swift in Sources */,

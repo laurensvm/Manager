@@ -12,6 +12,10 @@ protocol LoginViewDelegate: class {
     func loginView(_ view: LoginView, didTapLoginButton button: UIButton)
 }
 
+protocol AlertViewDelegate: class {
+    func dismissViewController()
+}
+
 @objc protocol DocumentsDelegate: class {
     @objc func addDirectory(_ button: UIButton)
 }
