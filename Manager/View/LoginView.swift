@@ -67,15 +67,15 @@ class LoginView: View {
     }()
     
     private lazy var loginButton: UIButton = {
-        let lb = UIButton()
-        lb.translatesAutoresizingMaskIntoConstraints = false
-        lb.setTitle("Log In", for: [.normal])
-        lb.setTitleColor(Theme.colors.baseBlack, for: [.normal])
-        lb.titleLabel?.font = Theme.fonts.avenirBlack(size: 24)
-        lb.layer.cornerRadius = 6
-        lb.backgroundColor = Theme.colors.baseOrange
-        lb.addTarget(self, action: #selector(didTapLoginButton(_:)), for: .touchUpInside)
-        return lb
+        let bt = UIButton()
+        bt.translatesAutoresizingMaskIntoConstraints = false
+        bt.setTitle("Log In", for: [.normal])
+        bt.setTitleColor(Theme.colors.baseBlack, for: [.normal])
+        bt.titleLabel?.font = Theme.fonts.avenirBlack(size: 24)
+        bt.layer.cornerRadius = 6
+        bt.backgroundColor = Theme.colors.baseOrange
+        bt.addTarget(self, action: #selector(didTapLoginButton(_:)), for: .touchUpInside)
+        return bt
     }()
     
     override init(frame: CGRect) {

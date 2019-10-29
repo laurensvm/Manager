@@ -23,6 +23,36 @@ class AlertView: View {
         return v
     }()
     
+    private lazy var messageLabel: UILabel = {
+        let lb = UILabel()
+        lb.translatesAutoresizingMaskIntoConstraints = false
+        lb.font = Theme.fonts.avenirBlack(size: 18)
+        lb.textColor = Theme.colors.baseBlack
+        lb.numberOfLines = 0
+        lb.text = "Error"
+        return lb
+    }()
+    
+    private lazy var descriptionLabel: UILabel = {
+        let lb = UILabel()
+        lb.translatesAutoresizingMaskIntoConstraints = false
+        lb.font = Theme.fonts.avenir(size: 14)
+        lb.textColor = Theme.colors.baseBlack
+        lb.numberOfLines = 0
+        lb.text = "Could not connect to the server."
+        return lb
+    }()
+    
+    private lazy var okButton: UIButton = {
+        let bt = UIButton()
+        bt.translatesAutoresizingMaskIntoConstraints = false
+        bt.setTitle("Ok", for: [.normal])
+        bt.setTitleColor(Theme.colors.baseOrange, for: [.normal])
+        bt.titleLabel?.font = Theme.fonts.avenirBlack(size: 24)
+        bt.addTarget(self, action: #selector(handleTap(_:)), for: .touchUpInside)
+        return bt
+    }()
+    
     private lazy var blurView: UIVisualEffectView = {
         let blur = UIBlurEffect(style: .dark)
         let blurView = UIVisualEffectView(effect: blur)
@@ -64,18 +94,37 @@ class AlertView: View {
     private func setupViews() {
         addSubview(blurView)
         addSubview(alertView)
+        alertView.addSubview(messageLabel)
+        alertView.addSubview(descriptionLabel)
+        alertView.addSubview(okButton)
         
+        
+        // Alert View
         bottomConstraint = alertView.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: calculateConstant(active: false))
         bottomConstraint.isActive = true
         
         alertView.heightAnchor.constraint(equalToConstant: height).isActive = true
-        
         alertView.leftAnchor.constraint(equalTo: self.leftAnchor, constant: 16).isActive = true
         
         // Somehow this constraint breaks the system constraints. Setting priorities fixes it
         let rightConstraint = alertView.rightAnchor.constraint(equalTo: self.rightAnchor, constant: -16)
         rightConstraint.isActive = true
         rightConstraint.priority = UILayoutPriority(800)
+        
+        // Message Label
+        messageLabel.topAnchor.constraint(equalTo: alertView.topAnchor, constant: 8).isActive = true
+        messageLabel.centerXAnchor.constraint(equalTo: alertView.centerXAnchor, constant: 0).isActive = true
+        
+        // Description Label
+        descriptionLabel.topAnchor.constraint(equalTo: messageLabel.bottomAnchor, constant: 0).isActive = true
+        descriptionLabel.centerXAnchor.constraint(equalTo: alertView.centerXAnchor, constant: 0).isActive = true
+        descriptionLabel.bottomAnchor.constraint(equalTo: okButton.topAnchor, constant: -8).isActive = true
+        
+        // Ok Button
+        okButton.bottomAnchor.constraint(equalTo: alertView.bottomAnchor, constant: 0).isActive = true
+        okButton.heightAnchor.constraint(equalToConstant: 50).isActive = true
+        okButton.leftAnchor.constraint(equalTo: alertView.leftAnchor, constant: 0).isActive = true
+        okButton.rightAnchor.constraint(equalTo: alertView.rightAnchor, constant: 0).isActive = true
         
     }
     
