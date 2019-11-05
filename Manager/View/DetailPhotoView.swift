@@ -13,9 +13,26 @@ class DetailPhotoView: UIView {
     var delegate: DetailPhotoDelegate?
     var image: Image? {
         didSet {
-            self.imageView.image = image?.imageData
+            DispatchQueue.main.async {
+                self.imageView.image = self.image?.imageData
+                
+                self.detailView.nameLabel.text? = "Name: \(self.image?.name ?? "Unknown")"
+            }
         }
     }
+    
+    var mapPin: MapPin! {
+        didSet {
+            self.detailView.map.addAnnotation(mapPin)
+            
+            self.detailView.map.setCenter(mapPin.coordinate, animated: true)
+        }
+    }
+    
+    private var imageLayoutConstraints: [NSLayoutConstraint] = []
+    private var detailsLayoutConstraints: [NSLayoutConstraint] = []
+    
+    var detailsViewIsActive: Bool = false
     
     var tapGestureRecognizer = UITapGestureRecognizer()
     var swipeUpGestureRecognizer = UISwipeGestureRecognizer()
@@ -31,6 +48,11 @@ class DetailPhotoView: UIView {
         iv.translatesAutoresizingMaskIntoConstraints = false
         iv.contentMode = UIView.ContentMode.scaleAspectFit
         return iv
+    }()
+    
+    let detailView: AssetDetailView = {
+        let v = AssetDetailView()
+        return v
     }()
     
     override init(frame: CGRect) {
@@ -58,18 +80,35 @@ class DetailPhotoView: UIView {
     }
     
     private func setupViews() {
-        self.addSubview(imageView)
+        addSubview(imageView)
+        addSubview(detailView)
     }
     
     func setConstraints() {
-        self.imageView.leftAnchor.constraint(equalTo: self.leftAnchor, constant: 0).isActive = true
-        self.imageView.rightAnchor.constraint(equalTo: self.rightAnchor, constant: 0).isActive = true
         
-        topConstraint = self.imageView.topAnchor.constraint(equalTo: self.topAnchor, constant: 0)
-        topConstraint.isActive = true
-        bottomConstraint = self.imageView.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: 0)
-        bottomConstraint.isActive = true
-//        heightConstraint = self.imageView.heightAnchor.constraint(equalToConstant: 250)
+        // The value of these constraints depend on the state of the view
+        self.imageLayoutConstraints = [
+            self.imageView.topAnchor.constraint(equalTo: self.topAnchor, constant: 0),
+            self.imageView.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: 0),
+            self.detailView.topAnchor.constraint(equalTo: imageView.bottomAnchor, constant: 0),
+            self.detailView.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: 400)
+        ]
+        NSLayoutConstraint.activate(self.imageLayoutConstraints)
+        
+        self.detailsLayoutConstraints = [
+            self.imageView.topAnchor.constraint(equalTo: self.topAnchor, constant: -1000),
+            self.imageView.bottomAnchor.constraint(equalTo: self.topAnchor, constant: 0),
+            self.detailView.topAnchor.constraint(equalTo: self.topAnchor, constant: 0),
+            self.detailView.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: 0)
+        ]
+        
+        
+		// These constraints should always be active
+        imageView.leftAnchor.constraint(equalTo: self.leftAnchor, constant: 0).isActive = true
+        imageView.rightAnchor.constraint(equalTo: self.rightAnchor, constant: 0).isActive = true
+        
+        detailView.leftAnchor.constraint(equalTo: self.leftAnchor, constant: 0).isActive = true
+        detailView.rightAnchor.constraint(equalTo: self.rightAnchor, constant: 0).isActive = true
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -77,22 +116,24 @@ class DetailPhotoView: UIView {
     }
     
     func didSwipeUp() {
-        bottomConstraint.constant = -250
-        topConstraint.constant = -250
+        NSLayoutConstraint.deactivate(self.imageLayoutConstraints)
+        NSLayoutConstraint.activate(self.detailsLayoutConstraints)
         
-        UIView.animate(withDuration: 0.3, delay: 0, options: .curveEaseInOut, animations: {
+        UIView.animate(withDuration: 0.4, delay: 0, options: .curveEaseInOut, animations: {
             self.layoutIfNeeded()
         }, completion: nil)
+        
+        self.detailsViewIsActive = true
     }
     
     func didSwipeDown() {
-        bottomConstraint.constant = 0
-        topConstraint.constant = 0
+        NSLayoutConstraint.deactivate(self.detailsLayoutConstraints)
+        NSLayoutConstraint.activate(self.imageLayoutConstraints)
         
-        UIView.animate(withDuration: 0.3, delay: 0, options: .curveEaseInOut, animations: {
+        UIView.animate(withDuration: 0.4, delay: 0, options: .curveEaseInOut, animations: {
             self.layoutIfNeeded()
         }, completion: nil)
+        
+        self.detailsViewIsActive = false
     }
-    
-    
 }

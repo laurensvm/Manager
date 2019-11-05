@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import CoreLocation
 
 class DetailPhotoViewController: ViewController<DetailPhotoView> {
     
@@ -16,6 +17,10 @@ class DetailPhotoViewController: ViewController<DetailPhotoView> {
         didSet {
             if let _ = image?.imageData {
                 self.customView.image = image
+            }
+            
+            if let coords = image?.coordinates {
+                self.customView.mapPin = self.generateMapPin(coords)
             }
         }
     }
@@ -28,6 +33,10 @@ class DetailPhotoViewController: ViewController<DetailPhotoView> {
         self.tabBarController?.tabBar.isHidden = true
         self.tabBarController?.tabBar.isTranslucent = true
     }
+    
+    private func generateMapPin(_ coords: CLLocationCoordinate2D) -> MapPin {
+        return MapPin(coordinate: coords, title: "Image", subtitle: "Image")
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -36,10 +45,9 @@ class DetailPhotoViewController: ViewController<DetailPhotoView> {
         customView.didLoadDelegate()
         
         if let im = self.image?.imageData {
-            customView.imageView.image = im
+            image?.imageData = im
         }
-        
-        customView.imageView.image = thumbnail.image
+        image?.imageData = thumbnail.image
         
     }
     
@@ -89,21 +97,23 @@ class DetailPhotoViewController: ViewController<DetailPhotoView> {
 
 extension DetailPhotoViewController: DetailPhotoDelegate {
     @objc func didTapView(_ sender: UITapGestureRecognizer?) {
-        if navigationsBarsAreHidden {
-            self.navigationController?.setNavigationBarHidden(false, animated: true)
-        } else {
-            self.navigationController?.setNavigationBarHidden(true, animated: true)
+        if !customView.detailsViewIsActive {
+            if navigationsBarsAreHidden {
+                self.navigationController?.setNavigationBarHidden(false, animated: true)
+            } else {
+                self.navigationController?.setNavigationBarHidden(true, animated: true)
+            }
+            navigationsBarsAreHidden = !navigationsBarsAreHidden
         }
-        navigationsBarsAreHidden = !navigationsBarsAreHidden
     }
     
     @objc func didSwipeUp(_ sender: UISwipeGestureRecognizer?) {
-        self.navigationController?.setNavigationBarHidden(true, animated: true)
+        self.navigationController?.setNavigationBarHidden(false, animated: true)
         customView.didSwipeUp()
     }
     
     @objc func didSwipeDown(_ sender: UISwipeGestureRecognizer?) {
-        self.navigationController?.setNavigationBarHidden(false, animated: true)
+//        self.navigationController?.setNavigationBarHidden(false, animated: true)
         customView.didSwipeDown()
     }
 }
