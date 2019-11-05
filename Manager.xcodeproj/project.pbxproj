@@ -12,6 +12,7 @@
 		A90707DC2367CFD000CE5AED /* AlertViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A90707DB2367CFD000CE5AED /* AlertViewController.swift */; };
 		A90707DE2367D00200CE5AED /* AlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A90707DD2367D00200CE5AED /* AlertView.swift */; };
 		A92FF2C2237158B300F91C2F /* PHAssetImageWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = A92FF2C1237158B300F91C2F /* PHAssetImageWrapper.swift */; };
+		A92FF2C4237179EE00F91C2F /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = A92FF2C3237179EE00F91C2F /* String.swift */; };
 		A944E47D237022720003E201 /* AppConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = A944E47C237022720003E201 /* AppConfig.swift */; };
 		A944E47F237024070003E201 /* FormDataEncoding.swift in Sources */ = {isa = PBXBuildFile; fileRef = A944E47E237024070003E201 /* FormDataEncoding.swift */; };
 		A944E48123702D890003E201 /* Data.swift in Sources */ = {isa = PBXBuildFile; fileRef = A944E48023702D890003E201 /* Data.swift */; };
@@ -106,6 +107,7 @@
 		A90707DB2367CFD000CE5AED /* AlertViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertViewController.swift; sourceTree = "<group>"; };
 		A90707DD2367D00200CE5AED /* AlertView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertView.swift; sourceTree = "<group>"; };
 		A92FF2C1237158B300F91C2F /* PHAssetImageWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PHAssetImageWrapper.swift; sourceTree = "<group>"; };
+		A92FF2C3237179EE00F91C2F /* String.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = String.swift; sourceTree = "<group>"; };
 		A944E47C237022720003E201 /* AppConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppConfig.swift; sourceTree = "<group>"; };
 		A944E47E237024070003E201 /* FormDataEncoding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormDataEncoding.swift; sourceTree = "<group>"; };
 		A944E48023702D890003E201 /* Data.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Data.swift; sourceTree = "<group>"; };
@@ -345,6 +347,7 @@
 				A9DE7DE923248C3000B5EE03 /* UserDefaults.swift */,
 				A9DE7DEB2324967900B5EE03 /* View.swift */,
 				A944E48023702D890003E201 /* Data.swift */,
+				A92FF2C3237179EE00F91C2F /* String.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -658,6 +661,7 @@
 				A9DE7DB1232351A200B5EE03 /* PhotoCell.swift in Sources */,
 				A977556622E5681F00407385 /* UIView.swift in Sources */,
 				A9DE7DD82323C0B500B5EE03 /* NetworkRouter.swift in Sources */,
+				A92FF2C4237179EE00F91C2F /* String.swift in Sources */,
 				A9DE7DAB2323390200B5EE03 /* PhotoViewController.swift in Sources */,
 				A9DE7DDC2323C5B600B5EE03 /* AuthenticationEndPoint.swift in Sources */,
 				A971AF6E231621B800BAA34D /* HomeView.swift in Sources */,

@@ -33,9 +33,8 @@ public struct FormDataEncoding: ParameterEncoder {
                 
             case let imageAsset as PHAssetImageWrapper:
                 let mimeType = "image/jpg"
-                let data = imageAsset.image.jpegData(compressionQuality: 1.0)
                 
-                print(Float(data?.count ?? 0))
+                let data = imageAsset.image.jpegData(compressionQuality: 1.0)
             
                 body.add("Content-Disposition: form-data; name=\"\(key)\"; filename=\"\(imageAsset.name)\"\r\n")
                 body.add("Content-Type: \(mimeType)\r\n\r\n")

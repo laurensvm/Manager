@@ -40,10 +40,8 @@ class PhotoManager: NSObject, PHPhotoLibraryChangeObserver {
 //        let videos = PHAsset.fetchAssets(with: PHAssetMediaType.video, options: nil)
         
         imageAssets.enumerateObjects { (asset, index, _) in
-            if index == 0 {
-                print("Processing Image \(index)")
-                self.processImage(asset: asset)
-            }
+            print("Processing Image \(index)")
+            self.processImage(asset: asset)
         }
         
 //        videos.enumerateObjects { (video, index, _) in
