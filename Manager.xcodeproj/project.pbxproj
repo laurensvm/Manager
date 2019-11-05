@@ -11,6 +11,12 @@
 		7C59CE6051A1A6DAB7816489 /* libPods-ManagerTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 17635363A3CCC8C41F968343 /* libPods-ManagerTests.a */; };
 		A90707DC2367CFD000CE5AED /* AlertViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A90707DB2367CFD000CE5AED /* AlertViewController.swift */; };
 		A90707DE2367D00200CE5AED /* AlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A90707DD2367D00200CE5AED /* AlertView.swift */; };
+		A944E47D237022720003E201 /* AppConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = A944E47C237022720003E201 /* AppConfig.swift */; };
+		A944E47F237024070003E201 /* FormDataEncoding.swift in Sources */ = {isa = PBXBuildFile; fileRef = A944E47E237024070003E201 /* FormDataEncoding.swift */; };
+		A944E48123702D890003E201 /* Data.swift in Sources */ = {isa = PBXBuildFile; fileRef = A944E48023702D890003E201 /* Data.swift */; };
+		A944E483237031A90003E201 /* DirectoryEndPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = A944E482237031A90003E201 /* DirectoryEndPoint.swift */; };
+		A944E4852370DDF70003E201 /* ImageEndPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = A944E4842370DDF70003E201 /* ImageEndPoint.swift */; };
+		A944E4872370F6120003E201 /* Image.swift in Sources */ = {isa = PBXBuildFile; fileRef = A944E4862370F6120003E201 /* Image.swift */; };
 		A971AF6C2316217700BAA34D /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A971AF6B2316217700BAA34D /* HomeViewController.swift */; };
 		A971AF6E231621B800BAA34D /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A971AF6D231621B800BAA34D /* HomeView.swift */; };
 		A971AF7223162BD800BAA34D /* HomeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A971AF7123162BD800BAA34D /* HomeCell.swift */; };
@@ -55,7 +61,7 @@
 		A9DE7DD82323C0B500B5EE03 /* NetworkRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9DE7DD72323C0B500B5EE03 /* NetworkRouter.swift */; };
 		A9DE7DDA2323C13300B5EE03 /* Router.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9DE7DD92323C13300B5EE03 /* Router.swift */; };
 		A9DE7DDC2323C5B600B5EE03 /* AuthenticationEndPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9DE7DDB2323C5B600B5EE03 /* AuthenticationEndPoint.swift */; };
-		A9DE7DDE2323C5D900B5EE03 /* Image.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9DE7DDD2323C5D900B5EE03 /* Image.swift */; };
+		A9DE7DDE2323C5D900B5EE03 /* ThumbnailImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9DE7DDD2323C5D900B5EE03 /* ThumbnailImage.swift */; };
 		A9DE7DE02323C66C00B5EE03 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9DE7DDF2323C66C00B5EE03 /* NetworkManager.swift */; };
 		A9DE7DE22323D4A300B5EE03 /* BasicAuthEncoding.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9DE7DE12323D4A300B5EE03 /* BasicAuthEncoding.swift */; };
 		A9DE7DEA23248C3000B5EE03 /* UserDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9DE7DE923248C3000B5EE03 /* UserDefaults.swift */; };
@@ -96,6 +102,12 @@
 		A243F3FC2102FE24B30C0B4B /* Pods-Manager.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Manager.release.xcconfig"; path = "Target Support Files/Pods-Manager/Pods-Manager.release.xcconfig"; sourceTree = "<group>"; };
 		A90707DB2367CFD000CE5AED /* AlertViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertViewController.swift; sourceTree = "<group>"; };
 		A90707DD2367D00200CE5AED /* AlertView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertView.swift; sourceTree = "<group>"; };
+		A944E47C237022720003E201 /* AppConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppConfig.swift; sourceTree = "<group>"; };
+		A944E47E237024070003E201 /* FormDataEncoding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormDataEncoding.swift; sourceTree = "<group>"; };
+		A944E48023702D890003E201 /* Data.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Data.swift; sourceTree = "<group>"; };
+		A944E482237031A90003E201 /* DirectoryEndPoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DirectoryEndPoint.swift; sourceTree = "<group>"; };
+		A944E4842370DDF70003E201 /* ImageEndPoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageEndPoint.swift; sourceTree = "<group>"; };
+		A944E4862370F6120003E201 /* Image.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Image.swift; sourceTree = "<group>"; };
 		A971AF6B2316217700BAA34D /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		A971AF6D231621B800BAA34D /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		A971AF7123162BD800BAA34D /* HomeCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeCell.swift; sourceTree = "<group>"; };
@@ -146,7 +158,7 @@
 		A9DE7DD72323C0B500B5EE03 /* NetworkRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkRouter.swift; sourceTree = "<group>"; };
 		A9DE7DD92323C13300B5EE03 /* Router.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Router.swift; sourceTree = "<group>"; };
 		A9DE7DDB2323C5B600B5EE03 /* AuthenticationEndPoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationEndPoint.swift; sourceTree = "<group>"; };
-		A9DE7DDD2323C5D900B5EE03 /* Image.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Image.swift; sourceTree = "<group>"; };
+		A9DE7DDD2323C5D900B5EE03 /* ThumbnailImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThumbnailImage.swift; sourceTree = "<group>"; };
 		A9DE7DDF2323C66C00B5EE03 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		A9DE7DE12323D4A300B5EE03 /* BasicAuthEncoding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasicAuthEncoding.swift; sourceTree = "<group>"; };
 		A9DE7DE923248C3000B5EE03 /* UserDefaults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaults.swift; sourceTree = "<group>"; };
@@ -200,6 +212,14 @@
 			path = Pods;
 			sourceTree = "<group>";
 		};
+		A944E47B237022680003E201 /* Config */ = {
+			isa = PBXGroup;
+			children = (
+				A944E47C237022720003E201 /* AppConfig.swift */,
+			);
+			path = Config;
+			sourceTree = "<group>";
+		};
 		A977551922E5298B00407385 = {
 			isa = PBXGroup;
 			children = (
@@ -225,6 +245,7 @@
 		A977552422E5298B00407385 /* Manager */ = {
 			isa = PBXGroup;
 			children = (
+				A944E47B237022680003E201 /* Config */,
 				A9BA332D22EEBB17004FCE5E /* Networking */,
 				A977555C22E5358600407385 /* Helpers */,
 				A977555922E534DC00407385 /* Model */,
@@ -295,8 +316,9 @@
 			children = (
 				A9F4036922F696B900209D17 /* Token.swift */,
 				A988D2212317ECA9004EDB42 /* HomeViewTab.swift */,
-				A9DE7DDD2323C5D900B5EE03 /* Image.swift */,
+				A9DE7DDD2323C5D900B5EE03 /* ThumbnailImage.swift */,
 				A9F74126234B43D500C8513D /* PhotoManager.swift */,
+				A944E4862370F6120003E201 /* Image.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -313,6 +335,7 @@
 				A9BA332B22EEAA25004FCE5E /* Protocols.swift */,
 				A9DE7DE923248C3000B5EE03 /* UserDefaults.swift */,
 				A9DE7DEB2324967900B5EE03 /* View.swift */,
+				A944E48023702D890003E201 /* Data.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -375,6 +398,8 @@
 			children = (
 				A9DE7DDB2323C5B600B5EE03 /* AuthenticationEndPoint.swift */,
 				A9DE7DED23249C5500B5EE03 /* FileSystemEndPoint.swift */,
+				A944E482237031A90003E201 /* DirectoryEndPoint.swift */,
+				A944E4842370DDF70003E201 /* ImageEndPoint.swift */,
 			);
 			path = EndPoint;
 			sourceTree = "<group>";
@@ -386,6 +411,7 @@
 				A9DE7DD32323BE7F00B5EE03 /* URLParameterEncoder.swift */,
 				A9DE7DD52323C01C00B5EE03 /* JSONParameterEncoder.swift */,
 				A9DE7DE12323D4A300B5EE03 /* BasicAuthEncoding.swift */,
+				A944E47E237024070003E201 /* FormDataEncoding.swift */,
 			);
 			path = Encoding;
 			sourceTree = "<group>";
@@ -628,12 +654,15 @@
 				A971AF6E231621B800BAA34D /* HomeView.swift in Sources */,
 				A9DE7DDA2323C13300B5EE03 /* Router.swift in Sources */,
 				A9DE7DEE23249C5500B5EE03 /* FileSystemEndPoint.swift in Sources */,
+				A944E4852370DDF70003E201 /* ImageEndPoint.swift in Sources */,
 				A971AF7223162BD800BAA34D /* HomeCell.swift in Sources */,
+				A944E47F237024070003E201 /* FormDataEncoding.swift in Sources */,
 				A977555622E529D300407385 /* AppDelegate.swift in Sources */,
 				A977556222E538E800407385 /* LoginView.swift in Sources */,
 				A9DE7DA523231DEB00B5EE03 /* CustomNavigationBar.swift in Sources */,
-				A9DE7DDE2323C5D900B5EE03 /* Image.swift in Sources */,
+				A9DE7DDE2323C5D900B5EE03 /* ThumbnailImage.swift in Sources */,
 				A9DE7DEA23248C3000B5EE03 /* UserDefaults.swift in Sources */,
+				A944E47D237022720003E201 /* AppConfig.swift in Sources */,
 				A9BD60B32354A014006263D5 /* SettingsView.swift in Sources */,
 				A9F4036A22F696B900209D17 /* Token.swift in Sources */,
 				A9DE7DEC2324967900B5EE03 /* View.swift in Sources */,
@@ -641,12 +670,15 @@
 				A9DE7DCB2323BCC700B5EE03 /* HTTPMethod.swift in Sources */,
 				A9DE7DB323235F5400B5EE03 /* CollectionViewHeader.swift in Sources */,
 				A90707DE2367D00200CE5AED /* AlertView.swift in Sources */,
+				A944E483237031A90003E201 /* DirectoryEndPoint.swift in Sources */,
 				A9DE7DC1232390A300B5EE03 /* DocumentsView.swift in Sources */,
 				A9F74125234B359A00C8513D /* NetworkAlertController.swift in Sources */,
+				A944E48123702D890003E201 /* Data.swift in Sources */,
 				A9DE7DE02323C66C00B5EE03 /* NetworkManager.swift in Sources */,
 				A9DE7DA323231A4800B5EE03 /* BubbleTabBarController.swift in Sources */,
 				A90707DC2367CFD000CE5AED /* AlertViewController.swift in Sources */,
 				A9DE7DBF2323907C00B5EE03 /* DocumentsViewController.swift in Sources */,
+				A944E4872370F6120003E201 /* Image.swift in Sources */,
 				A988D2222317ECA9004EDB42 /* HomeViewTab.swift in Sources */,
 				A9DE7DD22323BE2700B5EE03 /* NetworkError.swift in Sources */,
 				A9DE7DD42323BE7F00B5EE03 /* URLParameterEncoder.swift in Sources */,

@@ -33,13 +33,13 @@ class AlertView: View {
         return lb
     }()
     
-    private lazy var descriptionLabel: UILabel = {
+    lazy var descriptionLabel: UILabel = {
         let lb = UILabel()
         lb.translatesAutoresizingMaskIntoConstraints = false
         lb.font = Theme.fonts.avenir(size: 14)
         lb.textColor = Theme.colors.baseBlack
         lb.numberOfLines = 0
-        lb.text = "Could not connect to the server."
+        lb.text = "Unknown Error"
         return lb
     }()
     
@@ -48,7 +48,7 @@ class AlertView: View {
         bt.translatesAutoresizingMaskIntoConstraints = false
         bt.setTitle("Ok", for: [.normal])
         bt.setTitleColor(Theme.colors.baseOrange, for: [.normal])
-        bt.titleLabel?.font = Theme.fonts.avenirBlack(size: 24)
+        bt.titleLabel?.font = Theme.fonts.avenirBlack(size: 22)
         bt.addTarget(self, action: #selector(handleTap(_:)), for: .touchUpInside)
         return bt
     }()
@@ -112,8 +112,9 @@ class AlertView: View {
         rightConstraint.priority = UILayoutPriority(800)
         
         // Message Label
-        messageLabel.topAnchor.constraint(equalTo: alertView.topAnchor, constant: 8).isActive = true
+        messageLabel.topAnchor.constraint(equalTo: alertView.topAnchor, constant: 16).isActive = true
         messageLabel.centerXAnchor.constraint(equalTo: alertView.centerXAnchor, constant: 0).isActive = true
+        messageLabel.heightAnchor.constraint(equalToConstant: 16).isActive = true
         
         // Description Label
         descriptionLabel.topAnchor.constraint(equalTo: messageLabel.bottomAnchor, constant: 0).isActive = true
@@ -122,10 +123,11 @@ class AlertView: View {
         
         // Ok Button
         okButton.bottomAnchor.constraint(equalTo: alertView.bottomAnchor, constant: 0).isActive = true
-        okButton.heightAnchor.constraint(equalToConstant: 50).isActive = true
+        okButton.heightAnchor.constraint(equalToConstant: 60).isActive = true
         okButton.leftAnchor.constraint(equalTo: alertView.leftAnchor, constant: 0).isActive = true
         okButton.rightAnchor.constraint(equalTo: alertView.rightAnchor, constant: 0).isActive = true
         
+        self.layoutIfNeeded()        
     }
     
     func animateAlertView(active: Bool, completion: ((_: Bool) -> ())? = nil) {

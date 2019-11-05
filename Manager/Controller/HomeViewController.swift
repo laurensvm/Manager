@@ -73,12 +73,11 @@ extension HomeViewController: CollectionViewDelegate {
         if indexPath.item == 0 {
             if let networkManager = self.networkManager {
                 let vc = PhotoViewController(withNetworkManager: networkManager)
-                networkManager.getImageList(amount: 100, completion: { (images, error) in
-                    if let images = images {
-            			vc.images = images
+                networkManager.getImageListIds(amount: 100, completion: { (thumbnails, error) in
+                    if let thumbnails = thumbnails {
+                        vc.thumbnails = thumbnails
                     }
                 })
-
                 navigationController?.pushViewController(vc, animated: true)
             }
         }

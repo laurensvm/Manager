@@ -22,7 +22,7 @@ class AlertViewController: ViewController<AlertView> {
     
     convenience init(withMessage message: String?) {
         self.init()
-        print(message)
+        customView.descriptionLabel.text = message
     }
     
     override func viewWillAppear(_ animated: Bool) {

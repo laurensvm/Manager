@@ -2,35 +2,66 @@
 //  Image.swift
 //  Manager
 //
-//  Created by Laurens Van Mieghem on 07/09/2019.
+//  Created by Laurens Van Mieghem on 05/11/2019.
 //  Copyright © 2019 Laurens Van Mieghem. All rights reserved.
 //
 
-import Foundation
 import UIKit
+import CoreLocation
+import SwiftyJSON
 
-class Image {
-    var size: Int!
-    var imageURL: String!
-    var image: UIImage!
-    var isFetching: Bool = false
+struct Image {
+    var imageData: UIImage?
+    var coordinates: CLLocationCoordinate2D?
+    var description: String?
+    var device: String?
+    var directory: String?
+    var _extension: String?
+    var id: Int!
+    var localId: String?
+    var name: String?
+    var path: String?
+    var resolution: String?
+    var size: Int?
+    var timestamp: Date?
+    var user: String?
+    var type: String?
+    var updated: Date?
     
-    init() {
+    mutating func append(_ json: JSON) {
+        self.id = json["id"].intValue
+        self.coordinates = Image.createCoordinates(coordinates: json["coordinates"])
+        self.description = json["description"].string
+        self.device = json["device"].string
+        self.directory = json["directory"].string
+        self._extension = json["extension"].string
+        self.localId = json["local_identifier"].string
+        self.name = json["name"].string
+        self.path = json["path"].string
+        self.resolution = json["resolution"].string
+        self.size = json["size"].intValue
+        self.type = json["type"].string
+        self.timestamp = Image.createDateObject(dateString: json["timestamp"].string)
+        self.updated = Image.createDateObject(dateString: json["updated"].string)
     }
     
-    required init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        
-        size = try container.decode(Int.self, forKey: .size)
-        imageURL = try container.decode(String.self, forKey: .imageURL)
-        
-    }
-}
-
-extension Image: Codable {
+    private static let dateFormatter: DateFormatter = {
+        let df = DateFormatter()
+        df.dateFormat = "E, d MMM yyyy HH:mm:ss zzz"
+        df.timeZone = TimeZone(abbreviation: "GMT")
+        df.locale = Locale(identifier: "en_US_POSIX")
+        return df
+    }()
     
-    private enum CodingKeys: String, CodingKey {
-        case size
-        case imageURL = "image_url"
+    private static func createCoordinates(coordinates: JSON) -> CLLocationCoordinate2D? {
+        let lat = CLLocationDegrees(coordinates["latitude"].doubleValue)
+        let lon = CLLocationDegrees(coordinates["longitude"].doubleValue)
+        
+        return CLLocationCoordinate2D(latitude: lat, longitude: lon)
+    }
+    
+    private static func createDateObject(dateString: String?) -> Date? {
+        guard let dateString = dateString else { return nil }
+        return dateFormatter.date(from: dateString)
     }
 }

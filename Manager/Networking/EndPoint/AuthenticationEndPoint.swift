@@ -16,7 +16,7 @@ public enum AuthenticationApi {
 extension AuthenticationApi: EndPointType {
     
     var environmentBaseURL: String {
-         return "http://127.0.0.1:5000/"
+         return AppConfig.baseURL + "/auth/"
     }
     
     var baseURL: URL {

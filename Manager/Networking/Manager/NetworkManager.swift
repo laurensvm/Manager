@@ -12,6 +12,7 @@ import SwiftyJSON
 class NetworkManager: NSObject {
     private let authenticationRouter = Router<AuthenticationApi>()
     private let filesystemRouter = Router<FileSystemApi>()
+    private let imageRouter = Router<ImageApi>()
     
     let credentialManager = CredentialManager()
     
@@ -23,6 +24,7 @@ class NetworkManager: NSObject {
         // Give each router (who needs one) a reference to the credentialManager
         authenticationRouter.credentialsManagerDelegate = credentialManager
         filesystemRouter.credentialsManagerDelegate = credentialManager
+        imageRouter.credentialsManagerDelegate = credentialManager
     }
     
     enum NetworkResponse: String {
@@ -116,8 +118,8 @@ class NetworkManager: NSObject {
         })
     }
     
-    func getImageList(amount: Int, completion: @escaping (_ imageList: [Image]?, _ error: String?) -> ()) {
-        self.filesystemRouter.request(.getImageList(amount: amount), completion: { data, response, error in
+    func getImageListIds(amount: Int, completion: @escaping (_ thumbnails: [ThumbnailImage]?, _ error: String?) -> ()) {
+        self.imageRouter.request(.getThumbnailImageIds(amount: amount), completion: { data, response, error in
             if error != nil {
                 completion(nil, "\(NetworkError.noConnection)")
             }
@@ -131,9 +133,11 @@ class NetworkManager: NSObject {
                         return
                     }
                     
-                    let images = try? JSONDecoder().decode([Image].self, from: responseData)
+                    let json = try? JSON(data: responseData)
                     
-                    completion(images, nil)
+                    let thumbnails = json?["images"].map { ThumbnailImage(id: $0.1.intValue) }
+                    
+                    completion(thumbnails, nil)
                 case .failure(let networkFailureError):
                     completion(nil, networkFailureError)
                 }
@@ -142,8 +146,8 @@ class NetworkManager: NSObject {
         })
     }
     
-    func getImage(url: String, completion: @escaping (_ data: Data) -> ()) {
-        self.filesystemRouter.request(.getImage(url: url), completion: { data, response, error in
+    func getThumbnailImage(id: Int, completion: @escaping (_ data: Data) -> ()) {
+        self.imageRouter.request(.getThumbnailImage(id: id), completion: { data, response, error in
             if let response = response as? HTTPURLResponse {
                 let result = self.handleNetworkResponse(response)
                 switch result {
@@ -155,6 +159,52 @@ class NetworkManager: NSObject {
                     completion(responseData)
                 case .failure:
                     return
+                }
+                
+            }
+        })
+    }
+    
+    func getImage(id: Int, completion: @escaping (_ data: Data) -> ()) {
+        self.imageRouter.request(.getImage(id: id), completion: { data, response, error in
+            if let response = response as? HTTPURLResponse {
+                let result = self.handleNetworkResponse(response)
+                switch result {
+                case .success:
+                    guard let responseData = data else {
+                        return
+                    }
+                    
+                    completion(responseData)
+                case .failure:
+                    return
+                }
+                
+            }
+        })
+    }
+    
+    func getImageDetails(id: Int, completion: @escaping (_ data: JSON?, _ error: String?) -> ()) {
+        self.imageRouter.request(.getImageDetails(id: id), completion: { data, response, error in
+            if error != nil {
+            	completion(nil, "\(NetworkError.noConnection)")
+            }
+            
+            if let response = response as? HTTPURLResponse {
+                let result = self.handleNetworkResponse(response)
+                switch result {
+                case .success:
+                    guard let responseData = data else {
+                        completion(nil, NetworkResponse.noData.rawValue)
+                        return
+                    }
+                    
+                    let json = try? JSON(data: responseData)
+                    
+                    completion(json, nil)
+                    
+                case .failure(let networkFailureError):
+                    completion(nil, networkFailureError)
                 }
                 
             }

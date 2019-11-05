@@ -11,6 +11,11 @@ import UIKit
 class DetailPhotoView: UIView {
     
     var delegate: DetailPhotoDelegate?
+    var image: Image? {
+        didSet {
+            self.imageView.image = image?.imageData
+        }
+    }
     
     var tapGestureRecognizer = UITapGestureRecognizer()
     var swipeUpGestureRecognizer = UISwipeGestureRecognizer()

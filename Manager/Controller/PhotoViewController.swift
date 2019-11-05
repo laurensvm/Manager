@@ -14,7 +14,7 @@ class PhotoViewController: ViewController<PhotoView> {
     
     private let transition = DetailViewTransition()
     
-    var images: [Image] = [] {
+    var thumbnails: [ThumbnailImage] = [] {
         didSet {
             DispatchQueue.main.async {
                 self.customView.collectionView.reloadData()
@@ -58,17 +58,17 @@ extension PhotoViewController: CollectionViewDelegate {
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return images.count
+        return thumbnails.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: self.customView.photoCellId, for: indexPath) as! PhotoCell
         
-        let image = images[indexPath.item]
+        let thumbnail = thumbnails[indexPath.item]
         
-        cell.imageView.image = image.image
+        cell.imageView.image = thumbnail.image
         
-        if image.image == nil && !image.isFetching {
+        if thumbnail.image == nil && !thumbnail.isFetching {
             self.collectionView(collectionView, prefetchItemsAt: [indexPath])
         }
         
@@ -97,17 +97,18 @@ extension PhotoViewController: CollectionViewDelegate {
             transition.originFrame = cell.frame
         }
         
-        // Animation        
-        if let image = images[indexPath.item].image {
-            let detailPhotoViewController = DetailPhotoViewController(image: image)
-            detailPhotoViewController.transitioningDelegate = self
-            
+        
+        let thumbnail = thumbnails[indexPath.item]
+        
+        let detailPhotoViewController = DetailPhotoViewController(withNetworkManager: self.networkManager, thumbnail: thumbnail)
+        detailPhotoViewController.transitioningDelegate = self
+        
 //            Change to true for an animation
 //            self.present(detailPhotoViewController, animated: true, completion: nil)
-            
-            self.navigationController?.pushViewController(detailPhotoViewController, animated: true)
+        
+        self.navigationController?.pushViewController(detailPhotoViewController, animated: true)
 
-        }
+        
         
     }
     
@@ -123,14 +124,15 @@ extension PhotoViewController: UIViewControllerTransitioningDelegate {
 extension PhotoViewController: UICollectionViewDataSourcePrefetching {
     func collectionView(_ collectionView: UICollectionView, prefetchItemsAt indexPaths: [IndexPath]) {
         for idx in indexPaths {
-            let image = images[idx.item]
-            guard let imageURL = image.imageURL,
-                 image.image == nil,
-                !image.isFetching else { return }
+            let thumbnail = thumbnails[idx.item]
             
-            image.isFetching = true
-            networkManager?.getImage(url: imageURL, completion: { data in
-                image.image = UIImage(data: data)
+            if thumbnail.image != nil || thumbnail.isFetching {
+                return
+            }
+            
+            thumbnail.isFetching = true
+            networkManager?.getThumbnailImage(id: thumbnail.id, completion: { data in
+                thumbnail.image = UIImage(data: data)
                 DispatchQueue.main.async {
                     self.customView.collectionView.reloadItems(at: [idx])
                 }

@@ -63,20 +63,20 @@ class CredentialManager: NSObject {
         refreshTokenIfNeeded()
     }
     
-    func login(username: String, password: String, completion: @escaping (Bool) -> ()) {
+    func login(username: String, password: String, completion: @escaping (Bool, String?) -> ()) {
         
         setCredentials(username: username, password: password)
         
         delegate?.getToken(completion: { error, token in
             if error != nil {
-                print("Error: \(error!)")
+                completion(false, error)
             }
             
             if let token = token {
                 self.token = token
-                completion(true)
+                completion(true, nil)
             } else {
-                completion(false)
+                completion(false, error)
             }
             
         })
@@ -117,10 +117,7 @@ class CredentialManager: NSObject {
     
     func hasValidCredentials() -> Bool {
         if let _ = storage.defaultCredential(for: protectionSpace) {
-            if let _ = self.token?.string {
-                return true
-            }
-            return false
+            return true
         }
         return false
     }

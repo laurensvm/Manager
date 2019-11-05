@@ -10,7 +10,16 @@ import UIKit
 
 class DetailPhotoViewController: ViewController<DetailPhotoView> {
     
-    private var image: UIImage?
+    private var networkManager: NetworkManager?
+    
+    private var image: Image? {
+        didSet {
+            if let _ = image?.imageData {
+                self.customView.image = image
+            }
+        }
+    }
+    private var thumbnail: ThumbnailImage!
     private var navigationsBarsAreHidden: Bool = false
     
     override func viewWillAppear(_ animated: Bool) {
@@ -25,7 +34,12 @@ class DetailPhotoViewController: ViewController<DetailPhotoView> {
         
         customView.delegate = self
         customView.didLoadDelegate()
-        customView.imageView.image = image
+        
+        if let im = self.image?.imageData {
+            customView.imageView.image = im
+        }
+        
+        customView.imageView.image = thumbnail.image
         
     }
     
@@ -36,13 +50,39 @@ class DetailPhotoViewController: ViewController<DetailPhotoView> {
         self.tabBarController?.tabBar.isHidden = false
     }
     
-    init(image: UIImage?) {
+    init(withNetworkManager networkManager: NetworkManager?, thumbnail: ThumbnailImage) {
         super.init(nibName: nil, bundle: nil)
-        self.image = image
+        self.networkManager = networkManager
+        self.thumbnail = thumbnail
+        self.image = Image()
+        
+        fetchImage()
+        fetchImageDetails()
     }
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    private func fetchImage() {
+        networkManager?.getImage(id: thumbnail.id, completion: { data in
+            DispatchQueue.main.async {
+            	self.image?.imageData = UIImage(data: data)
+            }
+        })
+    }
+    
+    private func fetchImageDetails() {
+        networkManager?.getImageDetails(id: thumbnail.id, completion: { data, error in
+            if let error = error {
+                // Do something with the error
+                print(error)
+            }
+            
+            if let data = data {
+                self.image?.append(data)
+            }
+        })
     }
     
 }
