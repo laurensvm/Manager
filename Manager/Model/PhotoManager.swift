@@ -13,6 +13,11 @@ class PhotoManager: NSObject, PHPhotoLibraryChangeObserver {
     
     private var networkManager: NetworkManager!
     private var imageManager: PHImageManager!
+    private let options: PHImageRequestOptions = {
+        let options = PHImageRequestOptions()
+        options.deliveryMode = PHImageRequestOptionsDeliveryMode.highQualityFormat
+        return options
+    }()
     
     init(withNetworkManager networkManager: NetworkManager) {
         super.init()
@@ -63,6 +68,7 @@ class PhotoManager: NSObject, PHPhotoLibraryChangeObserver {
         
         parameters["local_id"] = asset.localIdentifier
         parameters["directory_id"] = 1
+        parameters["resolution"] = "W\(asset.pixelWidth)xH\(asset.pixelHeight)"
         
         if let lat = asset.location?.coordinate.latitude,
             let lon = asset.location?.coordinate.latitude {
@@ -70,16 +76,14 @@ class PhotoManager: NSObject, PHPhotoLibraryChangeObserver {
             parameters["longitude"] = Double(lon)
         }
         
-        
         let name = PHAssetResource.assetResources(for: asset).first?.originalFilename ?? UUID().uuidString
         
-        self.imageManager.requestImage(for: asset, targetSize: PHImageManagerMaximumSize, contentMode: .aspectFit, options: nil, resultHandler: { (image, info) in
+        self.imageManager.requestImage(for: asset, targetSize: PHImageManagerMaximumSize, contentMode: .aspectFit, options: self.options, resultHandler: { (image, info) in
             
             guard let image = image else { return }
             
             parameters["file"] = PHAssetImageWrapper(image: image, name: name)
-            print(parameters)
-            print(asset.pixelWidth, asset.pixelHeight)
+            
             self.networkManager.uploadImage(parameters: parameters, completion: { json, error in                
                 print("Request Completed")
             })
