@@ -88,7 +88,9 @@ class DetailPhotoViewController: ViewController<DetailPhotoView> {
             }
             
             if let data = data {
-                self.image?.append(data)
+                DispatchQueue.main.async {
+                    self.image?.append(data)
+                }
             }
         })
     }

@@ -12,29 +12,33 @@ import AVFoundation
 public struct FormDataEncoding: ParameterEncoder {
     public static func encode(urlRequest: inout URLRequest, with parameters: Parameters) throws {
         
-        urlRequest.httpMethod = "POST"
-        
         let boundary = "Boundary-\(UUID().uuidString)"
         urlRequest.setValue("multipart/form-data; boundary=\(boundary)", forHTTPHeaderField: "Content-Type")
         
+        urlRequest.httpBody = createBody(parameters: parameters, boundary: boundary)
+        
     }
     
-    private static func createBody(parameters: Parameters, boundary: String) {
+    private static func createBody(parameters: Parameters, boundary: String) -> Data {
         
         var body = Data()
         
+        
         for (key, value) in parameters {
+            // Key name for image should be 'file'
+            // Add the boundary
+            body.add("--\(boundary)\r\n")
             
             switch value {
-            case let im as UIImage:
-                let random = arc4random()
-                let file = "image\(random).jpg"
-                let data = im.jpegData(compressionQuality: 1);
-//                let mimetype = mimeTypeForPath(path: file)
                 
-                body.add("--\(boundary)\r\n")
-                body.add("Content-Disposition: form-data; name=\"\(key)\"; filename=\"\(file)\"\r\n")
-                body.add("Content-Type: \("MIMETYPE")\r\n\r\n")
+            case let imageAsset as PHAssetImageWrapper:
+                let mimeType = "image/jpg"
+                let data = imageAsset.image.jpegData(compressionQuality: 1.0)
+                
+                print(Float(data?.count ?? 0))
+            
+                body.add("Content-Disposition: form-data; name=\"\(key)\"; filename=\"\(imageAsset.name)\"\r\n")
+                body.add("Content-Type: \(mimeType)\r\n\r\n")
                 
                 body.append(data!)
                 
@@ -48,16 +52,9 @@ public struct FormDataEncoding: ParameterEncoder {
                 body.add("\(value)\r\n")
             }
         }
+        
+        body.add("--\(boundary)--")
+        
+        return body
     }
-    
-//    private static func mimeTypeForPath(path: String) -> String {
-//        let pathExtension = path.pathExtension
-//        var stringMimeType = "application/octet-stream";
-//        if let uti = UTTypeCreatePreferredIdentifierForTag(kUTTagClassFilenameExtension, pathExtension as! CFString, nil)?.takeRetainedValue() {
-//            if let mimetype = UTTypeCopyPreferredTagWithClass(uti, kUTTagClassMIMEType)?.takeRetainedValue() {
-//                stringMimeType = mimetype as NSString as String
-//            }
-//        }
-//        return stringMimeType;
-//    }
 }

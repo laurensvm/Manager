@@ -12,7 +12,7 @@ extension Data {
 	mutating func add(_ string: String) {
         let data = string.data(
             using: String.Encoding.utf8,
-            allowLossyConversion: true)
+            allowLossyConversion: false)
         append(data!)
     }
 }

@@ -19,6 +19,6 @@ public enum HTTPTask {
         additionalHeaders: HTTPHeaders?
     )
     case requestHeaders(headers: HTTPHeaders?)
-    
+    case requestFormDataParameters(formDataParameters: Parameters?)
     // Add download and upload tasks here later
 }

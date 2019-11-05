@@ -13,6 +13,7 @@ public enum ImageApi {
     case getThumbnailImage(id: Int)
     case getImage(id: Int)
     case getImageDetails(id: Int)
+    case uploadImage(parameters: Parameters)
     
 }
 
@@ -36,11 +37,15 @@ extension ImageApi: EndPointType {
             return "download/\(id)/"
         case .getImageDetails(id: let id):
             return "\(id)/"
+        case .uploadImage:
+            return "upload/"
         }
     }
     
     var httpMethod: HTTPMethod {
         switch self {
+        case .uploadImage:
+            return .post
         default:
             return .get
         }
@@ -50,6 +55,8 @@ extension ImageApi: EndPointType {
         switch self {
         case .getThumbnailImageIds(amount: let amount):
             return .requestParameters(bodyParameters: nil, urlParameters: ["amount": amount])
+        case .uploadImage(parameters: let parameters):
+            return .requestFormDataParameters(formDataParameters: parameters)
         default:
             return .request
         }

@@ -20,12 +20,7 @@ class CredentialManager: NSObject {
     
     private var token: Token?
     
-    private let protectionSpace = URLProtectionSpace(
-        host: "127.0.0.1:5000",
-        port: 5000,
-        protocol: "http",
-        realm: nil,
-        authenticationMethod: NSURLAuthenticationMethodHTTPBasic)
+    private let protectionSpace = AppConfig.protectionSpace
     
     override init() {
         super.init()

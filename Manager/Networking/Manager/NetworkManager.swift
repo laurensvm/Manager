@@ -211,4 +211,31 @@ class NetworkManager: NSObject {
         })
     }
     
+    func uploadImage(parameters: Parameters, completion: @escaping (_ data: JSON?, _ error: String?) -> ()) {
+        self.imageRouter.request(.uploadImage(parameters: parameters), completion: { data, error, response in
+            if error != nil {
+                completion(nil, "\(NetworkError.noConnection)")
+            }
+            
+            if let response = response as? HTTPURLResponse {
+                let result = self.handleNetworkResponse(response)
+                switch result {
+                case .success:
+                    guard let responseData = data else {
+                        completion(nil, NetworkResponse.noData.rawValue)
+                        return
+                    }
+                    
+                    let json = try? JSON(data: responseData)
+                    
+                    completion(json, nil)
+                    
+                case .failure(let networkFailureError):
+                    completion(nil, networkFailureError)
+                }
+                
+            }
+        })
+    }
+    
 }

@@ -11,6 +11,7 @@
 		7C59CE6051A1A6DAB7816489 /* libPods-ManagerTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 17635363A3CCC8C41F968343 /* libPods-ManagerTests.a */; };
 		A90707DC2367CFD000CE5AED /* AlertViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A90707DB2367CFD000CE5AED /* AlertViewController.swift */; };
 		A90707DE2367D00200CE5AED /* AlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A90707DD2367D00200CE5AED /* AlertView.swift */; };
+		A92FF2C2237158B300F91C2F /* PHAssetImageWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = A92FF2C1237158B300F91C2F /* PHAssetImageWrapper.swift */; };
 		A944E47D237022720003E201 /* AppConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = A944E47C237022720003E201 /* AppConfig.swift */; };
 		A944E47F237024070003E201 /* FormDataEncoding.swift in Sources */ = {isa = PBXBuildFile; fileRef = A944E47E237024070003E201 /* FormDataEncoding.swift */; };
 		A944E48123702D890003E201 /* Data.swift in Sources */ = {isa = PBXBuildFile; fileRef = A944E48023702D890003E201 /* Data.swift */; };
@@ -104,6 +105,7 @@
 		A243F3FC2102FE24B30C0B4B /* Pods-Manager.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Manager.release.xcconfig"; path = "Target Support Files/Pods-Manager/Pods-Manager.release.xcconfig"; sourceTree = "<group>"; };
 		A90707DB2367CFD000CE5AED /* AlertViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertViewController.swift; sourceTree = "<group>"; };
 		A90707DD2367D00200CE5AED /* AlertView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertView.swift; sourceTree = "<group>"; };
+		A92FF2C1237158B300F91C2F /* PHAssetImageWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PHAssetImageWrapper.swift; sourceTree = "<group>"; };
 		A944E47C237022720003E201 /* AppConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppConfig.swift; sourceTree = "<group>"; };
 		A944E47E237024070003E201 /* FormDataEncoding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormDataEncoding.swift; sourceTree = "<group>"; };
 		A944E48023702D890003E201 /* Data.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Data.swift; sourceTree = "<group>"; };
@@ -325,6 +327,7 @@
 				A9F74126234B43D500C8513D /* PhotoManager.swift */,
 				A944E4862370F6120003E201 /* Image.swift */,
 				A944E48C237115F20003E201 /* MapPin.swift */,
+				A92FF2C1237158B300F91C2F /* PHAssetImageWrapper.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -668,6 +671,7 @@
 				A9DE7DA523231DEB00B5EE03 /* CustomNavigationBar.swift in Sources */,
 				A9DE7DDE2323C5D900B5EE03 /* ThumbnailImage.swift in Sources */,
 				A9DE7DEA23248C3000B5EE03 /* UserDefaults.swift in Sources */,
+				A92FF2C2237158B300F91C2F /* PHAssetImageWrapper.swift in Sources */,
 				A944E47D237022720003E201 /* AppConfig.swift in Sources */,
 				A9BD60B32354A014006263D5 /* SettingsView.swift in Sources */,
 				A9F4036A22F696B900209D17 /* Token.swift in Sources */,
