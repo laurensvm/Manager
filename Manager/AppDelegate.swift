@@ -19,13 +19,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         setupApplicationHierarchy()
         
-        // Handle the document uploads from the PHAsset library here
-        DispatchQueue.global(qos: DispatchQoS.QoSClass.background).async {
-            sleep(3)
-            let photoManager = PhotoManager(withNetworkManager: self.networkManager)
-            photoManager.beginImportingAssets()
-        }
-        
         return true
     }
     
@@ -76,10 +69,19 @@ extension AppDelegate {
         self.window?.rootViewController = tabBarController
         self.window?.makeKeyAndVisible()
         
-//        if !networkManager.credentialManager.hasValidCredentials() {
-            let loginViewController = LoginViewController(networkManager: networkManager)
+        if !networkManager.credentialManager.hasValidCredentials() {
+            let loginViewController = LoginViewController(networkManager: networkManager, onLoginCompletion: setupPhotoManager)
             tabBarController.present(loginViewController, animated: false, completion: nil)
-//        }
+        }
+    }
+    
+    func setupPhotoManager() {
+        
+        // Handle the document uploads from the PHAsset library here
+        DispatchQueue.global(qos: DispatchQoS.QoSClass.background).async {
+            let photoManager = PhotoManager(withNetworkManager: self.networkManager)
+            photoManager.beginImportingAssets()
+        }
     }
 
 }

@@ -22,21 +22,42 @@ class DocumentsViewController: ViewController<DocumentsView> {
         return ""
     }
     
+    private lazy var addBarButtonItem: UIBarButtonItem = {
+        let addButton = UIButton(type: .custom)
+        addButton.setImage(#imageLiteral(resourceName: "plug-50"), for: .normal)
+        
+        addButton.addTarget(self, action: #selector(addDirectory(_:)), for: .touchUpInside)
+        
+        let barButtonItem = UIBarButtonItem(customView: addButton)
+        barButtonItem.customView?.widthAnchor.constraint(equalToConstant: 32).isActive = true
+        barButtonItem.customView?.heightAnchor.constraint(equalToConstant: 32).isActive = true
+        
+        return barButtonItem
+    }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         customView.delegate = self
-        customView.documentsDelegate = self
         customView.didLoadDelegate()
         populateBreadCrumbTrail()
         
+        getDirectories()
+        
+        // Add the add bar button
+        self.navigationItem.setRightBarButton(self.addBarButtonItem, animated: true)
+    }
+    
+    private func getDirectories() {
         networkManager?.getDirectories(inDirectory: getPath(), completion: { data, error in
             if let directories = data?["directories"] {
+                self.directories = []
                 directories.forEach({ _, json in
-                    self.directories.append(json.stringValue)
+                    self.directories.append(json["name"].stringValue)
                 })
             }
             DispatchQueue.main.async {
                 self.customView.containsSubDirectories = !self.directories.isEmpty
+                self.customView.collectionView.reloadData()
             }
         })
     }
@@ -98,9 +119,18 @@ extension DocumentsViewController: CollectionViewDelegate {
     
 }
 
-extension DocumentsViewController: DocumentsDelegate {
+extension DocumentsViewController {
     @objc func addDirectory(_ button: UIButton) {
-        print("Make call to server to add a new document + present controller that inputs name")
+        let createDirectoryViewController = CreateDirectoryViewController(directory: 1)
+        createDirectoryViewController.networkManager = self.networkManager
+        createDirectoryViewController.presentationController?.delegate = self
+        
+        self.present(createDirectoryViewController, animated: true, completion: nil)
     }
-    
+}
+
+extension DocumentsViewController: UIAdaptivePresentationControllerDelegate {
+    func presentationControllerDidDismiss(_ presentationController: UIPresentationController) {
+        getDirectories()
+    }
 }

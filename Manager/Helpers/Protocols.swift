@@ -16,8 +16,9 @@ protocol AlertViewDelegate: class {
     func dismissViewController()
 }
 
-@objc protocol DocumentsDelegate: class {
-    @objc func addDirectory(_ button: UIButton)
+@objc protocol CreateDirectoryDelegate {
+    @objc func didTapCreateDirectory(_: UIButton)
+    @objc func removeSelf(_ sender: UITapGestureRecognizer?)
 }
 
 protocol CollectionViewDelegate: UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {

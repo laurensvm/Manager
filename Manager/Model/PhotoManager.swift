@@ -12,7 +12,7 @@ import Photos
 class PhotoManager: NSObject, PHPhotoLibraryChangeObserver {
     
     private var networkManager: NetworkManager!
-    private var imageManager: PHImageManager!
+    private let imageManager: PHImageManager = PHImageManager.default()
     private let options: PHImageRequestOptions = {
         let options = PHImageRequestOptions()
         options.deliveryMode = PHImageRequestOptionsDeliveryMode.highQualityFormat
@@ -22,7 +22,6 @@ class PhotoManager: NSObject, PHPhotoLibraryChangeObserver {
     init(withNetworkManager networkManager: NetworkManager) {
         super.init()
         self.networkManager = networkManager
-        self.imageManager = PHImageManager.default()
         
         PHPhotoLibrary.requestAuthorization { (status) in
             if status == PHAuthorizationStatus.authorized {
@@ -53,7 +52,7 @@ class PhotoManager: NSObject, PHPhotoLibraryChangeObserver {
         print("Imported")
     }
     
-    func photoLibraryDidChange(_ changeInstance: PHChange) {
+    public func photoLibraryDidChange(_ changeInstance: PHChange) {
         DispatchQueue.main.async {
             print("WWWWW")
         }
@@ -66,7 +65,7 @@ class PhotoManager: NSObject, PHPhotoLibraryChangeObserver {
         
         parameters["local_id"] = asset.localIdentifier
         parameters["directory_id"] = 1
-        parameters["resolution"] = "W\(asset.pixelWidth)xH\(asset.pixelHeight)"
+//        parameters["resolution"] = "W\(asset.pixelWidth)xH\(asset.pixelHeight)"
         
         if let lat = asset.location?.coordinate.latitude,
             let lon = asset.location?.coordinate.latitude {
@@ -83,7 +82,7 @@ class PhotoManager: NSObject, PHPhotoLibraryChangeObserver {
             parameters["file"] = PHAssetImageWrapper(image: image, name: name)
             
             self.networkManager.uploadImage(parameters: parameters, completion: { json, error in                
-                print("Request Completed")
+                print(json, error)
             })
         })
     }

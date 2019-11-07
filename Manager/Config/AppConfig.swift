@@ -11,7 +11,7 @@ import Foundation
 
 struct AppConfig {
     
-    static let baseURL: String = "http://127.0.0.1:5000"
+    static let baseURL: String = "https://api.vanmieghem.me"
     static let protectionSpace = URLProtectionSpace(
                 host: "api.vanmieghem.me",
     			port: 443,

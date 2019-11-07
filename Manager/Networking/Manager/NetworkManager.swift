@@ -11,7 +11,7 @@ import SwiftyJSON
 
 class NetworkManager: NSObject {
     private let authenticationRouter = Router<AuthenticationApi>()
-    private let filesystemRouter = Router<FileSystemApi>()
+    private let directoryRouter = Router<DirectoryApi>()
     private let imageRouter = Router<ImageApi>()
     
     let credentialManager = CredentialManager()
@@ -23,7 +23,7 @@ class NetworkManager: NSObject {
         
         // Give each router (who needs one) a reference to the credentialManager
         authenticationRouter.credentialsManagerDelegate = credentialManager
-        filesystemRouter.credentialsManagerDelegate = credentialManager
+        directoryRouter.credentialsManagerDelegate = credentialManager
         imageRouter.credentialsManagerDelegate = credentialManager
     }
     
@@ -93,7 +93,7 @@ class NetworkManager: NSObject {
     }
     
     func getDirectories(inDirectory directory: String, completion: @escaping (_ directories: JSON?, _ error: String?) -> ()) {
-        self.filesystemRouter.request(.getDirectories(directory: directory), completion: { data, response, error in
+        self.directoryRouter.request(.getDirectories(amount: 20), completion: { data, response, error in
             if error != nil {
                 completion(nil, "\(NetworkError.noConnection)")
             }
@@ -113,6 +113,34 @@ class NetworkManager: NSObject {
                     
                 case .failure(let networkFailureError):
                     completion(nil, networkFailureError)
+                }
+            }
+        })
+    }
+    
+    func createDirectory(withName name: String, andParentId parentId: Int, completion: @escaping (_ success: Bool, _ error: String?) -> ()) {
+        self.directoryRouter.request(.createDirectory(name: name, parentId: parentId), completion: { data, response, error in
+            if error != nil {
+                completion(false, "\(NetworkError.noConnection)")
+            }
+            
+            if let response = response as? HTTPURLResponse {
+                let result = self.handleNetworkResponse(response)
+                switch result {
+                case .success:
+                    
+                    guard let responseData = data else {
+                        completion(false, NetworkResponse.noData.rawValue)
+                        return
+                    }
+                    
+                    let json = try? JSON(data: responseData)
+                    if let _ = json?["success"] {
+                        completion(true, nil)
+                    }
+                    
+                case .failure(let networkFailureError):
+                    completion(false, networkFailureError)
                 }
             }
         })
