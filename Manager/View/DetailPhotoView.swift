@@ -9,6 +9,7 @@
 import UIKit
 
 class DetailPhotoView: UIView {
+    static let KILOBYTE: Int = 1024
     
     private let formatter: DateFormatter = {
         let df = DateFormatter()
@@ -30,6 +31,11 @@ class DetailPhotoView: UIView {
                 
                 if let description = self.image?._description {
                     self.detailView.descriptionLabel.text = "Description: \(description)"
+                }
+                
+                if let size = self.image?.size {
+                    let sizeInMegaBytes = Float(size) / Float(DetailPhotoView.KILOBYTE * DetailPhotoView.KILOBYTE)
+                    self.detailView.sizeLabel.text = "Size: \(sizeInMegaBytes.truncate(places: 2)) MB"
                 }
             }
         }

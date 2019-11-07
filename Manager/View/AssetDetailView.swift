@@ -52,6 +52,16 @@ class AssetDetailView: View {
         return lb
     }()
     
+    lazy var sizeLabel: UILabel = {
+        let lb = UILabel()
+        lb.translatesAutoresizingMaskIntoConstraints = false
+        lb.font = Theme.fonts.avenir(size: 16)
+        lb.textColor = Theme.colors.lightGrey
+        lb.numberOfLines = 0
+        lb.text = "Size: Unknown"
+        return lb
+    }()
+    
     lazy var map: MKMapView = {
         let map = MKMapView()
         map.layer.cornerRadius = 10.0
@@ -72,6 +82,7 @@ class AssetDetailView: View {
         addSubview(titleLabel)
         addSubview(nameLabel)
         addSubview(dateLabel)
+        addSubview(sizeLabel)
         addSubview(descriptionLabel)
         addSubview(map)
     }
@@ -92,8 +103,13 @@ class AssetDetailView: View {
         dateLabel.rightAnchor.constraint(equalTo: self.rightAnchor, constant: -16).isActive = true
         dateLabel.leftAnchor.constraint(equalTo: self.leftAnchor, constant: 16).isActive = true
         
+        // Add size label
+        sizeLabel.topAnchor.constraint(equalTo: dateLabel.bottomAnchor, constant: 8).isActive = true
+        sizeLabel.rightAnchor.constraint(equalTo: self.rightAnchor, constant: -16).isActive = true
+        sizeLabel.leftAnchor.constraint(equalTo: self.leftAnchor, constant: 16).isActive = true
+        
         // Add Description Label
-        descriptionLabel.topAnchor.constraint(equalTo: dateLabel.bottomAnchor, constant: 8).isActive = true
+        descriptionLabel.topAnchor.constraint(equalTo: sizeLabel.bottomAnchor, constant: 8).isActive = true
         descriptionLabel.rightAnchor.constraint(equalTo: self.rightAnchor, constant: -16).isActive = true
         descriptionLabel.leftAnchor.constraint(equalTo: self.leftAnchor, constant: 16).isActive = true
         

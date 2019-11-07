@@ -29,7 +29,7 @@ struct Image {
     var timestamp: Date?
     
     mutating func append(_ json: JSON) {
-        self.coordinates = Base().createCoordinates(coordinates: json["coordinates"])
+        self.coordinates = createCoordinates(coordinates: json["coordinates"])
         self._description = json["description"].string
         self.device = json["device"].string
         self.directory = json["directory"].string
@@ -54,8 +54,11 @@ struct Image {
     }()
     
     func createCoordinates(coordinates: JSON) -> CLLocationCoordinate2D? {
-        let lat = CLLocationDegrees(coordinates["latitude"].doubleValue)
-        let lon = CLLocationDegrees(coordinates["longitude"].doubleValue)
+        guard let latitude = coordinates["latitude"].double,
+            let longitude = coordinates["longitude"].double else { return nil }
+        
+        let lat = CLLocationDegrees(latitude)
+        let lon = CLLocationDegrees(longitude)
         
         return CLLocationCoordinate2D(latitude: lat, longitude: lon)
     }

@@ -69,11 +69,7 @@ extension AppDelegate {
         self.window?.rootViewController = tabBarController
         self.window?.makeKeyAndVisible()
         
-//        if !networkManager.credentialManager.hasValidCredentials() {
-            let loginViewController = LoginViewController(networkManager: networkManager, onLoginCompletion: setupPhotoManager)
-            loginViewController.modalPresentationStyle = .fullScreen
-            tabBarController.present(loginViewController, animated: false, completion: nil)
-//        }
+        presentLoginScreen(rootViewController: tabBarController)
     }
     
     func setupPhotoManager() {
@@ -83,6 +79,16 @@ extension AppDelegate {
 //            let photoManager = PhotoManager(withNetworkManager: self.networkManager)
 //            photoManager.beginImportingAssets()
 //        }
+    }
+    
+    func presentLoginScreen(rootViewController: UITabBarController, animated: Bool = false) {
+        if !networkManager.credentialManager.hasValidCredentials() {
+            let loginViewController = LoginViewController(networkManager: networkManager, onLoginCompletion: setupPhotoManager)
+            loginViewController.modalPresentationStyle = .fullScreen
+            rootViewController.present(loginViewController, animated: animated, completion: {
+                rootViewController.selectedIndex = 0
+            })
+        }
     }
 
 }

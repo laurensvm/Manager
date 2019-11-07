@@ -124,4 +124,10 @@ class CredentialManager: NSObject {
         }
         return false
     }
+    
+    func signOut() {
+        self.removeCredentials()
+        Session.shared.user = nil
+        
+    }
 }

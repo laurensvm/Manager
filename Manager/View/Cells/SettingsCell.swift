@@ -37,7 +37,7 @@ class SettingsCell: UICollectionViewCell {
     lazy var _titleLabel: UILabel = {
         let lb = UILabel()
         lb.translatesAutoresizingMaskIntoConstraints = false
-        lb.font = UIFont.boldSystemFont(ofSize: 16)
+        lb.font = UIFont.systemFont(ofSize: 16)
         lb.textColor = Theme.colors.baseBlack
         lb.numberOfLines = 0
         lb.text = "User"

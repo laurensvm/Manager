@@ -11,6 +11,7 @@
 		7C59CE6051A1A6DAB7816489 /* libPods-ManagerTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 17635363A3CCC8C41F968343 /* libPods-ManagerTests.a */; };
 		A90707DC2367CFD000CE5AED /* AlertViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A90707DB2367CFD000CE5AED /* AlertViewController.swift */; };
 		A90707DE2367D00200CE5AED /* AlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A90707DD2367D00200CE5AED /* AlertView.swift */; };
+		A92473EE237420B00007AAF2 /* Float.swift in Sources */ = {isa = PBXBuildFile; fileRef = A92473ED237420B00007AAF2 /* Float.swift */; };
 		A92FF2C2237158B300F91C2F /* PHAssetImageWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = A92FF2C1237158B300F91C2F /* PHAssetImageWrapper.swift */; };
 		A92FF2C4237179EE00F91C2F /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = A92FF2C3237179EE00F91C2F /* String.swift */; };
 		A944E47D237022720003E201 /* AppConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = A944E47C237022720003E201 /* AppConfig.swift */; };
@@ -115,6 +116,7 @@
 		A243F3FC2102FE24B30C0B4B /* Pods-Manager.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Manager.release.xcconfig"; path = "Target Support Files/Pods-Manager/Pods-Manager.release.xcconfig"; sourceTree = "<group>"; };
 		A90707DB2367CFD000CE5AED /* AlertViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertViewController.swift; sourceTree = "<group>"; };
 		A90707DD2367D00200CE5AED /* AlertView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertView.swift; sourceTree = "<group>"; };
+		A92473ED237420B00007AAF2 /* Float.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Float.swift; sourceTree = "<group>"; };
 		A92FF2C1237158B300F91C2F /* PHAssetImageWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PHAssetImageWrapper.swift; sourceTree = "<group>"; };
 		A92FF2C3237179EE00F91C2F /* String.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = String.swift; sourceTree = "<group>"; };
 		A944E47C237022720003E201 /* AppConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppConfig.swift; sourceTree = "<group>"; };
@@ -381,6 +383,7 @@
 				A9DE7DEB2324967900B5EE03 /* View.swift */,
 				A944E48023702D890003E201 /* Data.swift */,
 				A92FF2C3237179EE00F91C2F /* String.swift */,
+				A92473ED237420B00007AAF2 /* Float.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -736,6 +739,7 @@
 				A9DE7DBF2323907C00B5EE03 /* DocumentsViewController.swift in Sources */,
 				A944E4872370F6120003E201 /* Image.swift in Sources */,
 				A944E48B237113260003E201 /* AssetDetailView.swift in Sources */,
+				A92473EE237420B00007AAF2 /* Float.swift in Sources */,
 				A988D2222317ECA9004EDB42 /* HomeViewTab.swift in Sources */,
 				A944E48D237115F20003E201 /* MapPin.swift in Sources */,
 				A9DE7DD22323BE2700B5EE03 /* NetworkError.swift in Sources */,

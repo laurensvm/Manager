@@ -9,7 +9,16 @@
 import UIKit
 
 struct SettingsTab {
+    
+    public enum Setting {
+        case User
+        case Photos
+        case Network
+        case SignOut
+    }
+    
     let name: String
     let image: UIImage
     let arrow: Bool
+    let type: Setting
 }

@@ -10,12 +10,16 @@ import UIKit
 
 class SettingsViewController: ViewController<SettingsView> {
     
-    private let sections: [String] = ["General", "Networking"]
-    private let tabs: [SettingsTab] = [
-        SettingsTab(name: "User", image: #imageLiteral(resourceName: "user-50-filled"), arrow: true),
-        SettingsTab(name: "Photos", image: #imageLiteral(resourceName: "photos-50"), arrow: true),
-        SettingsTab(name: "Network", image: #imageLiteral(resourceName: "cloud-50-filled"), arrow: true),
-        SettingsTab(name: "Sign Out", image: #imageLiteral(resourceName: "sign-out-50"), arrow: false)
+    private let sections: [String] = ["General", ""]
+    private let tabs: [[SettingsTab]] = [
+    	[
+            SettingsTab(name: "User", image: #imageLiteral(resourceName: "user-50-filled"), arrow: true, type: .User),
+            SettingsTab(name: "Photos", image: #imageLiteral(resourceName: "photos-50"), arrow: true, type: .Photos),
+            SettingsTab(name: "Network", image: #imageLiteral(resourceName: "cloud-50-filled"), arrow: true, type: .Network)
+        ],
+        [
+            SettingsTab(name: "Sign Out", image: #imageLiteral(resourceName: "sign-out-50"), arrow: false, type: .SignOut)
+        ]
     ]
     
     var networkManager: NetworkManager!
@@ -45,13 +49,17 @@ class SettingsViewController: ViewController<SettingsView> {
 
 extension SettingsViewController: SettingsDelegate {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return tabs[section].count
+    }
+    
+    func numberOfSections(in collectionView: UICollectionView) -> Int {
         return tabs.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: customView.settingsCell, for: indexPath) as! SettingsCell
         
-        let tab = tabs[indexPath.item]
+        let tab = tabs[indexPath.section][indexPath.item]
         
         cell.rightArrow.alpha = tab.arrow ? 1 : 0
         cell._imageView.image = tab.image
@@ -74,7 +82,7 @@ extension SettingsViewController: SettingsDelegate {
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
 
         let header = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: self.customView.headerId, for: indexPath) as! SettingsSectionHeader
-        header.title.text = "General"
+        header.title.text = sections[indexPath.section]
         return header
     }
     
@@ -82,4 +90,25 @@ extension SettingsViewController: SettingsDelegate {
         return CGSize(width: self.customView.frame.width - 64, height: 15)
     }
     
+}
+
+extension SettingsViewController {
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let settingsTab = tabs[indexPath.section][indexPath.item]
+        switch settingsTab.type {
+        case .User:
+    		break
+        case .Photos:
+             break
+        case .Network:
+             break
+        case .SignOut:
+            self.networkManager.credentialManager.signOut()
+            
+            if let tabBarController = self.tabBarController {
+                let appDelegate = UIApplication.shared.delegate as! AppDelegate
+                appDelegate.presentLoginScreen(rootViewController: tabBarController, animated: true)
+            }
+        }
+    }
 }
