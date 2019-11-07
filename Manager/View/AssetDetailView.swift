@@ -32,6 +32,26 @@ class AssetDetailView: View {
         return lb
     }()
     
+    lazy var dateLabel: UILabel = {
+        let lb = UILabel()
+        lb.translatesAutoresizingMaskIntoConstraints = false
+        lb.font = Theme.fonts.avenir(size: 16)
+        lb.textColor = Theme.colors.lightGrey
+        lb.numberOfLines = 0
+        lb.text = "Date: "
+        return lb
+    }()
+    
+    lazy var descriptionLabel: UILabel = {
+        let lb = UILabel()
+        lb.translatesAutoresizingMaskIntoConstraints = false
+        lb.font = Theme.fonts.avenir(size: 16)
+        lb.textColor = Theme.colors.lightGrey
+        lb.numberOfLines = 0
+        lb.text = "Description: "
+        return lb
+    }()
+    
     lazy var map: MKMapView = {
         let map = MKMapView()
         map.layer.cornerRadius = 10.0
@@ -51,6 +71,8 @@ class AssetDetailView: View {
     private func setupViews() {
         addSubview(titleLabel)
         addSubview(nameLabel)
+        addSubview(dateLabel)
+        addSubview(descriptionLabel)
         addSubview(map)
     }
     
@@ -64,6 +86,16 @@ class AssetDetailView: View {
         nameLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 8).isActive = true
         nameLabel.rightAnchor.constraint(equalTo: self.rightAnchor, constant: -16).isActive = true
         nameLabel.leftAnchor.constraint(equalTo: self.leftAnchor, constant: 16).isActive = true
+        
+        // Add Date Label
+        dateLabel.topAnchor.constraint(equalTo: nameLabel.bottomAnchor, constant: 8).isActive = true
+        dateLabel.rightAnchor.constraint(equalTo: self.rightAnchor, constant: -16).isActive = true
+        dateLabel.leftAnchor.constraint(equalTo: self.leftAnchor, constant: 16).isActive = true
+        
+        // Add Description Label
+        descriptionLabel.topAnchor.constraint(equalTo: dateLabel.bottomAnchor, constant: 8).isActive = true
+        descriptionLabel.rightAnchor.constraint(equalTo: self.rightAnchor, constant: -16).isActive = true
+        descriptionLabel.leftAnchor.constraint(equalTo: self.leftAnchor, constant: 16).isActive = true
         
         // Add map
 //        map.topAnchor.constraint(equalTo: nameLabel.bottomAnchor, constant: 32).isActive = true

@@ -45,6 +45,6 @@ class Theme {
         static let baseOrange: UIColor = UIColor(rgbColorCodeRed: 253, green: 211, blue: 42, alpha: 1)
         static let lightOrange: UIColor = UIColor(rgbColorCodeRed: 255, green: 217, blue: 146, alpha: 1)
 //        static let baseGrey: UIColor = UIColor(rgbColorCodeRed: 61, green: 62, blue: 74, alpha: 1)
-//        static let lightBlue: UIColor = UIColor(rgbColorCodeRed: 84, green: 188, blue: 231, alpha: 1)
+        static let darkBlue: UIColor = UIColor(rgbColorCodeRed: 38, green: 75, blue: 116, alpha: 1)
     }
 }

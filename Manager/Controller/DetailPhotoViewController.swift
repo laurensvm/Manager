@@ -32,6 +32,7 @@ class DetailPhotoViewController: ViewController<DetailPhotoView> {
         self.navigationController?.navigationBar.isTranslucent = false
         self.tabBarController?.tabBar.isHidden = true
         self.tabBarController?.tabBar.isTranslucent = true
+        
     }
     
     private func generateMapPin(_ coords: CLLocationCoordinate2D) -> MapPin {

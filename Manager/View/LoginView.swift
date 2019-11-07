@@ -55,6 +55,7 @@ class LoginView: View {
         tf.font = Theme.fonts.avenirLight(size: 14)
         tf.tintColor = UIColor.lightGray
         tf.setIcon(#imageLiteral(resourceName: "password"))
+        
         tf.isSecureTextEntry = true
         tf.autocorrectionType = UITextAutocorrectionType.no
         tf.autocapitalizationType = UITextAutocapitalizationType.none
@@ -96,7 +97,7 @@ class LoginView: View {
         // Set autolayout constraints
         
         // Welcome label
-        self.welcomeLabel.topAnchor.constraint(equalTo: self.topAnchor, constant: 200).isActive = true
+        self.welcomeLabel.centerYAnchor.constraint(equalTo: self.centerYAnchor, constant: -125).isActive = true
         self.welcomeLabel.leftAnchor.constraint(equalTo: self.leftAnchor, constant: 16).isActive = true
         self.welcomeLabel.rightAnchor.constraint(equalTo: self.rightAnchor, constant: 16).isActive = true
 
@@ -119,6 +120,12 @@ class LoginView: View {
         self.loginButton.heightAnchor.constraint(equalToConstant: 50).isActive = true
         
 
+    }
+    
+    func didLoadDelegate() {
+        
+        self.passwordTextField.delegate = delegate!
+        self.usernameTextField.delegate = delegate!
     }
     
     required init?(coder aDecoder: NSCoder) {

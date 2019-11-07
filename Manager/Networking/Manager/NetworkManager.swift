@@ -92,6 +92,37 @@ class NetworkManager: NSObject {
         }
     }
     
+    func getUser(byUsername username: String, completion: @escaping (_ user: User?, _ error: String?) -> ()) {
+        self.authenticationRouter.request(.getUser(username: username), completion: { data, response, error in
+            if error != nil {
+                completion(nil, "\(NetworkError.noConnection)")
+            }
+            
+            if let response = response as? HTTPURLResponse {
+                let result = self.handleNetworkResponse(response)
+                switch result {
+                case .success:
+                    
+                    guard let responseData = data else {
+                        completion(nil, NetworkResponse.noData.rawValue)
+                        return
+                    }
+                    
+                    let json = try? JSON(data: responseData)
+                    guard let jsonObject = json else { return completion(nil, NetworkResponse.failed.rawValue )}
+                    
+                    let user = User()
+                    user.append(jsonObject)
+                    
+                    completion(user, nil)
+                    
+                case .failure(let networkFailureError):
+                    completion(nil, networkFailureError)
+                }
+            }
+        })
+    }
+    
     func getDirectories(inDirectory directory: String, completion: @escaping (_ directories: [Directory]?, _ error: String?) -> ()) {
         self.directoryRouter.request(.getDirectories(amount: 20), completion: { data, response, error in
             if error != nil {

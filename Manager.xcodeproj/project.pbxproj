@@ -76,6 +76,11 @@
 		A9DE7DEC2324967900B5EE03 /* View.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9DE7DEB2324967900B5EE03 /* View.swift */; };
 		A9DE7DEE23249C5500B5EE03 /* FileSystemEndPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9DE7DED23249C5500B5EE03 /* FileSystemEndPoint.swift */; };
 		A9DE7DF32324E6A600B5EE03 /* DetailViewTransition.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9DE7DF22324E6A600B5EE03 /* DetailViewTransition.swift */; };
+		A9EB26532373C77B00FF66E5 /* Session.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9EB26522373C77B00FF66E5 /* Session.swift */; };
+		A9EB26552373C7DB00FF66E5 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9EB26542373C7DA00FF66E5 /* User.swift */; };
+		A9EB26572373E4DB00FF66E5 /* SettingsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9EB26562373E4DB00FF66E5 /* SettingsCell.swift */; };
+		A9EB26592373F4A500FF66E5 /* SettingsSectionHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9EB26582373F4A500FF66E5 /* SettingsSectionHeader.swift */; };
+		A9EB265B2373F83400FF66E5 /* SettingsTab.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9EB265A2373F83400FF66E5 /* SettingsTab.swift */; };
 		A9F4036A22F696B900209D17 /* Token.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9F4036922F696B900209D17 /* Token.swift */; };
 		A9F74125234B359A00C8513D /* NetworkAlertController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9F74124234B359A00C8513D /* NetworkAlertController.swift */; };
 		A9F74127234B43D500C8513D /* PhotoManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9F74126234B43D500C8513D /* PhotoManager.swift */; };
@@ -181,6 +186,11 @@
 		A9DE7DEB2324967900B5EE03 /* View.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = View.swift; sourceTree = "<group>"; };
 		A9DE7DED23249C5500B5EE03 /* FileSystemEndPoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileSystemEndPoint.swift; sourceTree = "<group>"; };
 		A9DE7DF22324E6A600B5EE03 /* DetailViewTransition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewTransition.swift; sourceTree = "<group>"; };
+		A9EB26522373C77B00FF66E5 /* Session.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Session.swift; sourceTree = "<group>"; };
+		A9EB26542373C7DA00FF66E5 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		A9EB26562373E4DB00FF66E5 /* SettingsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsCell.swift; sourceTree = "<group>"; };
+		A9EB26582373F4A500FF66E5 /* SettingsSectionHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsSectionHeader.swift; sourceTree = "<group>"; };
+		A9EB265A2373F83400FF66E5 /* SettingsTab.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsTab.swift; sourceTree = "<group>"; };
 		A9F4036922F696B900209D17 /* Token.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Token.swift; sourceTree = "<group>"; };
 		A9F74124234B359A00C8513D /* NetworkAlertController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkAlertController.swift; sourceTree = "<group>"; };
 		A9F74126234B43D500C8513D /* PhotoManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoManager.swift; sourceTree = "<group>"; };
@@ -232,6 +242,7 @@
 			isa = PBXGroup;
 			children = (
 				A944E47C237022720003E201 /* AppConfig.swift */,
+				A9EB26522373C77B00FF66E5 /* Session.swift */,
 			);
 			path = Config;
 			sourceTree = "<group>";
@@ -242,6 +253,7 @@
 				A944E4862370F6120003E201 /* Image.swift */,
 				A94EB87C2373BC0E0083C0C8 /* Directory.swift */,
 				A94EB87E2373BCD50083C0C8 /* Base.swift */,
+				A9EB26542373C7DA00FF66E5 /* User.swift */,
 			);
 			path = Objects;
 			sourceTree = "<group>";
@@ -350,6 +362,7 @@
 				A9F74126234B43D500C8513D /* PhotoManager.swift */,
 				A944E48C237115F20003E201 /* MapPin.swift */,
 				A92FF2C1237158B300F91C2F /* PHAssetImageWrapper.swift */,
+				A9EB265A2373F83400FF66E5 /* SettingsTab.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -390,6 +403,8 @@
 				A9DE7DB223235F5400B5EE03 /* CollectionViewHeader.swift */,
 				A971AF7123162BD800BAA34D /* HomeCell.swift */,
 				A9DE7DC22323978700B5EE03 /* FolderCell.swift */,
+				A9EB26562373E4DB00FF66E5 /* SettingsCell.swift */,
+				A9EB26582373F4A500FF66E5 /* SettingsSectionHeader.swift */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -700,7 +715,10 @@
 				A944E47D237022720003E201 /* AppConfig.swift in Sources */,
 				A9BD60B32354A014006263D5 /* SettingsView.swift in Sources */,
 				A94EB8792372BBDC0083C0C8 /* CreateDirectoryViewController.swift in Sources */,
+				A9EB26572373E4DB00FF66E5 /* SettingsCell.swift in Sources */,
 				A9F4036A22F696B900209D17 /* Token.swift in Sources */,
+				A9EB26592373F4A500FF66E5 /* SettingsSectionHeader.swift in Sources */,
+				A9EB26552373C7DB00FF66E5 /* User.swift in Sources */,
 				A9DE7DEC2324967900B5EE03 /* View.swift in Sources */,
 				A94EB87B2372BBFE0083C0C8 /* CreateDirectoryView.swift in Sources */,
 				A9DE7DC32323978700B5EE03 /* FolderCell.swift in Sources */,
@@ -709,6 +727,7 @@
 				A90707DE2367D00200CE5AED /* AlertView.swift in Sources */,
 				A944E483237031A90003E201 /* DirectoryEndPoint.swift in Sources */,
 				A9DE7DC1232390A300B5EE03 /* DocumentsView.swift in Sources */,
+				A9EB265B2373F83400FF66E5 /* SettingsTab.swift in Sources */,
 				A9F74125234B359A00C8513D /* NetworkAlertController.swift in Sources */,
 				A944E48123702D890003E201 /* Data.swift in Sources */,
 				A9DE7DE02323C66C00B5EE03 /* NetworkManager.swift in Sources */,
@@ -739,6 +758,7 @@
 				A9DE7DD62323C01C00B5EE03 /* JSONParameterEncoder.swift in Sources */,
 				A971AF6C2316217700BAA34D /* HomeViewController.swift in Sources */,
 				A9DE7DF32324E6A600B5EE03 /* DetailViewTransition.swift in Sources */,
+				A9EB26532373C77B00FF66E5 /* Session.swift in Sources */,
 				A9BD60AD235405F4006263D5 /* CredentialManager.swift in Sources */,
 				A9DE7DE22323D4A300B5EE03 /* BasicAuthEncoding.swift in Sources */,
 				A977556022E536A600407385 /* UIColor.swift in Sources */,

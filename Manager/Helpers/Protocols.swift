@@ -8,15 +8,19 @@
 
 import UIKit
 
-protocol LoginViewDelegate: class {
+@objc protocol LoginViewDelegate: UITextFieldDelegate {
     func loginView(_ view: LoginView, didTapLoginButton button: UIButton)
+    @objc func dissmissKeyBoard(_ sender: UITapGestureRecognizer)
 }
 
 protocol AlertViewDelegate: class {
     func dismissViewController()
 }
 
-@objc protocol CreateDirectoryDelegate {
+protocol SettingsDelegate: UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
+}
+
+@objc protocol CreateDirectoryDelegate: UITextFieldDelegate {
     @objc func didTapCreateDirectory(_: UIButton)
     @objc func removeSelf(_ sender: UITapGestureRecognizer?)
 }

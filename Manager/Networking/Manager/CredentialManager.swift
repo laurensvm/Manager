@@ -69,11 +69,19 @@ class CredentialManager: NSObject {
             
             if let token = token {
                 self.token = token
+                self.getUserObject()
                 completion(true, nil)
             } else {
                 completion(false, error)
             }
             
+        })
+    }
+    
+    private func getUserObject() {
+        guard let username = storage.defaultCredential(for: protectionSpace)?.user else { return }
+        delegate?.getUser(byUsername: username, completion: { user, error in
+            Session.shared.user = user
         })
     }
     

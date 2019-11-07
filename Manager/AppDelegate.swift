@@ -69,19 +69,20 @@ extension AppDelegate {
         self.window?.rootViewController = tabBarController
         self.window?.makeKeyAndVisible()
         
-        if !networkManager.credentialManager.hasValidCredentials() {
+//        if !networkManager.credentialManager.hasValidCredentials() {
             let loginViewController = LoginViewController(networkManager: networkManager, onLoginCompletion: setupPhotoManager)
+            loginViewController.modalPresentationStyle = .fullScreen
             tabBarController.present(loginViewController, animated: false, completion: nil)
-        }
+//        }
     }
     
     func setupPhotoManager() {
         
         // Handle the document uploads from the PHAsset library here
-        DispatchQueue.global(qos: DispatchQoS.QoSClass.background).async {
-            let photoManager = PhotoManager(withNetworkManager: self.networkManager)
-            photoManager.beginImportingAssets()
-        }
+//        DispatchQueue.global(qos: DispatchQoS.QoSClass.background).async {
+//            let photoManager = PhotoManager(withNetworkManager: self.networkManager)
+//            photoManager.beginImportingAssets()
+//        }
     }
 
 }

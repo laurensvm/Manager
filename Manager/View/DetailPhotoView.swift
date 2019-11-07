@@ -10,6 +10,12 @@ import UIKit
 
 class DetailPhotoView: UIView {
     
+    private let formatter: DateFormatter = {
+        let df = DateFormatter()
+        df.dateFormat = "dd-MM-YYYY"
+        return df
+    }()
+    
     var delegate: DetailPhotoDelegate?
     var image: Image? {
         didSet {
@@ -17,6 +23,14 @@ class DetailPhotoView: UIView {
                 self.imageView.image = self.image?.imageData
                 
                 self.detailView.nameLabel.text? = "Name: \(self.image?.name ?? "Unknown")"
+                
+                if let timestamp = self.image?.timestamp {
+                    self.detailView.dateLabel.text? = "Date: \(self.formatter.string(from: timestamp))"
+                }
+                
+                if let description = self.image?._description {
+                    self.detailView.descriptionLabel.text = "Description: \(description)"
+                }
             }
         }
     }

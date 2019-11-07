@@ -10,7 +10,7 @@ import UIKit
 import CoreLocation
 import SwiftyJSON
 
-class Image: Base {
+struct Image {
     var imageData: UIImage?
     var coordinates: CLLocationCoordinate2D?
     var _description: String?
@@ -24,10 +24,12 @@ class Image: Base {
     var size: Int?
     var user: String?
     var type: String?
+    var id: Int!
+    var updated: Date?
+    var timestamp: Date?
     
-    override func append(_ json: JSON) {
-        super.append(json)
-        self.coordinates = createCoordinates(coordinates: json["coordinates"])
+    mutating func append(_ json: JSON) {
+        self.coordinates = Base().createCoordinates(coordinates: json["coordinates"])
         self._description = json["description"].string
         self.device = json["device"].string
         self.directory = json["directory"].string
@@ -38,5 +40,28 @@ class Image: Base {
         self.resolution = json["resolution"].string
         self.size = json["size"].intValue
         self.type = json["type"].string
+        self.id = json["id"].intValue
+        self.timestamp = createDateObject(dateString: json["timestamp"].string)
+        self.updated = createDateObject(dateString: json["updated"].string)
+    }
+    
+    private static let dateFormatter: DateFormatter = {
+        let df = DateFormatter()
+        df.dateFormat = "E, d MMM yyyy HH:mm:ss zzz"
+        df.timeZone = TimeZone(abbreviation: "GMT")
+        df.locale = Locale(identifier: "en_US_POSIX")
+        return df
+    }()
+    
+    func createCoordinates(coordinates: JSON) -> CLLocationCoordinate2D? {
+        let lat = CLLocationDegrees(coordinates["latitude"].doubleValue)
+        let lon = CLLocationDegrees(coordinates["longitude"].doubleValue)
+        
+        return CLLocationCoordinate2D(latitude: lat, longitude: lon)
+    }
+    
+    func createDateObject(dateString: String?) -> Date? {
+        guard let dateString = dateString else { return nil }
+        return Image.dateFormatter.date(from: dateString)
     }
 }
