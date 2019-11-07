@@ -13,6 +13,7 @@ import UIKit
 class LoginViewController: ViewController<LoginView> {
     
     var networkManager: NetworkManager!
+    var loginCompletion: (() -> ())!
     
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return .lightContent
@@ -23,9 +24,10 @@ class LoginViewController: ViewController<LoginView> {
         customView.delegate = self
     }
     
-    init(networkManager: NetworkManager) {
+    init(networkManager: NetworkManager, onLoginCompletion completion: @escaping () -> ()) {
         super.init(nibName: nil, bundle: nil)
         self.networkManager = networkManager
+        self.loginCompletion = completion
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -35,17 +37,19 @@ class LoginViewController: ViewController<LoginView> {
 
 extension LoginViewController: LoginViewDelegate {
     func loginView(_ view: LoginView, didTapLoginButton button: UIButton) {
+        let username = "theexission@gmail.com"
+//        let username = customView.username.lowercased()
+//        let passsword = customView.password
+        let password = "Ld4qIZSy6CFMuAESFSsadkfhj23475SjaNfVC"
         
-        let username = customView.username.lowercased()
-        let password = customView.password
-        
-        networkManager.credentialManager.login(username: username, password: password, completion: { successful in
+        networkManager.credentialManager.login(username: username, password: password, completion: { successful, error in
             DispatchQueue.main.async {
                 self.customView.indicatorView.stopAnimating()
                 if successful {
+                    self.loginCompletion()
                     self.dismiss(animated: true, completion: nil)
                 } else {
-                    let alertViewController = AlertViewController(withMessage:"Error: Could not connect to server")
+                    let alertViewController = AlertViewController(withMessage: error)
                     self.present(alertViewController, animated: false, completion: nil)
                 }
             }

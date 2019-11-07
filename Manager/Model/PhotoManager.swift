@@ -82,7 +82,7 @@ class PhotoManager: NSObject, PHPhotoLibraryChangeObserver {
             parameters["file"] = PHAssetImageWrapper(image: image, name: name)
             
             self.networkManager.uploadImage(parameters: parameters, completion: { json, error in                
-                print(json, error)
+                print(json!, error!)
             })
         })
     }

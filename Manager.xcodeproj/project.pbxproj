@@ -23,6 +23,8 @@
 		A944E48D237115F20003E201 /* MapPin.swift in Sources */ = {isa = PBXBuildFile; fileRef = A944E48C237115F20003E201 /* MapPin.swift */; };
 		A94EB8792372BBDC0083C0C8 /* CreateDirectoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A94EB8782372BBDC0083C0C8 /* CreateDirectoryViewController.swift */; };
 		A94EB87B2372BBFE0083C0C8 /* CreateDirectoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A94EB87A2372BBFE0083C0C8 /* CreateDirectoryView.swift */; };
+		A94EB87D2373BC0E0083C0C8 /* Directory.swift in Sources */ = {isa = PBXBuildFile; fileRef = A94EB87C2373BC0E0083C0C8 /* Directory.swift */; };
+		A94EB87F2373BCD50083C0C8 /* Base.swift in Sources */ = {isa = PBXBuildFile; fileRef = A94EB87E2373BCD50083C0C8 /* Base.swift */; };
 		A971AF6C2316217700BAA34D /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A971AF6B2316217700BAA34D /* HomeViewController.swift */; };
 		A971AF6E231621B800BAA34D /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A971AF6D231621B800BAA34D /* HomeView.swift */; };
 		A971AF7223162BD800BAA34D /* HomeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A971AF7123162BD800BAA34D /* HomeCell.swift */; };
@@ -120,6 +122,8 @@
 		A944E48C237115F20003E201 /* MapPin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapPin.swift; sourceTree = "<group>"; };
 		A94EB8782372BBDC0083C0C8 /* CreateDirectoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateDirectoryViewController.swift; sourceTree = "<group>"; };
 		A94EB87A2372BBFE0083C0C8 /* CreateDirectoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateDirectoryView.swift; sourceTree = "<group>"; };
+		A94EB87C2373BC0E0083C0C8 /* Directory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Directory.swift; sourceTree = "<group>"; };
+		A94EB87E2373BCD50083C0C8 /* Base.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Base.swift; sourceTree = "<group>"; };
 		A971AF6B2316217700BAA34D /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		A971AF6D231621B800BAA34D /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		A971AF7123162BD800BAA34D /* HomeCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeCell.swift; sourceTree = "<group>"; };
@@ -232,6 +236,16 @@
 			path = Config;
 			sourceTree = "<group>";
 		};
+		A94EB8802373C01C0083C0C8 /* Objects */ = {
+			isa = PBXGroup;
+			children = (
+				A944E4862370F6120003E201 /* Image.swift */,
+				A94EB87C2373BC0E0083C0C8 /* Directory.swift */,
+				A94EB87E2373BCD50083C0C8 /* Base.swift */,
+			);
+			path = Objects;
+			sourceTree = "<group>";
+		};
 		A977551922E5298B00407385 = {
 			isa = PBXGroup;
 			children = (
@@ -329,11 +343,11 @@
 		A977555922E534DC00407385 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				A94EB8802373C01C0083C0C8 /* Objects */,
 				A9F4036922F696B900209D17 /* Token.swift */,
 				A988D2212317ECA9004EDB42 /* HomeViewTab.swift */,
 				A9DE7DDD2323C5D900B5EE03 /* ThumbnailImage.swift */,
 				A9F74126234B43D500C8513D /* PhotoManager.swift */,
-				A944E4862370F6120003E201 /* Image.swift */,
 				A944E48C237115F20003E201 /* MapPin.swift */,
 				A92FF2C1237158B300F91C2F /* PHAssetImageWrapper.swift */,
 			);
@@ -667,6 +681,7 @@
 				A9DE7DB1232351A200B5EE03 /* PhotoCell.swift in Sources */,
 				A977556622E5681F00407385 /* UIView.swift in Sources */,
 				A9DE7DD82323C0B500B5EE03 /* NetworkRouter.swift in Sources */,
+				A94EB87D2373BC0E0083C0C8 /* Directory.swift in Sources */,
 				A92FF2C4237179EE00F91C2F /* String.swift in Sources */,
 				A9DE7DAB2323390200B5EE03 /* PhotoViewController.swift in Sources */,
 				A9DE7DDC2323C5B600B5EE03 /* AuthenticationEndPoint.swift in Sources */,
@@ -716,6 +731,7 @@
 				A9F74127234B43D500C8513D /* PhotoManager.swift in Sources */,
 				A9DE7DCF2323BDAB00B5EE03 /* ParameterEncoding.swift in Sources */,
 				A9BA332C22EEAA25004FCE5E /* Protocols.swift in Sources */,
+				A94EB87F2373BCD50083C0C8 /* Base.swift in Sources */,
 				A977555E22E5359500407385 /* Theme.swift in Sources */,
 				A9DE7DA223231A4800B5EE03 /* BubbleTabBar.swift in Sources */,
 				A9DE7DB92323792E00B5EE03 /* DetailPhotoViewController.swift in Sources */,

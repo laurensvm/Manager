@@ -10,18 +10,11 @@ import UIKit
 
 class DocumentsViewController: ViewController<DocumentsView> {
     
-    lazy var directories: [String] = []
+    lazy var directories: [Directory] = []
     
-    private var path: String?
+    private var directory: Directory?
     private var networkManager: NetworkManager?
-    
-    private func getPath() -> String {
-        if let path = path {
-            return path + "/"
-        }
-        return ""
-    }
-    
+
     private lazy var addBarButtonItem: UIBarButtonItem = {
         let addButton = UIButton(type: .custom)
         addButton.setImage(#imageLiteral(resourceName: "plug-50"), for: .normal)
@@ -48,12 +41,9 @@ class DocumentsViewController: ViewController<DocumentsView> {
     }
     
     private func getDirectories() {
-        networkManager?.getDirectories(inDirectory: getPath(), completion: { data, error in
-            if let directories = data?["directories"] {
-                self.directories = []
-                directories.forEach({ _, json in
-                    self.directories.append(json["name"].stringValue)
-                })
+        networkManager?.getDirectories(inDirectory: "", completion: { directories, error in
+            if let directories = directories {
+                self.directories = directories
             }
             DispatchQueue.main.async {
                 self.customView.containsSubDirectories = !self.directories.isEmpty
@@ -62,17 +52,24 @@ class DocumentsViewController: ViewController<DocumentsView> {
         })
     }
     
-    init(withControllerTitle controllerTitle: String = "Documents", andDirectories directories: [String]) {
+    init(withControllerTitle controllerTitle: String = "Documents", andDirectories directories: [Directory]) {
         super.init(nibName: nil, bundle: nil)
         self.controllerTitle = controllerTitle
         self.directories = directories
     }
     
-    init(withNetworkManager networkManager: NetworkManager?, andControllerTitle controllerTitle: String = "Documents", andPath path: String?) {
+    init(withNetworkManager networkManager: NetworkManager?, andControllerTitle controllerTitle: String = "Documents", andId: Int) {
         super.init(nibName: nil, bundle: nil)
         self.networkManager = networkManager
         self.controllerTitle = controllerTitle
-        self.path = path
+    }
+    
+    private func getDirectoryFromId(id: Int) {
+        self.networkManager?.getDirectoryById(id: id, completion: { directory, error in
+            if let directory = directory {
+                self.directory = directory
+            }
+        })
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -100,7 +97,7 @@ extension DocumentsViewController: CollectionViewDelegate {
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: self.customView.folderCellId, for: indexPath) as! FolderCell
-        cell.folderName.text = directories[indexPath.item]
+        cell.folderName.text = directories[indexPath.item].name
         return cell
     }
     
@@ -112,7 +109,7 @@ extension DocumentsViewController: CollectionViewDelegate {
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let directory = directories[indexPath.item]
-        let documentsViewController = DocumentsViewController(withNetworkManager: self.networkManager, andControllerTitle: directory, andPath: getPath() + directory)
+        let documentsViewController = DocumentsViewController(withNetworkManager: self.networkManager, andControllerTitle: directory.name, andId: 1)
         self.navigationController?.pushViewController(documentsViewController, animated: true)
     }
     

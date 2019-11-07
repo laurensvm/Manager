@@ -92,7 +92,7 @@ class NetworkManager: NSObject {
         }
     }
     
-    func getDirectories(inDirectory directory: String, completion: @escaping (_ directories: JSON?, _ error: String?) -> ()) {
+    func getDirectories(inDirectory directory: String, completion: @escaping (_ directories: [Directory]?, _ error: String?) -> ()) {
         self.directoryRouter.request(.getDirectories(amount: 20), completion: { data, response, error in
             if error != nil {
                 completion(nil, "\(NetworkError.noConnection)")
@@ -109,7 +109,10 @@ class NetworkManager: NSObject {
                     }
                     
                     let json = try? JSON(data: responseData)
-                    completion(json, nil)
+                    guard let jsonArray = json else { return completion(nil, NetworkResponse.failed.rawValue )}
+                    
+                    let directories = Directory.createDirectoryList(jsonArray)
+                    completion(directories, nil)
                     
                 case .failure(let networkFailureError):
                     completion(nil, networkFailureError)
@@ -141,6 +144,34 @@ class NetworkManager: NSObject {
                     
                 case .failure(let networkFailureError):
                     completion(false, networkFailureError)
+                }
+            }
+        })
+    }
+    
+    func getDirectoryById(id: Int, completion: @escaping (_ directory: Directory?, _ error: String?) -> ()) {
+        self.directoryRouter.request(.getDirectory(id: id), completion: { data, response, error in
+            if error != nil {
+                completion(nil, "\(NetworkError.noConnection)")
+            }
+            
+            if let response = response as? HTTPURLResponse {
+                let result = self.handleNetworkResponse(response)
+                switch result {
+                case .success:
+                    guard let responseData = data else {
+                        completion(nil, NetworkResponse.noData.rawValue)
+                        return
+                    }
+
+                    let json = try? JSON(data: responseData)
+                    guard let jsonObject = json else { return completion(nil, NetworkResponse.failed.rawValue) }
+                    
+                    let directory = Directory(jsonObject)
+
+                    completion(directory, nil)
+                case .failure(let networkFailureError):
+                    completion(nil, networkFailureError)
                 }
             }
         })
