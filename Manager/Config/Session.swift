@@ -16,7 +16,7 @@ struct Session {
     
     var user: User? {
         didSet {
-            print(self.user)
+//            print(self.user)
         }
     }
 }

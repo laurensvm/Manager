@@ -10,7 +10,7 @@ import UIKit
 
 class CollectionViewHeader: UICollectionReusableView {
    
-    private lazy var viewTitleLabel: UILabel = {
+    lazy var viewTitleLabel: UILabel = {
         let lb = UILabel()
         lb.translatesAutoresizingMaskIntoConstraints = false
         lb.font = Theme.fonts.avenirBlack(size: 40)

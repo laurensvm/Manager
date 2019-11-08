@@ -87,7 +87,7 @@ class CreateDirectoryView: View {
         self.addGestureRecognizer(tapGestureRecognizer)
         
         // Add textfield delegate
-        directoryName.delegate = delegate as? UITextFieldDelegate
+        directoryName.delegate = delegate
         
         // Set titlelabel text
 //        titleLabel.text = "Creating new directory inside of directory \(directory)"

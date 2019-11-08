@@ -47,7 +47,11 @@ class SettingsViewController: ViewController<SettingsView> {
     }
 }
 
-extension SettingsViewController: SettingsDelegate {
+extension SettingsViewController: CollectionViewDelegate {
+    func collectionViewHeight() -> CGFloat {
+        return 0
+    }
+    
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return tabs[section].count
     }
@@ -99,7 +103,8 @@ extension SettingsViewController {
         case .User:
     		break
         case .Photos:
-             break
+            let photosSettingsViewController = PhotoSettingsViewController(withNetworkManager: self.networkManager)
+            self.navigationController?.pushViewController(photosSettingsViewController, animated: true)
         case .Network:
              break
         case .SignOut:
@@ -109,6 +114,8 @@ extension SettingsViewController {
                 let appDelegate = UIApplication.shared.delegate as! AppDelegate
                 appDelegate.presentLoginScreen(rootViewController: tabBarController, animated: true)
             }
+        default:
+            break
         }
     }
 }

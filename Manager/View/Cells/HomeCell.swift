@@ -65,8 +65,16 @@ class HomeCell: UICollectionViewCell {
     private func setupViews() {
         // Configure superview
         self.translatesAutoresizingMaskIntoConstraints = false
-        self.backgroundColor = Theme.colors.superLightGrey
+//        self.backgroundColor = Theme.colors.superLightGrey
+        self.backgroundColor = .white
+        
+        // Setup shadow
         self.layer.cornerRadius = 15
+        self.layer.masksToBounds = false
+        self.layer.shadowColor = Theme.colors.lightGrey.cgColor
+        self.layer.shadowOpacity = 0.8
+        self.layer.shadowOffset = .zero
+        self.layer.shadowRadius = 5
         
         
         self.addSubview(pictureView)

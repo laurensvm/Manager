@@ -46,7 +46,7 @@ class PhotoViewController: ViewController<PhotoView> {
     func populateBreadCrumbTrail() {
         self.navigationController?.viewControllers.forEach({
             if let viewController = $0 as? BreadCrumbViewController {
-                self.customView.breadCrumbTrail.append(viewController.getViewControllerTitle())
+        	self.customView.breadCrumbTrail.append(viewController.getViewControllerTitle())
             }
         })
     }

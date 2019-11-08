@@ -66,7 +66,7 @@ extension HomeViewController: CollectionViewDelegate {
     }
     
     func collectionViewHeight() -> CGFloat {
-        return CGFloat(categories.count) * (collectionViewCellHeight + collectionViewSpacing)
+        return CGFloat(categories.count) * (collectionViewCellHeight + collectionViewSpacing) + 32
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
@@ -81,6 +81,10 @@ extension HomeViewController: CollectionViewDelegate {
                 navigationController?.pushViewController(vc, animated: true)
             }
         }
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
+        return UIEdgeInsets(top: 16, left: 0, bottom: 16, right: 0)
     }
     
 }

@@ -17,8 +17,12 @@ protocol AlertViewDelegate: class {
     func dismissViewController()
 }
 
-protocol SettingsDelegate: UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
+protocol SwitchDelegate {
+    func didTapSwitch(_ sender: UISwitch)
 }
+
+//protocol SettingsDelegate: UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
+//}
 
 @objc protocol CreateDirectoryDelegate: UITextFieldDelegate {
     @objc func didTapCreateDirectory(_: UIButton)

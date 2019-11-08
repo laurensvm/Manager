@@ -10,7 +10,7 @@ import UIKit
 
 class SettingsView: View {
     
-    var delegate: SettingsDelegate?
+    var delegate: CollectionViewDelegate?
     let settingsCell = "settingsCell"
     let headerId = "headerId"
     

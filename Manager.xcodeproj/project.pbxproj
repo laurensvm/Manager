@@ -12,6 +12,10 @@
 		A90707DC2367CFD000CE5AED /* AlertViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A90707DB2367CFD000CE5AED /* AlertViewController.swift */; };
 		A90707DE2367D00200CE5AED /* AlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A90707DD2367D00200CE5AED /* AlertView.swift */; };
 		A92473EE237420B00007AAF2 /* Float.swift in Sources */ = {isa = PBXBuildFile; fileRef = A92473ED237420B00007AAF2 /* Float.swift */; };
+		A92473F0237423A40007AAF2 /* PhotoSettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A92473EF237423A40007AAF2 /* PhotoSettingsViewController.swift */; };
+		A92473F2237423E80007AAF2 /* PhotoSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A92473F1237423E80007AAF2 /* PhotoSettingsView.swift */; };
+		A92473F42374269F0007AAF2 /* TrackChangesSettingsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A92473F32374269F0007AAF2 /* TrackChangesSettingsCell.swift */; };
+		A92473F623753EDD0007AAF2 /* ImportSettingsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A92473F523753EDD0007AAF2 /* ImportSettingsCell.swift */; };
 		A92FF2C2237158B300F91C2F /* PHAssetImageWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = A92FF2C1237158B300F91C2F /* PHAssetImageWrapper.swift */; };
 		A92FF2C4237179EE00F91C2F /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = A92FF2C3237179EE00F91C2F /* String.swift */; };
 		A944E47D237022720003E201 /* AppConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = A944E47C237022720003E201 /* AppConfig.swift */; };
@@ -117,6 +121,10 @@
 		A90707DB2367CFD000CE5AED /* AlertViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertViewController.swift; sourceTree = "<group>"; };
 		A90707DD2367D00200CE5AED /* AlertView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertView.swift; sourceTree = "<group>"; };
 		A92473ED237420B00007AAF2 /* Float.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Float.swift; sourceTree = "<group>"; };
+		A92473EF237423A40007AAF2 /* PhotoSettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoSettingsViewController.swift; sourceTree = "<group>"; };
+		A92473F1237423E80007AAF2 /* PhotoSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoSettingsView.swift; sourceTree = "<group>"; };
+		A92473F32374269F0007AAF2 /* TrackChangesSettingsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackChangesSettingsCell.swift; sourceTree = "<group>"; };
+		A92473F523753EDD0007AAF2 /* ImportSettingsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImportSettingsCell.swift; sourceTree = "<group>"; };
 		A92FF2C1237158B300F91C2F /* PHAssetImageWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PHAssetImageWrapper.swift; sourceTree = "<group>"; };
 		A92FF2C3237179EE00F91C2F /* String.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = String.swift; sourceTree = "<group>"; };
 		A944E47C237022720003E201 /* AppConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppConfig.swift; sourceTree = "<group>"; };
@@ -332,6 +340,7 @@
 				A90707DD2367D00200CE5AED /* AlertView.swift */,
 				A944E48A237113260003E201 /* AssetDetailView.swift */,
 				A94EB87A2372BBFE0083C0C8 /* CreateDirectoryView.swift */,
+				A92473F1237423E80007AAF2 /* PhotoSettingsView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -350,6 +359,7 @@
 				A9BD60AE23549FB2006263D5 /* SettingsViewController.swift */,
 				A90707DB2367CFD000CE5AED /* AlertViewController.swift */,
 				A94EB8782372BBDC0083C0C8 /* CreateDirectoryViewController.swift */,
+				A92473EF237423A40007AAF2 /* PhotoSettingsViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -408,6 +418,8 @@
 				A9DE7DC22323978700B5EE03 /* FolderCell.swift */,
 				A9EB26562373E4DB00FF66E5 /* SettingsCell.swift */,
 				A9EB26582373F4A500FF66E5 /* SettingsSectionHeader.swift */,
+				A92473F32374269F0007AAF2 /* TrackChangesSettingsCell.swift */,
+				A92473F523753EDD0007AAF2 /* ImportSettingsCell.swift */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -705,6 +717,7 @@
 				A9DE7DDC2323C5B600B5EE03 /* AuthenticationEndPoint.swift in Sources */,
 				A971AF6E231621B800BAA34D /* HomeView.swift in Sources */,
 				A9DE7DDA2323C13300B5EE03 /* Router.swift in Sources */,
+				A92473F42374269F0007AAF2 /* TrackChangesSettingsCell.swift in Sources */,
 				A9DE7DEE23249C5500B5EE03 /* FileSystemEndPoint.swift in Sources */,
 				A944E4852370DDF70003E201 /* ImageEndPoint.swift in Sources */,
 				A971AF7223162BD800BAA34D /* HomeCell.swift in Sources */,
@@ -733,6 +746,7 @@
 				A9EB265B2373F83400FF66E5 /* SettingsTab.swift in Sources */,
 				A9F74125234B359A00C8513D /* NetworkAlertController.swift in Sources */,
 				A944E48123702D890003E201 /* Data.swift in Sources */,
+				A92473F623753EDD0007AAF2 /* ImportSettingsCell.swift in Sources */,
 				A9DE7DE02323C66C00B5EE03 /* NetworkManager.swift in Sources */,
 				A9DE7DA323231A4800B5EE03 /* BubbleTabBarController.swift in Sources */,
 				A90707DC2367CFD000CE5AED /* AlertViewController.swift in Sources */,
@@ -741,7 +755,9 @@
 				A944E48B237113260003E201 /* AssetDetailView.swift in Sources */,
 				A92473EE237420B00007AAF2 /* Float.swift in Sources */,
 				A988D2222317ECA9004EDB42 /* HomeViewTab.swift in Sources */,
+				A92473F0237423A40007AAF2 /* PhotoSettingsViewController.swift in Sources */,
 				A944E48D237115F20003E201 /* MapPin.swift in Sources */,
+				A92473F2237423E80007AAF2 /* PhotoSettingsView.swift in Sources */,
 				A9DE7DD22323BE2700B5EE03 /* NetworkError.swift in Sources */,
 				A9DE7DD42323BE7F00B5EE03 /* URLParameterEncoder.swift in Sources */,
 				A9DE7DCD2323BCF800B5EE03 /* HTTPTask.swift in Sources */,

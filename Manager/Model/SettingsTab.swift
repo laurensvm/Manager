@@ -15,6 +15,10 @@ struct SettingsTab {
         case Photos
         case Network
         case SignOut
+        case TrackChanges
+        case Import
+        case ImportDirectory
+        case None
     }
     
     let name: String

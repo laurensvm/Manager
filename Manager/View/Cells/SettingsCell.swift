@@ -10,6 +10,8 @@ import UIKit
 
 class SettingsCell: UICollectionViewCell {
     
+    
+    
     private let imageContainerView: UIView = {
         let v = UIView()
         v.translatesAutoresizingMaskIntoConstraints = false
@@ -65,7 +67,7 @@ class SettingsCell: UICollectionViewCell {
         setupConstraints()
     }
     
-    private func setupViews() {
+    func setupViews() {
         addSubview(_titleLabel)
         addSubview(imageContainerView)
         addSubview(rightArrow)
@@ -73,7 +75,7 @@ class SettingsCell: UICollectionViewCell {
         imageContainerView.addSubview(_imageView)
     }
     
-    private func setupConstraints() {
+    func setupConstraints() {
         
         // Title Label Constraints
         NSLayoutConstraint.activate([
