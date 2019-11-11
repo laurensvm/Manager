@@ -9,7 +9,7 @@
 import Foundation
 import SwiftyJSON
 
-class Directory: Base {
+class Directory: Base, CollectionViewItem {
     var children: [String]?
     var files: [String]?
     var name: String!

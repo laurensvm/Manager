@@ -8,11 +8,8 @@
 
 import UIKit
 
-class DocumentsView: View {
+class DocumentsView: CollectionView {
     
-    weak var delegate: CollectionViewDelegate!
-    
-    let folderCellId = "folderCellId"
     var containsSubDirectories: Bool = true {
         didSet {
             configureActiveViews()
@@ -58,33 +55,22 @@ class DocumentsView: View {
         return lb
     }()
     
-    lazy var collectionView: UICollectionView = {
-        // CollectionViewFlowLayout
-        let cvLayout = UICollectionViewFlowLayout()
-        cvLayout.minimumLineSpacing = 16
-        cvLayout.minimumInteritemSpacing = 8
-        
-        // CollectionView
-        let cv = UICollectionView(frame: .zero, collectionViewLayout: cvLayout)
-        cv.backgroundColor = .white
-        cv.clipsToBounds = true
-        cv.isScrollEnabled = true
-        cv.register(FolderCell.self, forCellWithReuseIdentifier: folderCellId)
-        cv.translatesAutoresizingMaskIntoConstraints = false
-        return cv
+    private lazy var collectionViewLayout: UICollectionViewFlowLayout = {
+        let layout = UICollectionViewFlowLayout()
+        layout.minimumLineSpacing = 16
+        layout.minimumInteritemSpacing = 8
+        return layout
     }()
     
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-        self.translatesAutoresizingMaskIntoConstraints = true
-        self.backgroundColor = .white
-        
-        setupViews()
+    override func collectionViewBehaviour() {
+        self.collectionView.collectionViewLayout = collectionViewLayout
+        self.collectionView.clipsToBounds = true
+        self.collectionView.isScrollEnabled = true
+        self.collectionView.register(FolderCell.self, forCellWithReuseIdentifier: baseCellId)
     }
     
-    func didLoadDelegate() {
-        self.collectionView.dataSource = delegate
-        self.collectionView.delegate = delegate
+    override func didLoadDelegate() {
+        super.didLoadDelegate()
         
         // CollectionView
         self.collectionView.topAnchor.constraint(equalTo: self.breadCrumb.bottomAnchor, constant: 48).isActive = true
@@ -93,11 +79,12 @@ class DocumentsView: View {
         self.collectionView.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: 16).isActive = true
     }
     
-    private func setupViews() {
+    override func setupViews() {
+        super.setupViews()
+        
         self.addSubview(viewTitleLabel)
         self.addSubview(emptyDirectory)
         self.addSubview(emptyDirectoryImageView)
-        self.addSubview(collectionView)
         self.addSubview(breadCrumb)
         
  		configureActiveViews()
@@ -142,9 +129,5 @@ class DocumentsView: View {
         }
         
         self.collectionView.reloadData()
-    }
-    
-    required init?(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
     }
 }

@@ -8,7 +8,7 @@
 
 import UIKit
 
-class DocumentsViewController: ViewController<DocumentsView> {
+class DocumentsViewController: CollectionViewController<DocumentsView> {
     
     lazy var directories: [Directory] = []
     
@@ -30,10 +30,8 @@ class DocumentsViewController: ViewController<DocumentsView> {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        customView.delegate = self
-        customView.didLoadDelegate()
-        populateBreadCrumbTrail()
         
+        populateBreadCrumbTrail()
         getDirectories()
         
         // Add the add bar button
@@ -53,13 +51,13 @@ class DocumentsViewController: ViewController<DocumentsView> {
     }
     
     init(withControllerTitle controllerTitle: String = "Documents", andDirectories directories: [Directory]) {
-        super.init(nibName: nil, bundle: nil)
+        super.init()
         self.controllerTitle = controllerTitle
         self.directories = directories
     }
     
     init(withNetworkManager networkManager: NetworkManager?, andControllerTitle controllerTitle: String = "Documents", andId: Int) {
-        super.init(nibName: nil, bundle: nil)
+        super.init()
         self.networkManager = networkManager
         self.controllerTitle = controllerTitle
     }
@@ -84,34 +82,24 @@ class DocumentsViewController: ViewController<DocumentsView> {
         })
         self.customView.breadCrumb.attributedText = formatBreadCrumb(withTrail: self.customView.breadCrumbTrail)
     }
-}
-
-extension DocumentsViewController: CollectionViewDelegate {
-    func collectionView(_ collectionView: UICollectionView, prefetchItemsAt indexPaths: [IndexPath]) {
-        
-    }
     
-    func collectionViewHeight() -> CGFloat {
-        return 0
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+    override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return directories.count
     }
     
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: self.customView.folderCellId, for: indexPath) as! FolderCell
+    override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: self.customView.baseCellId, for: indexPath) as! FolderCell
         cell.folderName.text = directories[indexPath.item].name
         return cell
     }
     
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+    override func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let width = (self.customView.frame.width - (2 * 32 + 2 * 8)) / 3
         let height = width + 20
         return CGSize(width: width, height: height)
     }
     
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+    override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let directory = directories[indexPath.item]
         let documentsViewController = DocumentsViewController(withNetworkManager: self.networkManager, andControllerTitle: directory.name, andId: 1)
         self.navigationController?.pushViewController(documentsViewController, animated: true)

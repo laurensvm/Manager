@@ -8,21 +8,10 @@
 
 import UIKit
 
-class PhotoSettingsViewController: ViewController<PhotoSettingsView> {
-    
-    private let tabs: [[SettingsTab]] = [
-        [
-            SettingsTab(name: "Track Changes", image: #imageLiteral(resourceName: "clock-50"), arrow: false, type: .TrackChanges),
-            SettingsTab(name: "Import Photos", image: #imageLiteral(resourceName: "import-export"), arrow: false, type: .Import),
-            SettingsTab(name: "Select Import Directory", image: #imageLiteral(resourceName: "folder-50"), arrow: false, type: .ImportDirectory)
-        ],
-    ]
-    
-    private let collectionViewCellHeight: CGFloat = 82
-    private let collectionViewSpacing: CGFloat = 12
+class PhotoSettingsViewController: CollectionViewController<PhotoSettingsView> {
     
     init(withNetworkManager networkManager: NetworkManager) {
-        super.init(nibName: nil, bundle: nil)
+        super.init()
     }
     
     required init?(coder: NSCoder) {
@@ -32,10 +21,17 @@ class PhotoSettingsViewController: ViewController<PhotoSettingsView> {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.controllerTitle = "Photo Settings"
-        customView.delegate = self
-        customView.didLoadDelegate()
-        
         populateBreadCrumbTrail()
+    }
+    
+    override func collectionViewBehaviour() {
+        self.items = [
+            [
+                SettingsTab(name: "Track Changes", image: #imageLiteral(resourceName: "clock-50"), arrow: false, type: .TrackChanges),
+                SettingsTab(name: "Import Photos", image: #imageLiteral(resourceName: "import-export"), arrow: false, type: .Import),
+                SettingsTab(name: "Select Import Directory", image: #imageLiteral(resourceName: "folder-50"), arrow: false, type: .ImportDirectory)
+            ],
+        ]
     }
     
     func populateBreadCrumbTrail() {
@@ -45,28 +41,10 @@ class PhotoSettingsViewController: ViewController<PhotoSettingsView> {
             }
         })
     }
-}
-
-extension PhotoSettingsViewController: CollectionViewDelegate {
-    func collectionView(_ collectionView: UICollectionView, prefetchItemsAt indexPaths: [IndexPath]) {
     
-    }
-    
-    func collectionViewHeight() -> CGFloat {
-        return 0
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return tabs[section].count
-    }
-    
-    func numberOfSections(in collectionView: UICollectionView) -> Int {
-        return tabs.count
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+    override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
-        let tab = tabs[indexPath.section][indexPath.item]
+        guard let tab = items[indexPath.section][indexPath.item] as? SettingsTab else { return UICollectionViewCell() }
         
         switch tab.type {
         case .TrackChanges:
@@ -90,7 +68,7 @@ extension PhotoSettingsViewController: CollectionViewDelegate {
         }
     }
     
-    func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
+    override func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
 
         let header = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: self.customView.headerId, for: indexPath) as! CollectionViewHeader
         header.breadCrumb.attributedText = self.formatBreadCrumb(withTrail: customView.breadCrumbTrail)
@@ -98,24 +76,16 @@ extension PhotoSettingsViewController: CollectionViewDelegate {
         return header
     }
     
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+    override func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         return CGSize(width: self.customView.frame.width - 64, height: 60)
     }
     
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
-        return collectionViewSpacing
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
-        return UIEdgeInsets(top: 16, left: 0, bottom: 16, right: 0)
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
+    override func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
         return CGSize(width: self.customView.frame.width, height: 170)
     }
     
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let tab = tabs[indexPath.section][indexPath.item]
+    override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        guard let tab = items[indexPath.section][indexPath.item] as? SettingsTab else { return }
         switch tab.type {
         case .Import:
             self.customView.addSubview(PopUpView(frame: .zero, title: "Importing Photos.."))

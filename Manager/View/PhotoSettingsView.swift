@@ -8,56 +8,43 @@
 
 import UIKit
 
-class PhotoSettingsView: View {
+class PhotoSettingsView: CollectionView {
     
-    var delegate: CollectionViewDelegate?
     let trackChangesCellId = "trackChangesCellId"
     let importCellId = "importCellId"
-    let headerId = "headerId"
     var breadCrumbTrail: [String] = []
     
-    private lazy var collectionView: UICollectionView = {
-        // CollectionViewFlowLayout
-        let cvLayout = UICollectionViewFlowLayout()
-        cvLayout.minimumLineSpacing = 8
-        cvLayout.minimumInteritemSpacing = 8
-        cvLayout.sectionInset = UIEdgeInsets(top: 8, left: 0, bottom: 8, right: 0)
-        cvLayout.sectionHeadersPinToVisibleBounds = false
-        
-        let cv = UICollectionView(frame: .zero, collectionViewLayout: cvLayout)
-        cv.register(TrackChangesSettingsCell.self, forCellWithReuseIdentifier: trackChangesCellId)
-        cv.register(ImportSettingsCell.self, forCellWithReuseIdentifier: importCellId)
-        cv.register(CollectionViewHeader.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: headerId)
-        cv.translatesAutoresizingMaskIntoConstraints = false
-        cv.backgroundColor = .white
-        cv.clipsToBounds = true
-        return cv
+    private lazy var collectionViewLayout: UICollectionViewFlowLayout = {
+        let layout = UICollectionViewFlowLayout()
+        layout.minimumLineSpacing = 8
+        layout.minimumInteritemSpacing = 8
+        layout.sectionInset = UIEdgeInsets(top: 8, left: 0, bottom: 8, right: 0)
+        layout.sectionHeadersPinToVisibleBounds = false
+        return layout
     }()
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        self.backgroundColor = .white
         self.translatesAutoresizingMaskIntoConstraints = true
-        setupViews()
-        setupConstraints()
     }
     
-    func didLoadDelegate() {
-        collectionView.delegate = delegate!
-        collectionView.dataSource = delegate!
+    override func collectionViewBehaviour() {
+        self.collectionView.collectionViewLayout = collectionViewLayout
+        self.collectionView.register(TrackChangesSettingsCell.self, forCellWithReuseIdentifier: trackChangesCellId)
+        self.collectionView.register(ImportSettingsCell.self, forCellWithReuseIdentifier: importCellId)
+        self.collectionView.register(CollectionViewHeader.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: headerId)
+        self.collectionView.clipsToBounds = true
+        
+    }
+    
+    override func didLoadDelegate() {
+        super.didLoadDelegate()
         
         // Collection View
         self.collectionView.topAnchor.constraint(equalTo: self.topAnchor, constant: 0).isActive = true
         self.collectionView.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 8).isActive = true
         self.collectionView.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -8).isActive = true
         self.collectionView.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: 0).isActive = true
-    }
-    
-    private func setupViews() {
-        addSubview(collectionView)
-    }
-    
-    private func setupConstraints() {
     }
     
     required init?(coder aDecoder: NSCoder) {

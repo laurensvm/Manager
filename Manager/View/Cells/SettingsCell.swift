@@ -8,9 +8,17 @@
 
 import UIKit
 
-class SettingsCell: UICollectionViewCell {
+class SettingsCell: CollectionViewCell {
     
-    
+    override var item: CollectionViewItem? {
+        didSet {
+            if let tab = item as? SettingsTab {
+                rightArrow.alpha = tab.arrow ? 1 : 0
+                _imageView.image = tab.image
+                _titleLabel.text = tab.name
+            }
+        }
+    }
     
     private let imageContainerView: UIView = {
         let v = UIView()
@@ -62,12 +70,14 @@ class SettingsCell: UICollectionViewCell {
         self.layer.shadowOffset = .zero
         self.layer.shadowRadius = 5
            
-        
-        setupViews()
         setupConstraints()
     }
     
-    func setupViews() {
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    override func setupViews() {
         addSubview(_titleLabel)
         addSubview(imageContainerView)
         addSubview(rightArrow)
@@ -102,9 +112,5 @@ class SettingsCell: UICollectionViewCell {
         ])
         
         
-    }
-    
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
     }
 }

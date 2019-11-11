@@ -8,7 +8,7 @@
 
 import UIKit
 
-struct SettingsTab {
+struct SettingsTab: CollectionViewItem {
     
     public enum Setting {
         case User

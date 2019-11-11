@@ -65,14 +65,6 @@ class HomeCell: CollectionViewCell {
         return lb
     }()
     
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-
-        setupViews()
-        
-    }
-    
-    
     override func setupViews() {
         super.setupViews()
         
@@ -113,9 +105,5 @@ class HomeCell: CollectionViewCell {
         self.storageLabel.topAnchor.constraint(equalTo: self.topAnchor, constant: 16).isActive = true
         self.storageLabel.leftAnchor.constraint(equalTo: title.rightAnchor, constant: 16).isActive = true
         
-    }
-    
-    required init?(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
     }
 }

@@ -413,6 +413,8 @@
 			isa = PBXGroup;
 			children = (
 				A98A40492378E2C9000C6AB9 /* CollectionView.swift */,
+				A98A404D2378E592000C6AB9 /* CollectionViewCell.swift */,
+				A9DE7DB223235F5400B5EE03 /* CollectionViewHeader.swift */,
 			);
 			path = Base;
 			sourceTree = "<group>";
@@ -440,14 +442,12 @@
 			isa = PBXGroup;
 			children = (
 				A9DE7DB0232351A200B5EE03 /* PhotoCell.swift */,
-				A9DE7DB223235F5400B5EE03 /* CollectionViewHeader.swift */,
 				A971AF7123162BD800BAA34D /* HomeCell.swift */,
 				A9DE7DC22323978700B5EE03 /* FolderCell.swift */,
 				A9EB26562373E4DB00FF66E5 /* SettingsCell.swift */,
 				A9EB26582373F4A500FF66E5 /* SettingsSectionHeader.swift */,
 				A92473F32374269F0007AAF2 /* TrackChangesSettingsCell.swift */,
 				A92473F523753EDD0007AAF2 /* ImportSettingsCell.swift */,
-				A98A404D2378E592000C6AB9 /* CollectionViewCell.swift */,
 			);
 			path = Cells;
 			sourceTree = "<group>";

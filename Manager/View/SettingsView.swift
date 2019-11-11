@@ -8,11 +8,7 @@
 
 import UIKit
 
-class SettingsView: View {
-    
-    var delegate: CollectionViewDelegate?
-    let settingsCell = "settingsCell"
-    let headerId = "headerId"
+class SettingsView: CollectionView {
     
     private lazy var viewTitleLabel: UILabel = {
         let lb = UILabel()
@@ -24,35 +20,14 @@ class SettingsView: View {
         return lb
     }()
     
-    private lazy var collectionView: UICollectionView = {
-        let layout = UICollectionViewFlowLayout()
-        let cv = UICollectionView(frame: .zero, collectionViewLayout: layout)
-        cv.backgroundColor = .white
-        cv.translatesAutoresizingMaskIntoConstraints = false
-        cv.register(SettingsSectionHeader.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: headerId)
-        cv.register(SettingsCell.self, forCellWithReuseIdentifier: settingsCell)
-        return cv
-    }()
-    
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-        self.backgroundColor = .white
-        self.translatesAutoresizingMaskIntoConstraints = true
-        setupViews()
+    override func collectionViewBehaviour() {
+        self.collectionView.register(SettingsSectionHeader.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: sectionHeaderId)
+        self.collectionView.register(SettingsCell.self, forCellWithReuseIdentifier: baseCellId)
     }
     
-    required init?(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-    
-    func didLoadDelegate() {
-        self.collectionView.delegate = delegate!
-        self.collectionView.dataSource = delegate!
-    }
-    
-    private func setupViews() {
+    override func setupViews() {
+        super.setupViews()
         self.addSubview(viewTitleLabel)
-        self.addSubview(collectionView)
         
         // View Title label
         self.viewTitleLabel.topAnchor.constraint(equalTo: self.topAnchor, constant: 50).isActive = true

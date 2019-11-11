@@ -20,7 +20,6 @@ class CollectionViewController<V: CollectionView>: ViewController<V>, Collection
     
     internal var collectionViewCellHeight: CGFloat = 82
     internal var collectionViewSpacing: CGFloat = 16
-    internal var collectionViewHeaderHeight: CGFloat = 170.0
     internal var collectionViewInsets: UIEdgeInsets = UIEdgeInsets(top: 16, left: 0, bottom: 16, right: 0)
     
     override func viewDidLoad() {
@@ -56,6 +55,14 @@ class CollectionViewController<V: CollectionView>: ViewController<V>, Collection
         return cell
     }
     
+    func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
+        return UICollectionReusableView()
+    }
+    
+    func numberOfSections(in collectionView: UICollectionView) -> Int {
+        return items.count
+    }
+    
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {}
     
     func collectionView(_ collectionView: UICollectionView, prefetchItemsAt indexPaths: [IndexPath]) {}
@@ -75,8 +82,9 @@ class CollectionViewController<V: CollectionView>: ViewController<V>, Collection
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
-        return CGSize(width: self.customView.frame.width, height: collectionViewHeaderHeight)
+        return .zero
     }
+    
     
     // This method is optional
     func collectionViewHeight() -> CGFloat {

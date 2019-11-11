@@ -13,6 +13,7 @@ class CollectionView: View {
     var baseCellId = "baseCellId"
     var headerId = "headerCellId"
     var footerId = "footerId"
+    var sectionHeaderId = "sectionHeaderId"
     
     lazy var collectionView: UICollectionView = {
         let cvLayout = UICollectionViewFlowLayout()

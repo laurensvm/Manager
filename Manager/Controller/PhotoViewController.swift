@@ -61,7 +61,7 @@ class PhotoViewController: CollectionViewController<PhotoView> {
         return CGSize(width: size, height: size)
     }
     
-    func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
+    override func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
         let header = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: self.customView.headerId, for: indexPath) as! CollectionViewHeader
         header.breadCrumb.attributedText = self.formatBreadCrumb(withTrail: customView.breadCrumbTrail)
         return header
@@ -83,6 +83,10 @@ class PhotoViewController: CollectionViewController<PhotoView> {
         
         self.navigationController?.pushViewController(detailPhotoViewController, animated: true)
         
+    }
+    
+    override func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
+        return CGSize(width: self.customView.frame.width, height: 170)
     }
     
     override func collectionView(_ collectionView: UICollectionView, prefetchItemsAt indexPaths: [IndexPath]) {
@@ -108,7 +112,6 @@ class PhotoViewController: CollectionViewController<PhotoView> {
 
 extension PhotoViewController: UIViewControllerTransitioningDelegate {
     func animationController(forPresented presented: UIViewController, presenting: UIViewController, source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
-        
         return transition
     }
 }
