@@ -23,15 +23,13 @@ protocol SwitchDelegate {
     func didTapSwitch(_ sender: UISwitch)
 }
 
-//protocol SettingsDelegate: UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
-//}
 
 @objc protocol CreateDirectoryDelegate: UITextFieldDelegate {
     @objc func didTapCreateDirectory(_: UIButton)
     @objc func removeSelf(_ sender: UITapGestureRecognizer?)
 }
 
-protocol CollectionViewDelegate: UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
+protocol CollectionViewDelegate: UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, UICollectionViewDataSourcePrefetching {
     func collectionViewHeight() -> CGFloat
 }
 

@@ -8,7 +8,15 @@
 
 import UIKit
 
-class PhotoCell: UICollectionViewCell {
+class PhotoCell: CollectionViewCell {
+    
+    override var item: CollectionViewItem? {
+        didSet {
+            if let thumbnail = item as? ThumbnailImage {
+                imageView.image = thumbnail.image
+            }
+        }
+    }
     
     let imageView: UIImageView = {
         let iv = UIImageView()
@@ -21,12 +29,9 @@ class PhotoCell: UICollectionViewCell {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        self.translatesAutoresizingMaskIntoConstraints = false
-        
-        setupViews()
     }
     
-    private func setupViews() {
+    override func setupViews() {
         self.addSubview(imageView)
     
         self.imageView.topAnchor.constraint(equalTo: self.topAnchor, constant: 0).isActive = true

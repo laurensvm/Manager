@@ -11,7 +11,8 @@ import UIKit
 class CollectionView: View {
     weak var delegate: CollectionViewDelegate!
     var baseCellId = "baseCellId"
-    var headerCellId = "headerCellId"
+    var headerId = "headerCellId"
+    var footerId = "footerId"
     
     lazy var collectionView: UICollectionView = {
         let cvLayout = UICollectionViewFlowLayout()

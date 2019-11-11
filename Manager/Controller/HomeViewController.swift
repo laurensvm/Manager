@@ -12,16 +12,6 @@ class HomeViewController: CollectionViewController<HomeView> {
     
     var networkManager: NetworkManager!
     
-    override var items: [[CollectionViewItem]] {
-        get {
-            return [[
-                HomeViewTab(name: "Photos", imageName: "photos", capacity: 40, size: 19),
-                HomeViewTab(name: "Videos", imageName: "videos", capacity: 20, size: 5),
-                HomeViewTab(name: "Music", imageName: "music", capacity: 30, size: 28)
-            ]]
-        }
-    }
-    
     override func viewDidLoad() {
         super.viewDidLoad()
 		self.controllerTitle = "Home"
@@ -34,6 +24,14 @@ class HomeViewController: CollectionViewController<HomeView> {
     init(withNetworkManager networkManager: NetworkManager) {
         super.init()
         self.networkManager = networkManager
+    }
+    
+    override func collectionViewBehaviour() {
+        self.items = [[
+            HomeViewTab(name: "Photos", imageName: "photos", capacity: 40, size: 19),
+            HomeViewTab(name: "Videos", imageName: "videos", capacity: 20, size: 5),
+            HomeViewTab(name: "Music", imageName: "music", capacity: 30, size: 28)
+        ]]
     }
     
     required init?(coder aDecoder: NSCoder) {

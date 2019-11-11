@@ -9,22 +9,26 @@
 import UIKit
 
 class CollectionViewController<V: CollectionView>: ViewController<V>, CollectionViewDelegate {
-    
-    var items: [[CollectionViewItem]] {
-        get {
-            return [[]]
+
+    internal var items: [[CollectionViewItem]] = [[]] {
+        didSet {
+            DispatchQueue.main.async {
+                self.customView.collectionView.reloadData()
+            }
         }
     }
     
-    var collectionViewCellHeight: CGFloat = 82
-    var collectionViewSpacing: CGFloat = 16
-    var collectionViewInsets: UIEdgeInsets = UIEdgeInsets(top: 16, left: 0, bottom: 16, right: 0)
+    internal var collectionViewCellHeight: CGFloat = 82
+    internal var collectionViewSpacing: CGFloat = 16
+    internal var collectionViewHeaderHeight: CGFloat = 170.0
+    internal var collectionViewInsets: UIEdgeInsets = UIEdgeInsets(top: 16, left: 0, bottom: 16, right: 0)
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
         customView.delegate = self
         customView.didLoadDelegate()
+        customView.collectionView.prefetchDataSource = self
     }
     
     init() {
@@ -38,11 +42,8 @@ class CollectionViewController<V: CollectionView>: ViewController<V>, Collection
         fatalError("init(coder:) has not been implemented")
     }
     
-    // This method is optional
-    func collectionViewHeight() -> CGFloat {
-        return 0
-    }
     
+    // Datasource Methods
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return items[section].count
     }
@@ -55,6 +56,12 @@ class CollectionViewController<V: CollectionView>: ViewController<V>, Collection
         return cell
     }
     
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {}
+    
+    func collectionView(_ collectionView: UICollectionView, prefetchItemsAt indexPaths: [IndexPath]) {}
+    
+    
+    // Layout Methods
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         return CGSize(width: self.customView.frame.width - 4 * collectionViewSpacing, height: collectionViewCellHeight)
     }
@@ -67,7 +74,14 @@ class CollectionViewController<V: CollectionView>: ViewController<V>, Collection
         return collectionViewInsets
     }
     
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {}
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
+        return CGSize(width: self.customView.frame.width, height: collectionViewHeaderHeight)
+    }
+    
+    // This method is optional
+    func collectionViewHeight() -> CGFloat {
+        return 0
+    }
     
 }
 

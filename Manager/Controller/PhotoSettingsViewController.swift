@@ -48,6 +48,10 @@ class PhotoSettingsViewController: ViewController<PhotoSettingsView> {
 }
 
 extension PhotoSettingsViewController: CollectionViewDelegate {
+    func collectionView(_ collectionView: UICollectionView, prefetchItemsAt indexPaths: [IndexPath]) {
+    
+    }
+    
     func collectionViewHeight() -> CGFloat {
         return 0
     }

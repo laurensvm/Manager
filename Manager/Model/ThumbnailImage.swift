@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-class ThumbnailImage {
+class ThumbnailImage: CollectionViewItem {
     var id: Int
     var image: UIImage!
     var isFetching: Bool = false

@@ -48,6 +48,10 @@ class SettingsViewController: ViewController<SettingsView> {
 }
 
 extension SettingsViewController: CollectionViewDelegate {
+    func collectionView(_ collectionView: UICollectionView, prefetchItemsAt indexPaths: [IndexPath]) {
+        
+    }
+    
     func collectionViewHeight() -> CGFloat {
         return 0
     }
