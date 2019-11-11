@@ -14,20 +14,20 @@ class AlertViewController: ViewController<AlertView> {
         super.viewDidLoad()
     }
     
-    init() {
-        super.init(nibName: nil, bundle: nil)
+    override init() {
+        super.init()
         modalPresentationStyle = .overCurrentContext
-        customView.delegate = self
+        v.delegate = self
     }
     
     convenience init(withMessage message: String?) {
         self.init()
-        customView.descriptionLabel.text = message
+        v.descriptionLabel.text = message
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        customView.animateAlertView(active: true, completion: nil)
+        v.animateAlertView(active: true, completion: nil)
     }
     
     required init?(coder aDecoder: NSCoder) {

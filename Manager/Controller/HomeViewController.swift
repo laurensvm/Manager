@@ -15,8 +15,8 @@ class HomeViewController: CollectionViewController<HomeView> {
     override func viewDidLoad() {
         super.viewDidLoad()
 		self.controllerTitle = "Home"
-        customView.delegate = self
-        customView.didLoadDelegate()
+        v.delegate = self
+        v.didLoadDelegate()
         
         self.collectionViewSpacing = 16.0
     }

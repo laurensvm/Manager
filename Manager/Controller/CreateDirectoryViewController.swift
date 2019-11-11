@@ -14,7 +14,7 @@ class CreateDirectoryViewController: ViewController<CreateDirectoryView> {
 	private var directory: Int!
     
     init(directory: Int) {
-        super.init(nibName: nil, bundle: nil)
+        super.init()
         self.modalPresentationStyle = .overCurrentContext
         self.directory = directory
     }
@@ -22,9 +22,9 @@ class CreateDirectoryViewController: ViewController<CreateDirectoryView> {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.customView.delegate = self
-        self.customView.didLoadDelegate()
-        self.customView.directory = self.directory
+        self.v.delegate = self
+        self.v.didLoadDelegate()
+        self.v.directory = self.directory
     }
     
     required init?(coder: NSCoder) {
@@ -43,21 +43,21 @@ class CreateDirectoryViewController: ViewController<CreateDirectoryView> {
 
 extension CreateDirectoryViewController: CreateDirectoryDelegate {
     func didTapCreateDirectory(_: UIButton) {
-        customView.loading()
+        v.loading()
         
-        let name = customView.directoryName.text ?? ""
+        let name = v.directoryName.text ?? ""
         if  name != "" {
             self.networkManager?.createDirectory(withName: name, andParentId: directory, completion: { (success, error) in
                 if success {
                     DispatchQueue.main.async {
-                        self.customView.accept(completion: {
+                        self.v.accept(completion: {
                             self.dismiss(animated: true, completion: nil)
                         })
                     }
                 }
             })
         } else {
-            customView.failed(completion: {
+            v.failed(completion: {
                 self.dismiss(animated: true, completion: nil)
             })
         }
@@ -76,6 +76,6 @@ extension CreateDirectoryViewController: UIGestureRecognizerDelegate {
 
 extension CreateDirectoryViewController: UITextFieldDelegate {
     func textFieldDidBeginEditing(_ textField: UITextField) {
-        customView.directoryName.placeholder = ""
+        v.directoryName.placeholder = ""
     }
 }

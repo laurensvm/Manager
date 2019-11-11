@@ -10,13 +10,13 @@ import UIKit
 
 class SettingsViewController: CollectionViewController<SettingsView> {
     
+    private let networkManager: NetworkManager
+    
     private let sections: [String] = ["General", ""]
     
-    var networkManager: NetworkManager!
-    
     init(withNetworkManager networkManager: NetworkManager) {
-        super.init()
         self.networkManager = networkManager
+        super.init()
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -43,17 +43,17 @@ class SettingsViewController: CollectionViewController<SettingsView> {
     }
     
     override func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: self.customView.frame.width - 64, height: 60)
+        return CGSize(width: self.v.frame.width - 64, height: 60)
     }
     
     override func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
-        let header = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: self.customView.sectionHeaderId, for: indexPath) as! SettingsSectionHeader
+        let header = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: self.v.sectionHeaderId, for: indexPath) as! SettingsSectionHeader
         header.title.text = sections[indexPath.section]
         return header
     }
     
     override func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
-        return CGSize(width: self.customView.frame.width - 64, height: 15)
+        return CGSize(width: self.v.frame.width - 64, height: 15)
     }
     
 

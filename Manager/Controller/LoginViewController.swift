@@ -12,8 +12,8 @@ import UIKit
 
 class LoginViewController: ViewController<LoginView> {
     
-    var networkManager: NetworkManager!
-    var loginCompletion: (() -> ())!
+    private let networkManager: NetworkManager
+    private let loginCompletion: (() -> ())!
     
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return .lightContent
@@ -21,13 +21,14 @@ class LoginViewController: ViewController<LoginView> {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        customView.delegate = self
+        v.delegate = self
+        v.didLoadDelegate()
     }
     
     init(networkManager: NetworkManager, onLoginCompletion completion: @escaping () -> ()) {
-        super.init(nibName: nil, bundle: nil)
         self.networkManager = networkManager
         self.loginCompletion = completion
+        super.init()
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -44,7 +45,7 @@ extension LoginViewController: LoginViewDelegate {
         
         networkManager.credentialManager.login(username: username, password: password, completion: { successful, error in
             DispatchQueue.main.async {
-                self.customView.indicatorView.stopAnimating()
+                self.v.indicatorView.stopAnimating()
                 if successful {
                     self.loginCompletion()
                     self.dismiss(animated: true, completion: nil)
@@ -54,6 +55,18 @@ extension LoginViewController: LoginViewDelegate {
                 }
             }
         })
+    }
+}
+
+extension LoginViewController {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        self.view.endEditing(true)
+        return false
+    }
+    
+    func dissmissKeyBoard(_ sender: UITapGestureRecognizer) {
+//        customView.usernameTextField.resignFirstResponder()
+//        customView.passwordTextField.resignFirstResponder()
     }
 }
 

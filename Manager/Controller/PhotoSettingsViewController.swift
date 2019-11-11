@@ -37,7 +37,7 @@ class PhotoSettingsViewController: CollectionViewController<PhotoSettingsView> {
     func populateBreadCrumbTrail() {
         self.navigationController?.viewControllers.forEach({
             if let viewController = $0 as? BreadCrumbViewController {
-                self.customView.breadCrumbTrail.append(viewController.getViewControllerTitle())
+                self.v.breadCrumbTrail.append(viewController.getViewControllerTitle())
             }
         })
     }
@@ -48,7 +48,7 @@ class PhotoSettingsViewController: CollectionViewController<PhotoSettingsView> {
         
         switch tab.type {
         case .TrackChanges:
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: customView.trackChangesCellId, for: indexPath) as! TrackChangesSettingsCell
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: v.trackChangesCellId, for: indexPath) as! TrackChangesSettingsCell
             cell.delegate = self
             cell._imageView.image = tab.image
             cell._titleLabel.text = tab.name
@@ -56,7 +56,7 @@ class PhotoSettingsViewController: CollectionViewController<PhotoSettingsView> {
         	return cell
         
         case .Import, .ImportDirectory:
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: customView.importCellId, for: indexPath) as! ImportSettingsCell
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: v.importCellId, for: indexPath) as! ImportSettingsCell
             cell.delegate = self
             cell._imageView.image = tab.image
             cell._titleLabel.text = tab.name
@@ -70,25 +70,25 @@ class PhotoSettingsViewController: CollectionViewController<PhotoSettingsView> {
     
     override func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
 
-        let header = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: self.customView.headerId, for: indexPath) as! CollectionViewHeader
-        header.breadCrumb.attributedText = self.formatBreadCrumb(withTrail: customView.breadCrumbTrail)
+        let header = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: self.v.headerId, for: indexPath) as! CollectionViewHeader
+        header.breadCrumb.attributedText = self.formatBreadCrumb(withTrail: v.breadCrumbTrail)
         header.viewTitleLabel.text = self.controllerTitle
         return header
     }
     
     override func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: self.customView.frame.width - 64, height: 60)
+        return CGSize(width: self.v.frame.width - 64, height: 60)
     }
     
     override func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
-        return CGSize(width: self.customView.frame.width, height: 170)
+        return CGSize(width: self.v.frame.width, height: 170)
     }
     
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         guard let tab = items[indexPath.section][indexPath.item] as? SettingsTab else { return }
         switch tab.type {
         case .Import:
-            self.customView.addSubview(PopUpView(frame: .zero, title: "Importing Photos.."))
+            self.v.addSubview(PopUpView(frame: .zero, title: "Importing Photos.."))
         default:
         break
         }

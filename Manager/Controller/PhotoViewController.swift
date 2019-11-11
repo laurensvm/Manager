@@ -17,7 +17,7 @@ class PhotoViewController: CollectionViewController<PhotoView> {
     var thumbnails: [ThumbnailImage] = [] {
         didSet {
             DispatchQueue.main.async {
-                self.customView.collectionView.reloadData()
+                self.v.collectionView.reloadData()
             }
         }
     }
@@ -41,13 +41,13 @@ class PhotoViewController: CollectionViewController<PhotoView> {
     func populateBreadCrumbTrail() {
         self.navigationController?.viewControllers.forEach({
             if let viewController = $0 as? BreadCrumbViewController {
-        	self.customView.breadCrumbTrail.append(viewController.getViewControllerTitle())
+        	self.v.breadCrumbTrail.append(viewController.getViewControllerTitle())
             }
         })
     }
 	
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: self.customView.baseCellId, for: indexPath) as! PhotoCell
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: self.v.baseCellId, for: indexPath) as! PhotoCell
         
         let thumbnail = thumbnails[indexPath.item]
         if thumbnail.image == nil && !thumbnail.isFetching {
@@ -57,13 +57,13 @@ class PhotoViewController: CollectionViewController<PhotoView> {
     }
     
     override func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let size = (self.customView.frame.width - 4 * 8) / 3
+        let size = (self.v.frame.width - 4 * 8) / 3
         return CGSize(width: size, height: size)
     }
     
     override func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
-        let header = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: self.customView.headerId, for: indexPath) as! CollectionViewHeader
-        header.breadCrumb.attributedText = self.formatBreadCrumb(withTrail: customView.breadCrumbTrail)
+        let header = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: self.v.headerId, for: indexPath) as! CollectionViewHeader
+        header.breadCrumb.attributedText = self.formatBreadCrumb(withTrail: v.breadCrumbTrail)
         return header
     }
     
@@ -86,7 +86,7 @@ class PhotoViewController: CollectionViewController<PhotoView> {
     }
     
     override func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
-        return CGSize(width: self.customView.frame.width, height: 170)
+        return CGSize(width: self.v.frame.width, height: 170)
     }
     
     override func collectionView(_ collectionView: UICollectionView, prefetchItemsAt indexPaths: [IndexPath]) {
@@ -101,7 +101,7 @@ class PhotoViewController: CollectionViewController<PhotoView> {
             networkManager?.getThumbnailImage(id: thumbnail.id, completion: { data in
                 thumbnail.image = UIImage(data: data)
                 DispatchQueue.main.async {
-                    self.customView.collectionView.reloadItems(at: [idx])
+                    self.v.collectionView.reloadItems(at: [idx])
                 }
                 
             })

@@ -11,20 +11,18 @@ import CoreLocation
 
 class DetailPhotoViewController: ViewController<DetailPhotoView> {
     
-    private var networkManager: NetworkManager?
+    private let networkManager: NetworkManager
     
-    private var image: Image? {
+    private var image: Image {
         didSet {
-            if let _ = image?.imageData {
-                self.customView.image = image
-            }
+            self.v.image = image
             
-            if let coords = image?.coordinates {
-                self.customView.mapPin = self.generateMapPin(coords)
+            if let coords = image.coordinates {
+                self.v.mapPin = self.generateMapPin(coords)
             }
         }
     }
-    private var thumbnail: ThumbnailImage!
+    private var thumbnail: ThumbnailImage
     private var navigationsBarsAreHidden: Bool = false
     
     override func viewWillAppear(_ animated: Bool) {
@@ -42,13 +40,13 @@ class DetailPhotoViewController: ViewController<DetailPhotoView> {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        customView.delegate = self
-        customView.didLoadDelegate()
+        v.delegate = self
+        v.didLoadDelegate()
         
-        if let im = self.image?.imageData {
-            image?.imageData = im
+        if let im = self.image.imageData {
+            image.imageData = im
         }
-        image?.imageData = thumbnail.image
+        image.imageData = thumbnail.image
         
     }
     
@@ -59,11 +57,11 @@ class DetailPhotoViewController: ViewController<DetailPhotoView> {
         self.tabBarController?.tabBar.isHidden = false
     }
     
-    init(withNetworkManager networkManager: NetworkManager?, thumbnail: ThumbnailImage) {
-        super.init(nibName: nil, bundle: nil)
+    init(withNetworkManager networkManager: NetworkManager, thumbnail: ThumbnailImage) {
         self.networkManager = networkManager
         self.thumbnail = thumbnail
         self.image = Image()
+        super.init()
         
         fetchImage()
         fetchImageDetails()
@@ -74,15 +72,15 @@ class DetailPhotoViewController: ViewController<DetailPhotoView> {
     }
     
     private func fetchImage() {
-        networkManager?.getImage(id: thumbnail.id, completion: { data in
+        networkManager.getImage(id: thumbnail.id, completion: { data in
             DispatchQueue.main.async {
-            	self.image?.imageData = UIImage(data: data)
+            	self.image.imageData = UIImage(data: data)
             }
         })
     }
     
     private func fetchImageDetails() {
-        networkManager?.getImageDetails(id: thumbnail.id, completion: { data, error in
+        networkManager.getImageDetails(id: thumbnail.id, completion: { data, error in
             if let error = error {
                 // Do something with the error
                 print(error)
@@ -90,7 +88,7 @@ class DetailPhotoViewController: ViewController<DetailPhotoView> {
             
             if let data = data {
                 DispatchQueue.main.async {
-                    self.image?.append(data)
+                    self.image.append(data)
                 }
             }
         })
@@ -100,7 +98,7 @@ class DetailPhotoViewController: ViewController<DetailPhotoView> {
 
 extension DetailPhotoViewController: DetailPhotoDelegate {
     @objc func didTapView(_ sender: UITapGestureRecognizer?) {
-        if !customView.detailsViewIsActive {
+        if !v.detailsViewIsActive {
             if navigationsBarsAreHidden {
                 self.navigationController?.setNavigationBarHidden(false, animated: true)
             } else {
@@ -112,11 +110,11 @@ extension DetailPhotoViewController: DetailPhotoDelegate {
     
     @objc func didSwipeUp(_ sender: UISwipeGestureRecognizer?) {
         self.navigationController?.setNavigationBarHidden(false, animated: true)
-        customView.didSwipeUp()
+        v.didSwipeUp()
     }
     
     @objc func didSwipeDown(_ sender: UISwipeGestureRecognizer?) {
 //        self.navigationController?.setNavigationBarHidden(false, animated: true)
-        customView.didSwipeDown()
+        v.didSwipeDown()
     }
 }

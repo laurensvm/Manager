@@ -44,8 +44,8 @@ class DocumentsViewController: CollectionViewController<DocumentsView> {
                 self.directories = directories
             }
             DispatchQueue.main.async {
-                self.customView.containsSubDirectories = !self.directories.isEmpty
-                self.customView.collectionView.reloadData()
+                self.v.containsSubDirectories = !self.directories.isEmpty
+                self.v.collectionView.reloadData()
             }
         })
     }
@@ -77,10 +77,10 @@ class DocumentsViewController: CollectionViewController<DocumentsView> {
     func populateBreadCrumbTrail() {
         self.navigationController?.viewControllers.forEach({
             if let viewController = $0 as? BreadCrumbViewController {
-                self.customView.breadCrumbTrail.append(viewController.getViewControllerTitle())
+                self.v.breadCrumbTrail.append(viewController.getViewControllerTitle())
             }
         })
-        self.customView.breadCrumb.attributedText = formatBreadCrumb(withTrail: self.customView.breadCrumbTrail)
+        self.v.breadCrumb.attributedText = formatBreadCrumb(withTrail: self.v.breadCrumbTrail)
     }
     
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -88,13 +88,13 @@ class DocumentsViewController: CollectionViewController<DocumentsView> {
     }
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: self.customView.baseCellId, for: indexPath) as! FolderCell
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: self.v.baseCellId, for: indexPath) as! FolderCell
         cell.folderName.text = directories[indexPath.item].name
         return cell
     }
     
     override func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let width = (self.customView.frame.width - (2 * 32 + 2 * 8)) / 3
+        let width = (self.v.frame.width - (2 * 32 + 2 * 8)) / 3
         let height = width + 20
         return CGSize(width: width, height: height)
     }
