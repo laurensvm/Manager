@@ -9,7 +9,18 @@
 
 import UIKit
 
-class HomeCell: UICollectionViewCell {
+class HomeCell: CollectionViewCell {
+    
+    override var item: CollectionViewItem? {
+        didSet {
+            if let item = item as? HomeViewTab {
+                title.text = item.name
+                storageLabel.text = "\(Int(item.size)) GB"
+                progressView.setProgress(item.size / item.capacity, animated: true)
+                pictureImageView.image = UIImage(named: item.imageName)
+            }
+        }
+    }
     
     private lazy var pictureView: UIView = {
         let v = UIView()
@@ -62,11 +73,8 @@ class HomeCell: UICollectionViewCell {
     }
     
     
-    private func setupViews() {
-        // Configure superview
-        self.translatesAutoresizingMaskIntoConstraints = false
-//        self.backgroundColor = Theme.colors.superLightGrey
-        self.backgroundColor = .white
+    override func setupViews() {
+        super.setupViews()
         
         // Setup shadow
         self.layer.cornerRadius = 15

@@ -110,6 +110,16 @@ extension PhotoSettingsViewController: CollectionViewDelegate {
         return CGSize(width: self.customView.frame.width, height: 170)
     }
     
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let tab = tabs[indexPath.section][indexPath.item]
+        switch tab.type {
+        case .Import:
+            self.customView.addSubview(PopUpView(frame: .zero, title: "Importing Photos.."))
+        default:
+        break
+        }
+    }
+    
 }
 
 extension PhotoSettingsViewController: SwitchDelegate {

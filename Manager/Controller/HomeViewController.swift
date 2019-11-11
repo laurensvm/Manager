@@ -8,17 +8,19 @@
 
 import UIKit
 
-class HomeViewController: ViewController<HomeView> {
+class HomeViewController: CollectionViewController<HomeView> {
     
-    var networkManager: NetworkManager?
+    var networkManager: NetworkManager!
     
-    private let categories: [HomeViewTab] = [
-        HomeViewTab(name: "Photos", imageName: "photos", capacity: 40, size: 19),
-        HomeViewTab(name: "Videos", imageName: "videos", capacity: 20, size: 5),
-        HomeViewTab(name: "Music", imageName: "music", capacity: 30, size: 28)
-    ]
-    private let collectionViewCellHeight: CGFloat = 82
-    private let collectionViewSpacing: CGFloat = 16
+    override var items: [[CollectionViewItem]] {
+        get {
+            return [[
+                HomeViewTab(name: "Photos", imageName: "photos", capacity: 40, size: 19),
+                HomeViewTab(name: "Videos", imageName: "videos", capacity: 20, size: 5),
+                HomeViewTab(name: "Music", imageName: "music", capacity: 30, size: 28)
+            ]]
+        }
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -26,50 +28,23 @@ class HomeViewController: ViewController<HomeView> {
         customView.delegate = self
         customView.didLoadDelegate()
         
+        self.collectionViewSpacing = 16.0
     }
     
     init(withNetworkManager networkManager: NetworkManager) {
-        super.init(nibName: nil, bundle: nil)
+        super.init()
         self.networkManager = networkManager
     }
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-
-}
-
-extension HomeViewController: CollectionViewDelegate {
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return categories.count
+    
+    override func collectionViewHeight() -> CGFloat {
+        return CGFloat(items.flatMap({ $0 }).count) * (collectionViewCellHeight + collectionViewSpacing) + 32
     }
     
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: self.customView.homeViewCellId, for: indexPath) as! HomeCell
-        
-        let category = categories[indexPath.item]
-        
-        cell.title.text = category.name
-        cell.storageLabel.text = "\(Int(category.size)) GB"
-        cell.progressView.setProgress(category.size / category.capacity, animated: true)
-        cell.pictureImageView.image = UIImage(named: category.imageName)
-        
-        return cell
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: self.customView.frame.width - 64, height: collectionViewCellHeight)
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
-        return collectionViewSpacing
-    }
-    
-    func collectionViewHeight() -> CGFloat {
-        return CGFloat(categories.count) * (collectionViewCellHeight + collectionViewSpacing) + 32
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+    override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if indexPath.item == 0 {
             if let networkManager = self.networkManager {
                 let vc = PhotoViewController(withNetworkManager: networkManager)
@@ -82,9 +57,4 @@ extension HomeViewController: CollectionViewDelegate {
             }
         }
     }
-    
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
-        return UIEdgeInsets(top: 16, left: 0, bottom: 16, right: 0)
-    }
-    
 }

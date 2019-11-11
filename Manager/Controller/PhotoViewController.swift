@@ -10,7 +10,7 @@ import UIKit
 
 class PhotoViewController: ViewController<PhotoView> {
     
-    private var networkManager: NetworkManager?
+    private var networkManager: NetworkManager!
     
     private let transition = DetailViewTransition()
     

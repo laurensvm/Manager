@@ -8,10 +8,7 @@
 
 import UIKit
 
-class HomeView: UIView {
-    
-    weak var delegate: CollectionViewDelegate!
-    let homeViewCellId = "homeViewCellId"
+class HomeView: CollectionView {
     
     private lazy var viewTitleLabel: UILabel = {
         let lb = UILabel()
@@ -23,16 +20,6 @@ class HomeView: UIView {
         return lb
     }()
     
-    lazy var collectionView: UICollectionView = {
-        let cvLayout = UICollectionViewFlowLayout()
-        let cv = UICollectionView(frame: CGRect(x: 0, y: 0, width: self.frame.width, height: self.frame.height), collectionViewLayout: cvLayout)
-        cv.backgroundColor = .white
-        cv.isScrollEnabled = false
-        cv.register(HomeCell.self, forCellWithReuseIdentifier: homeViewCellId)
-        cv.translatesAutoresizingMaskIntoConstraints = false
-        return cv
-    }()
-    
     override init(frame: CGRect) {
         super.init(frame: frame)
         self.backgroundColor = .white
@@ -40,9 +27,13 @@ class HomeView: UIView {
         setupViews()
     }
     
-    func didLoadDelegate() {
-        collectionView.delegate = delegate
-        collectionView.dataSource = delegate
+    override func collectionViewBehaviour() {
+        self.collectionView.register(HomeCell.self, forCellWithReuseIdentifier: baseCellId)
+        self.collectionView.isScrollEnabled = false
+    }
+    
+    override func didLoadDelegate() {
+        super.didLoadDelegate()
         
         // Collection View
         self.collectionView.topAnchor.constraint(equalTo: viewTitleLabel.bottomAnchor, constant: 64).isActive = true
@@ -51,9 +42,10 @@ class HomeView: UIView {
         self.collectionView.heightAnchor.constraint(equalToConstant: delegate.collectionViewHeight()).isActive = true
     }
 	
-    private func setupViews() {
+    override func setupViews() {
+        super.setupViews()
+        
         self.addSubview(viewTitleLabel)
-        self.addSubview(collectionView)
         
         // View Title label
         self.viewTitleLabel.topAnchor.constraint(equalTo: self.topAnchor, constant: 50).isActive = true

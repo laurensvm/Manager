@@ -13,6 +13,8 @@ import UIKit
     @objc func dissmissKeyBoard(_ sender: UITapGestureRecognizer)
 }
 
+protocol CollectionViewItem {}
+
 protocol AlertViewDelegate: class {
     func dismissViewController()
 }
