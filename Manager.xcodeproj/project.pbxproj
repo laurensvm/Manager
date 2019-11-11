@@ -45,6 +45,7 @@
 		A977556222E538E800407385 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A977556122E538E800407385 /* LoginView.swift */; };
 		A977556422E5547E00407385 /* UITextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = A977556322E5547E00407385 /* UITextField.swift */; };
 		A977556622E5681F00407385 /* UIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A977556522E5681F00407385 /* UIView.swift */; };
+		A97A83CF237918A500E71747 /* AlertType.swift in Sources */ = {isa = PBXBuildFile; fileRef = A97A83CE237918A500E71747 /* AlertType.swift */; };
 		A988D2222317ECA9004EDB42 /* HomeViewTab.swift in Sources */ = {isa = PBXBuildFile; fileRef = A988D2212317ECA9004EDB42 /* HomeViewTab.swift */; };
 		A98A40482378E27D000C6AB9 /* CollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A98A40472378E27D000C6AB9 /* CollectionViewController.swift */; };
 		A98A404A2378E2C9000C6AB9 /* CollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A98A40492378E2C9000C6AB9 /* CollectionView.swift */; };
@@ -164,6 +165,7 @@
 		A977556122E538E800407385 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		A977556322E5547E00407385 /* UITextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITextField.swift; sourceTree = "<group>"; };
 		A977556522E5681F00407385 /* UIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIView.swift; sourceTree = "<group>"; };
+		A97A83CE237918A500E71747 /* AlertType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertType.swift; sourceTree = "<group>"; };
 		A988D2212317ECA9004EDB42 /* HomeViewTab.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewTab.swift; sourceTree = "<group>"; };
 		A98A40472378E27D000C6AB9 /* CollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewController.swift; sourceTree = "<group>"; };
 		A98A40492378E2C9000C6AB9 /* CollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionView.swift; sourceTree = "<group>"; };
@@ -386,6 +388,7 @@
 				A944E48C237115F20003E201 /* MapPin.swift */,
 				A92FF2C1237158B300F91C2F /* PHAssetImageWrapper.swift */,
 				A9EB265A2373F83400FF66E5 /* SettingsTab.swift */,
+				A97A83CE237918A500E71747 /* AlertType.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -785,6 +788,7 @@
 				A9DE7DBF2323907C00B5EE03 /* DocumentsViewController.swift in Sources */,
 				A944E4872370F6120003E201 /* Image.swift in Sources */,
 				A944E48B237113260003E201 /* AssetDetailView.swift in Sources */,
+				A97A83CF237918A500E71747 /* AlertType.swift in Sources */,
 				A92473EE237420B00007AAF2 /* Float.swift in Sources */,
 				A988D2222317ECA9004EDB42 /* HomeViewTab.swift in Sources */,
 				A92473F0237423A40007AAF2 /* PhotoSettingsViewController.swift in Sources */,

@@ -23,7 +23,7 @@ class AlertView: View {
         return v
     }()
     
-    private lazy var messageLabel: UILabel = {
+    lazy var messageLabel: UILabel = {
         let lb = UILabel()
         lb.translatesAutoresizingMaskIntoConstraints = false
         lb.font = Theme.fonts.avenirBlack(size: 18)

@@ -88,7 +88,8 @@ class PhotoSettingsViewController: CollectionViewController<PhotoSettingsView> {
         guard let tab = items[indexPath.section][indexPath.item] as? SettingsTab else { return }
         switch tab.type {
         case .Import:
-            self.v.addSubview(PopUpView(frame: .zero, title: "Importing Photos.."))
+            let alertViewController = AlertViewController(withType: .info, andMessage: "Importing Photo's..")
+            self.present(alertViewController, animated: false, completion: nil)
         default:
         break
         }

@@ -50,7 +50,7 @@ extension LoginViewController: LoginViewDelegate {
                     self.loginCompletion()
                     self.dismiss(animated: true, completion: nil)
                 } else {
-                    let alertViewController = AlertViewController(withMessage: error)
+                    let alertViewController = AlertViewController(withType: .error, andMessage: error)
                     self.present(alertViewController, animated: false, completion: nil)
                 }
             }

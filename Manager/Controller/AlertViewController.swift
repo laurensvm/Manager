@@ -20,14 +20,15 @@ class AlertViewController: ViewController<AlertView> {
         v.delegate = self
     }
     
-    convenience init(withMessage message: String?) {
+    convenience init(withType type: AlertType, andMessage message: String?) {
         self.init()
+        v.messageLabel.text = type.rawValue
         v.descriptionLabel.text = message
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        v.animateAlertView(active: true, completion: nil)
+        self.v.animateAlertView(active: true, completion: nil)
     }
     
     required init?(coder aDecoder: NSCoder) {
