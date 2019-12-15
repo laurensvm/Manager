@@ -89,6 +89,7 @@ class PhotoSettingsViewController: CollectionViewController<PhotoSettingsView> {
         switch tab.type {
         case .Import:
             let alertViewController = AlertViewController(withType: .info, andMessage: "Importing Photo's..")
+            alertViewController.customTabBarController = self.tabBarController
             self.present(alertViewController, animated: false, completion: nil)
         default:
         break

@@ -23,6 +23,13 @@ protocol SwitchDelegate {
     func didTapSwitch(_ sender: UISwitch)
 }
 
+protocol PhotoDetailViewTransitionDelegate: class {
+    func transitionWillStartWith(animator: PhotoDetailViewTransition)
+    func transitionDidEndWith(animator: PhotoDetailViewTransition)
+    func referenceImageView(for animator: PhotoDetailViewTransition) -> UIImageView?
+    func referenceImageViewFrameInTransitioningView(for animator: PhotoDetailViewTransition) -> CGRect?
+}
+
 
 @objc protocol CreateDirectoryDelegate: UITextFieldDelegate {
     @objc func didTapCreateDirectory(_: UIButton)
@@ -31,9 +38,6 @@ protocol SwitchDelegate {
 
 protocol CollectionViewDelegate: UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, UICollectionViewDataSourcePrefetching {
     func collectionViewHeight() -> CGFloat
-}
-
-protocol PhotoViewDelegate: UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
 }
 
 protocol BreadCrumbViewController {

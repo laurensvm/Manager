@@ -66,6 +66,7 @@ extension AppDelegate {
         tabBarController.tabBar.tintColor = Theme.colors.baseOrange
         
         self.window = UIWindow(frame: UIScreen.main.bounds)
+        self.window?.backgroundColor = .white
         self.window?.rootViewController = tabBarController
         self.window?.makeKeyAndVisible()
         

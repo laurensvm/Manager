@@ -10,6 +10,8 @@ import UIKit
 
 class AlertViewController: ViewController<AlertView> {
     
+    var customTabBarController: UITabBarController?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
     }
@@ -28,7 +30,22 @@ class AlertViewController: ViewController<AlertView> {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        
+        handleTapBarController()
         self.v.animateAlertView(active: true, completion: nil)
+    }
+    
+    private func handleTapBarController() {
+        guard let tabBar = self.customTabBarController?.tabBar else { return }
+        
+        toggleTabBar(tabBar: tabBar, hide: tabBar.isHidden ? false : true)
+    }
+    
+    private func toggleTabBar(tabBar: UITabBar, hide: Bool) {
+        tabBar.isHidden = hide ? true : false
+        UIView.animate(withDuration: 0.1, animations: {
+            tabBar.alpha = hide ? 0 : 1
+        }, completion: nil)
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -38,6 +55,7 @@ class AlertViewController: ViewController<AlertView> {
 
 extension AlertViewController: AlertViewDelegate {
     func dismissViewController() {
+        handleTapBarController()
         self.dismiss(animated: false, completion: nil)
     }
 }

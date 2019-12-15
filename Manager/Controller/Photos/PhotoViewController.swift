@@ -10,9 +10,7 @@ import UIKit
 
 class PhotoViewController: CollectionViewController<PhotoView> {
     
-    private var networkManager: NetworkManager!
-    
-    private let transition = DetailViewTransition()
+    private let networkManager: NetworkManager
     
     var thumbnails: [ThumbnailImage] = [] {
         didSet {
@@ -30,8 +28,8 @@ class PhotoViewController: CollectionViewController<PhotoView> {
     }
     
     init(withNetworkManager networkManager: NetworkManager) {
-        super.init()
         self.networkManager = networkManager
+        super.init()
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -45,11 +43,22 @@ class PhotoViewController: CollectionViewController<PhotoView> {
             }
         })
     }
+    
+    override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return thumbnails.count
+    }
+    
+    override func collectionViewBehaviour() {
+        self.collectionViewSpacing = 8
+    }
 	
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: self.v.baseCellId, for: indexPath) as! PhotoCell
         
         let thumbnail = thumbnails[indexPath.item]
+        
+        cell.imageView.image = thumbnail.image
+        
         if thumbnail.image == nil && !thumbnail.isFetching {
             self.collectionView(collectionView, prefetchItemsAt: [indexPath])
         }
@@ -68,20 +77,20 @@ class PhotoViewController: CollectionViewController<PhotoView> {
     }
     
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-    	
-        if let cell = collectionView.cellForItem(at: indexPath) {
-            transition.originFrame = cell.frame
-        }
         
-        let thumbnail = thumbnails[indexPath.item]
+        let photoPageViewController = PhotoPageViewController(withNetworkManager: networkManager, andThumbnails: thumbnails, currentIndex: indexPath.item)
         
-        let detailPhotoViewController = DetailPhotoViewController(withNetworkManager: self.networkManager, thumbnail: thumbnail)
-        detailPhotoViewController.transitioningDelegate = self
+        self.navigationController?.pushViewController(photoPageViewController, animated: true)
+        
+//        let thumbnail = thumbnails[indexPath.item]
+//
+//        let detailPhotoViewController = DetailPhotoViewController(withNetworkManager: self.networkManager, thumbnail: thumbnail)
+//        detailPhotoViewController.transitioningDelegate = self
         
 //            Change to true for an animation
-//            self.present(detailPhotoViewController, animated: true, completion: nil)
+//        self.present(detailPhotoViewController, animated: true, completion: nil)
         
-        self.navigationController?.pushViewController(detailPhotoViewController, animated: true)
+//        self.navigationController?.pushViewController(detailPhotoViewController, animated: true)
         
     }
     
@@ -98,7 +107,7 @@ class PhotoViewController: CollectionViewController<PhotoView> {
             }
             
             thumbnail.isFetching = true
-            networkManager?.getThumbnailImage(id: thumbnail.id, completion: { data in
+            networkManager.getThumbnailImage(id: thumbnail.id, completion: { data in
                 thumbnail.image = UIImage(data: data)
                 DispatchQueue.main.async {
                     self.v.collectionView.reloadItems(at: [idx])
@@ -110,8 +119,8 @@ class PhotoViewController: CollectionViewController<PhotoView> {
     
 }
 
-extension PhotoViewController: UIViewControllerTransitioningDelegate {
-    func animationController(forPresented presented: UIViewController, presenting: UIViewController, source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
-        return transition
-    }
-}
+//extension PhotoViewController: UIViewControllerTransitioningDelegate {
+//    func animationController(forPresented presented: UIViewController, presenting: UIViewController, source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+//        return transition
+//    }
+//}
