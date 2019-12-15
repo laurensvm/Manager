@@ -36,6 +36,30 @@ class PhotoPageViewController: UIPageViewController {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        self.navigationController?.navigationBar.isTranslucent = false
+        self.navigationController?.setNavigationBarHidden(false, animated: false)
+        self.tabBarController?.tabBar.isHidden = false
+        
+        UIView.animate(withDuration: 0.2, animations: {
+            self.tabBarController?.tabBar.alpha = 1
+        })
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        UIView.animate(withDuration: 0.2, animations: {
+            self.tabBarController?.tabBar.alpha = 0
+        }, completion: { _ in
+            self.navigationController?.navigationBar.isTranslucent = false
+            self.tabBarController?.tabBar.isHidden = true
+            self.tabBarController?.tabBar.isTranslucent = true
+        })
+    }
 }
 
 extension PhotoPageViewController: UIPageViewControllerDelegate {
