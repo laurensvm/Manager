@@ -23,7 +23,7 @@ class PhotoDetailViewTransition: NSObject {
     var originFrame = CGRect.zero
     var transitionImageView: UIImageView?
     
-    init(duration: TimeInterval = 10.0,
+    init(duration: TimeInterval = 0.5,
          transitionMode: PhotoDetailViewTransitionMode = .present,
          originFrame: CGRect = .zero) {
         self.duration = duration
@@ -51,12 +51,13 @@ class PhotoDetailViewTransition: NSObject {
         toReferenceImageView.isHidden = true
         containerView.addSubview(toVC.view)
         
-        let referenceImage = fromReferenceImageView.image!
+        guard let referenceImage = fromReferenceImageView.image else { return }
         
         if self.transitionImageView == nil {
             let transitionImageView = UIImageView(image: referenceImage)
             transitionImageView.contentMode = .scaleAspectFill
             transitionImageView.clipsToBounds = true
+            transitionImageView.layer.cornerRadius = 5.0
             transitionImageView.frame = fromReferenceImageViewFrame
             self.transitionImageView = transitionImageView
             containerView.addSubview(transitionImageView)
@@ -73,6 +74,7 @@ class PhotoDetailViewTransition: NSObject {
                        options: [UIView.AnimationOptions.transitionCrossDissolve],
                        animations: {
                         self.transitionImageView?.frame = finalTransitionSize
+                        self.transitionImageView?.layer.cornerRadius = 0
                         toVC.view.alpha = 1.0
                         fromVC.tabBarController?.tabBar.alpha = 0
         },
@@ -109,11 +111,12 @@ class PhotoDetailViewTransition: NSObject {
         
         toReferenceImageView.isHidden = true
         
-        let referenceImage = fromReferenceImageView.image!
+        guard let referenceImage = fromReferenceImageView.image else { return }
         
         if self.transitionImageView == nil {
             let transitionImageView = UIImageView(image: referenceImage)
             transitionImageView.contentMode = .scaleAspectFill
+            transitionImageView.layer.cornerRadius = 0
             transitionImageView.clipsToBounds = true
             transitionImageView.frame = fromReferenceImageViewFrame
             self.transitionImageView = transitionImageView
@@ -130,6 +133,7 @@ class PhotoDetailViewTransition: NSObject {
                        options: [],
                        animations: {
                         fromVC.view.alpha = 0
+                        self.transitionImageView?.layer.cornerRadius = 5.0
                         self.transitionImageView?.frame = finalTransitionSize
                         toVC.tabBarController?.tabBar.alpha = 1
         }, completion: { completed in

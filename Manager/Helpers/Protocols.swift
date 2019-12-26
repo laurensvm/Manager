@@ -30,6 +30,10 @@ protocol PhotoDetailViewTransitionDelegate: class {
     func referenceImageViewFrameInTransitioningView(for animator: PhotoDetailViewTransition) -> CGRect?
 }
 
+protocol PhotoPageViewControllerDelegate: class {
+    func containerViewController(_ containerViewController: PhotoPageViewController, indexDidUpdate currentIndex: Int)
+}
+
 
 @objc protocol CreateDirectoryDelegate: UITextFieldDelegate {
     @objc func didTapCreateDirectory(_: UIButton)

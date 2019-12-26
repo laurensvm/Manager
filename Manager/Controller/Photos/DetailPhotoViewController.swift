@@ -25,14 +25,6 @@ class DetailPhotoViewController: ViewController<DetailPhotoView> {
     private var thumbnail: ThumbnailImage
     private var navigationsBarsAreHidden: Bool = false
     
-//    override func viewWillAppear(_ animated: Bool) {
-//        super.viewWillAppear(animated)
-//        self.navigationController?.navigationBar.isTranslucent = false
-//        self.tabBarController?.tabBar.isHidden = true
-//        self.tabBarController?.tabBar.isTranslucent = true
-//        
-//    }
-    
     private func generateMapPin(_ coords: CLLocationCoordinate2D) -> MapPin {
         return MapPin(coordinate: coords, title: "Image", subtitle: "Image")
     }
@@ -49,13 +41,6 @@ class DetailPhotoViewController: ViewController<DetailPhotoView> {
         image.imageData = thumbnail.image
         
     }
-    
-//    override func viewWillDisappear(_ animated: Bool) {
-//        super.viewWillAppear(animated)
-//        self.navigationController?.navigationBar.isTranslucent = false
-//        self.navigationController?.setNavigationBarHidden(false, animated: false)
-//        self.tabBarController?.tabBar.isHidden = false
-//    }
     
     init(withNetworkManager networkManager: NetworkManager, thumbnail: ThumbnailImage) {
         self.networkManager = networkManager
@@ -94,6 +79,15 @@ class DetailPhotoViewController: ViewController<DetailPhotoView> {
         })
     }
     
+    override func viewWillDisappear(_ animated: Bool) {
+        
+        if self.v.detailsViewIsActive {
+            self.v.didSwipeDown()
+        }
+        
+        super.viewWillAppear(animated)
+    }
+    
 }
 
 extension DetailPhotoViewController: DetailPhotoDelegate {
@@ -118,3 +112,4 @@ extension DetailPhotoViewController: DetailPhotoDelegate {
         v.didSwipeDown()
     }
 }
+

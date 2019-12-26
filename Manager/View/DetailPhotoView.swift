@@ -18,6 +18,7 @@ class DetailPhotoView: UIView {
     }()
     
     var delegate: DetailPhotoDelegate?
+    
     var image: Image? {
         didSet {
             DispatchQueue.main.async {
@@ -70,6 +71,17 @@ class DetailPhotoView: UIView {
         return iv
     }()
     
+    let scrollView: UIScrollView = {
+        let sv = UIScrollView()
+        sv.translatesAutoresizingMaskIntoConstraints = false
+        sv.minimumZoomScale = 1.0
+        sv.maximumZoomScale = 4.0
+        sv.alwaysBounceVertical = false
+        sv.alwaysBounceHorizontal = false
+        sv.showsVerticalScrollIndicator = true
+        return sv
+    }()
+    
     let detailView: AssetDetailView = {
         let v = AssetDetailView()
         return v
@@ -79,6 +91,8 @@ class DetailPhotoView: UIView {
         super.init(frame: frame)
         self.backgroundColor = .white
         self.translatesAutoresizingMaskIntoConstraints = true
+        
+        self.scrollView.delegate = self
         
         setupViews()
         setConstraints()
@@ -100,7 +114,8 @@ class DetailPhotoView: UIView {
     }
     
     private func setupViews() {
-        addSubview(imageView)
+        addSubview(scrollView)
+        scrollView.addSubview(imageView)
         addSubview(detailView)
     }
     
@@ -108,24 +123,34 @@ class DetailPhotoView: UIView {
         
         // The value of these constraints depend on the state of the view
         self.imageLayoutConstraints = [
-            self.imageView.topAnchor.constraint(equalTo: self.topAnchor, constant: 0),
-            self.imageView.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: 0),
-            self.detailView.topAnchor.constraint(equalTo: imageView.bottomAnchor, constant: 0),
+            self.scrollView.topAnchor.constraint(equalTo: self.topAnchor, constant: 0),
+            self.scrollView.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: 0),
+            
+            self.imageView.topAnchor.constraint(equalTo: scrollView.topAnchor, constant: 0),
+            self.imageView.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor, constant: 0),
+            self.detailView.topAnchor.constraint(equalTo: scrollView.bottomAnchor, constant: 0),
             self.detailView.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: 400)
         ]
         NSLayoutConstraint.activate(self.imageLayoutConstraints)
         
         self.detailsLayoutConstraints = [
-            self.imageView.topAnchor.constraint(equalTo: self.topAnchor, constant: -1000),
-            self.imageView.bottomAnchor.constraint(equalTo: self.topAnchor, constant: 0),
+            self.scrollView.topAnchor.constraint(equalTo: self.topAnchor, constant: -1000),
+            self.scrollView.bottomAnchor.constraint(equalTo: self.topAnchor, constant: 0),
+//            self.imageView.topAnchor.constraint(equalTo: self.topAnchor, constant: -1000),
+//            self.imageView.bottomAnchor.constraint(equalTo: self.topAnchor, constant: 0),
             self.detailView.topAnchor.constraint(equalTo: self.topAnchor, constant: 0),
             self.detailView.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: 0)
         ]
         
         
 		// These constraints should always be active
-        imageView.leftAnchor.constraint(equalTo: self.leftAnchor, constant: 0).isActive = true
-        imageView.rightAnchor.constraint(equalTo: self.rightAnchor, constant: 0).isActive = true
+        scrollView.leftAnchor.constraint(equalTo: self.leftAnchor, constant: 0).isActive = true
+        scrollView.rightAnchor.constraint(equalTo: self.rightAnchor, constant: 0).isActive = true
+        
+        imageView.leftAnchor.constraint(equalTo: scrollView.leftAnchor, constant: 0).isActive = true
+        imageView.rightAnchor.constraint(equalTo: scrollView.rightAnchor, constant: 0).isActive = true
+        imageView.centerXAnchor.constraint(equalTo: scrollView.centerXAnchor, constant: 0).isActive = true
+        imageView.centerYAnchor.constraint(equalTo: scrollView.centerYAnchor, constant: 0).isActive = true
         
         detailView.leftAnchor.constraint(equalTo: self.leftAnchor, constant: 0).isActive = true
         detailView.rightAnchor.constraint(equalTo: self.rightAnchor, constant: 0).isActive = true
@@ -155,5 +180,11 @@ class DetailPhotoView: UIView {
         }, completion: nil)
         
         self.detailsViewIsActive = false
+    }
+}
+
+extension DetailPhotoView: UIScrollViewDelegate {
+    func viewForZooming(in scrollView: UIScrollView) -> UIView? {
+        return self.imageView
     }
 }
