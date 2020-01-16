@@ -89,6 +89,10 @@
 		A9DE7DEC2324967900B5EE03 /* View.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9DE7DEB2324967900B5EE03 /* View.swift */; };
 		A9DE7DEE23249C5500B5EE03 /* FileSystemEndPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9DE7DED23249C5500B5EE03 /* FileSystemEndPoint.swift */; };
 		A9DE7DF32324E6A600B5EE03 /* PhotoDetailViewTransition.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9DE7DF22324E6A600B5EE03 /* PhotoDetailViewTransition.swift */; };
+		A9E3C69923B4BE310057EA4D /* DemoModePopUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9E3C69823B4BE310057EA4D /* DemoModePopUpViewController.swift */; };
+		A9E3C69B23B4BE710057EA4D /* DemoModePopUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9E3C69A23B4BE710057EA4D /* DemoModePopUpView.swift */; };
+		A9E3C69D23B4C7EB0057EA4D /* DemoTransition.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9E3C69C23B4C7EB0057EA4D /* DemoTransition.swift */; };
+		A9E3C69F23B4C8A10057EA4D /* DemoTransitionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9E3C69E23B4C8A10057EA4D /* DemoTransitionController.swift */; };
 		A9EB26532373C77B00FF66E5 /* Session.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9EB26522373C77B00FF66E5 /* Session.swift */; };
 		A9EB26552373C7DB00FF66E5 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9EB26542373C7DA00FF66E5 /* User.swift */; };
 		A9EB26572373E4DB00FF66E5 /* SettingsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9EB26562373E4DB00FF66E5 /* SettingsCell.swift */; };
@@ -212,6 +216,10 @@
 		A9DE7DEB2324967900B5EE03 /* View.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = View.swift; sourceTree = "<group>"; };
 		A9DE7DED23249C5500B5EE03 /* FileSystemEndPoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileSystemEndPoint.swift; sourceTree = "<group>"; };
 		A9DE7DF22324E6A600B5EE03 /* PhotoDetailViewTransition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoDetailViewTransition.swift; sourceTree = "<group>"; };
+		A9E3C69823B4BE310057EA4D /* DemoModePopUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DemoModePopUpViewController.swift; sourceTree = "<group>"; };
+		A9E3C69A23B4BE710057EA4D /* DemoModePopUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DemoModePopUpView.swift; sourceTree = "<group>"; };
+		A9E3C69C23B4C7EB0057EA4D /* DemoTransition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DemoTransition.swift; sourceTree = "<group>"; };
+		A9E3C69E23B4C8A10057EA4D /* DemoTransitionController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DemoTransitionController.swift; sourceTree = "<group>"; };
 		A9EB26522373C77B00FF66E5 /* Session.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Session.swift; sourceTree = "<group>"; };
 		A9EB26542373C7DA00FF66E5 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		A9EB26562373E4DB00FF66E5 /* SettingsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsCell.swift; sourceTree = "<group>"; };
@@ -369,6 +377,7 @@
 				A94EB87A2372BBFE0083C0C8 /* CreateDirectoryView.swift */,
 				A92473F1237423E80007AAF2 /* PhotoSettingsView.swift */,
 				A92473F72375423F0007AAF2 /* PopUpView.swift */,
+				A9E3C69A23B4BE710057EA4D /* DemoModePopUpView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -388,6 +397,7 @@
 				A9BD60AE23549FB2006263D5 /* SettingsViewController.swift */,
 				A90707DB2367CFD000CE5AED /* AlertViewController.swift */,
 				A94EB8782372BBDC0083C0C8 /* CreateDirectoryViewController.swift */,
+				A9E3C69823B4BE310057EA4D /* DemoModePopUpViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -538,6 +548,8 @@
 				A9DE7DF22324E6A600B5EE03 /* PhotoDetailViewTransition.swift */,
 				A9164F96237A671B00AE96A7 /* PhotoDetailViewTransitionController.swift */,
 				A9164F98237A677400AE96A7 /* PhotoDetailViewDismissalInterationController.swift */,
+				A9E3C69C23B4C7EB0057EA4D /* DemoTransition.swift */,
+				A9E3C69E23B4C8A10057EA4D /* DemoTransitionController.swift */,
 			);
 			path = Animations;
 			sourceTree = "<group>";
@@ -795,6 +807,7 @@
 				A9DE7DCB2323BCC700B5EE03 /* HTTPMethod.swift in Sources */,
 				A9DE7DB323235F5400B5EE03 /* CollectionViewHeader.swift in Sources */,
 				A90707DE2367D00200CE5AED /* AlertView.swift in Sources */,
+				A9E3C69923B4BE310057EA4D /* DemoModePopUpViewController.swift in Sources */,
 				A944E483237031A90003E201 /* DirectoryEndPoint.swift in Sources */,
 				A9DE7DC1232390A300B5EE03 /* DocumentsView.swift in Sources */,
 				A9EB265B2373F83400FF66E5 /* SettingsTab.swift in Sources */,
@@ -815,6 +828,7 @@
 				A92473F2237423E80007AAF2 /* PhotoSettingsView.swift in Sources */,
 				A9DE7DD22323BE2700B5EE03 /* NetworkError.swift in Sources */,
 				A9DE7DD42323BE7F00B5EE03 /* URLParameterEncoder.swift in Sources */,
+				A9E3C69B23B4BE710057EA4D /* DemoModePopUpView.swift in Sources */,
 				A9DE7DCD2323BCF800B5EE03 /* HTTPTask.swift in Sources */,
 				A9DE7DA123231A4800B5EE03 /* CBTabBarButton.swift in Sources */,
 				A9BD60AF23549FB2006263D5 /* SettingsViewController.swift in Sources */,
@@ -838,7 +852,9 @@
 				A9BD60AD235405F4006263D5 /* CredentialManager.swift in Sources */,
 				A9DE7DE22323D4A300B5EE03 /* BasicAuthEncoding.swift in Sources */,
 				A977556022E536A600407385 /* UIColor.swift in Sources */,
+				A9E3C69F23B4C8A10057EA4D /* DemoTransitionController.swift in Sources */,
 				A9DE7DBB2323795300B5EE03 /* DetailPhotoView.swift in Sources */,
+				A9E3C69D23B4C7EB0057EA4D /* DemoTransition.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

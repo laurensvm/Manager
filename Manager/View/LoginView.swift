@@ -67,7 +67,7 @@ class LoginView: View {
         return tf
     }()
     
-    private lazy var loginButton: UIButton = {
+    lazy var loginButton: UIButton = {
         let bt = UIButton()
         bt.translatesAutoresizingMaskIntoConstraints = false
         bt.setTitle("Log In", for: [.normal])

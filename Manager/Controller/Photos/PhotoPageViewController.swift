@@ -53,7 +53,7 @@ extension PhotoPageViewController: UIPageViewControllerDataSource {
             let viewControllerIndex = pages.firstIndex(of: viewController) else { return nil }
         
         let previousIndex = viewControllerIndex - 1
-        guard previousIndex >= 0 else { return pages.last }
+        guard previousIndex >= 0 else { return nil }
         guard pages.count > previousIndex else { return nil }
         
         self.currentIndex = previousIndex
@@ -82,6 +82,7 @@ extension PhotoPageViewController: UIPageViewControllerDataSource {
             let index = pages.firstIndex(of: nextVC) else { return }
         
         self.currentIndex = index
+        self.pageDelegate?.containerViewController(self, indexDidUpdate: self.currentIndex)
     }
     
 }

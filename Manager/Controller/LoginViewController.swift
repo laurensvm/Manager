@@ -13,6 +13,7 @@ import UIKit
 class LoginViewController: ViewController<LoginView> {
     
     private let networkManager: NetworkManager
+    private let transitionDelegate: DemoTransitionController = DemoTransitionController()
     private let loginCompletion: (() -> ())!
     
     override var preferredStatusBarStyle: UIStatusBarStyle {
@@ -43,12 +44,26 @@ extension LoginViewController: LoginViewDelegate {
 //        let passsword = customView.password
         let password = "Ld4qIZSy6CFMuAESFSsadkfhj23475SjaNfVC"
         
+        
         networkManager.credentialManager.login(username: username, password: password, completion: { successful, error in
             DispatchQueue.main.async {
                 self.v.indicatorView.stopAnimating()
                 if successful {
                     self.loginCompletion()
+                    
+//                    if false {
+//                        let demoModeVC = DemoModePopUpViewController()
+//                        demoModeVC.transitioningDelegate = self.transitionDelegate
+//                        self.present(demoModeVC, animated: true, completion: nil)
+//
+//                        // Dismiss
+//                        DispatchQueue.main.asyncAfter(deadline: .now() + self.transitionDelegate.seconds, execute: {
+//                            demoModeVC.dismiss(animated: true, completion: nil)
+//                        })
+//                    }
+                    
                     self.dismiss(animated: true, completion: nil)
+                    
                 } else {
                     let alertViewController = AlertViewController(withType: .error, andMessage: error)
                     self.present(alertViewController, animated: false, completion: nil)

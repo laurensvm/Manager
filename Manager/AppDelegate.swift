@@ -83,13 +83,13 @@ extension AppDelegate {
     }
     
     func presentLoginScreen(rootViewController: UITabBarController, animated: Bool = false) {
-        if !networkManager.credentialManager.hasValidCredentials() {
+//        if !networkManager.credentialManager.hasValidCredentials() {
             let loginViewController = LoginViewController(networkManager: networkManager, onLoginCompletion: setupPhotoManager)
             loginViewController.modalPresentationStyle = .fullScreen
             rootViewController.present(loginViewController, animated: animated, completion: {
                 rootViewController.selectedIndex = 0
             })
-        }
+//        }
     }
 
 }

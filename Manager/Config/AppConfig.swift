@@ -19,5 +19,6 @@ struct AppConfig {
     			realm: nil,
     			authenticationMethod: NSURLAuthenticationMethodHTTPBasic
     )
+    static var isDemoUser = false
     
 }
