@@ -34,9 +34,10 @@ extension AppDelegate {
         BarButtonItemAppearance.setTitleTextAttributes(attributes, for: .highlighted)
         
         // Temporary fill up for the tabbar controller
-        let rootViewController3 = HomeViewController(withNetworkManager: networkManager)
-        rootViewController3.tabBarItem = UITabBarItem(title: "Recent", image: #imageLiteral(resourceName: "clock"), tag: 2)
-        let tabBarController = BubbleTabBarController()
+        let recentViewController = RecentViewController(withNetworkManager: networkManager)
+        recentViewController.tabBarItem = UITabBarItem(title: "Recent", image: #imageLiteral(resourceName: "clock"), tag: 2)
+        let recentViewControllerController = CustomNavigationController(navigationBarClass: CustomNavigationBar.self, toolbarClass: nil)
+        recentViewControllerController.viewControllers = [recentViewController]
         
         // Setup home view with navigation controller
         let homeViewController = HomeViewController(withNetworkManager: networkManager)
@@ -57,10 +58,11 @@ extension AppDelegate {
                                                                           toolbarClass: nil)
         settingsViewNavigationController.viewControllers = [settingsViewController]
         
+        let tabBarController = BubbleTabBarController()
         tabBarController.viewControllers = [
             homeViewNavigationController,
             documentsViewNavigationController,
-            rootViewController3,
+            recentViewControllerController,
             settingsViewNavigationController
         ]
         tabBarController.tabBar.tintColor = Theme.colors.baseOrange

@@ -1,20 +1,20 @@
 //
-//  HomeViewController.swift
+//  RecentViewController.swift
 //  Manager
 //
-//  Created by Laurens Van Mieghem on 28/08/2019.
-//  Copyright © 2019 Laurens Van Mieghem. All rights reserved.
+//  Created by Laurens Van Mieghem on 16/01/2020.
+//  Copyright © 2020 Laurens Van Mieghem. All rights reserved.
 //
 
 import UIKit
 
-class HomeViewController: CollectionViewController<HomeView> {
+class RecentViewController: CollectionViewController<RecentView> {
     
     var networkManager: NetworkManager
     
     override func viewDidLoad() {
         super.viewDidLoad()
-		self.controllerTitle = "Home"
+        self.controllerTitle = "Recent"
         v.delegate = self
         v.didLoadDelegate()
         
@@ -24,14 +24,6 @@ class HomeViewController: CollectionViewController<HomeView> {
     init(withNetworkManager networkManager: NetworkManager) {
         self.networkManager = networkManager
         super.init()
-    }
-    
-    override func collectionViewBehaviour() {
-        self.items = [[
-            HomeViewTab(name: "Photos", imageName: "photos", capacity: 40, size: 19),
-            HomeViewTab(name: "Videos", imageName: "videos", capacity: 20, size: 5),
-            HomeViewTab(name: "Music", imageName: "music", capacity: 30, size: 28)
-        ]]
     }
     
     required init?(coder aDecoder: NSCoder) {

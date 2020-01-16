@@ -53,6 +53,8 @@
 		A98A40482378E27D000C6AB9 /* CollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A98A40472378E27D000C6AB9 /* CollectionViewController.swift */; };
 		A98A404A2378E2C9000C6AB9 /* CollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A98A40492378E2C9000C6AB9 /* CollectionView.swift */; };
 		A98A404E2378E592000C6AB9 /* CollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A98A404D2378E592000C6AB9 /* CollectionViewCell.swift */; };
+		A9B6FB4C23CFFEEA00EC8D27 /* RecentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9B6FB4B23CFFEEA00EC8D27 /* RecentViewController.swift */; };
+		A9B6FB4E23CFFF8D00EC8D27 /* RecentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9B6FB4D23CFFF8D00EC8D27 /* RecentView.swift */; };
 		A9BA332A22EEA7E6004FCE5E /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9BA332922EEA7E6004FCE5E /* ViewController.swift */; };
 		A9BA332C22EEAA25004FCE5E /* Protocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9BA332B22EEAA25004FCE5E /* Protocols.swift */; };
 		A9BD60AD235405F4006263D5 /* CredentialManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9BD60AC235405F4006263D5 /* CredentialManager.swift */; };
@@ -180,6 +182,8 @@
 		A98A40472378E27D000C6AB9 /* CollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewController.swift; sourceTree = "<group>"; };
 		A98A40492378E2C9000C6AB9 /* CollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionView.swift; sourceTree = "<group>"; };
 		A98A404D2378E592000C6AB9 /* CollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewCell.swift; sourceTree = "<group>"; };
+		A9B6FB4B23CFFEEA00EC8D27 /* RecentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecentViewController.swift; sourceTree = "<group>"; };
+		A9B6FB4D23CFFF8D00EC8D27 /* RecentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecentView.swift; sourceTree = "<group>"; };
 		A9BA332922EEA7E6004FCE5E /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		A9BA332B22EEAA25004FCE5E /* Protocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Protocols.swift; sourceTree = "<group>"; };
 		A9BD60AC235405F4006263D5 /* CredentialManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CredentialManager.swift; sourceTree = "<group>"; };
@@ -378,6 +382,7 @@
 				A92473F1237423E80007AAF2 /* PhotoSettingsView.swift */,
 				A92473F72375423F0007AAF2 /* PopUpView.swift */,
 				A9E3C69A23B4BE710057EA4D /* DemoModePopUpView.swift */,
+				A9B6FB4D23CFFF8D00EC8D27 /* RecentView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -398,6 +403,7 @@
 				A90707DB2367CFD000CE5AED /* AlertViewController.swift */,
 				A94EB8782372BBDC0083C0C8 /* CreateDirectoryViewController.swift */,
 				A9E3C69823B4BE310057EA4D /* DemoModePopUpViewController.swift */,
+				A9B6FB4B23CFFEEA00EC8D27 /* RecentViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -810,6 +816,7 @@
 				A9E3C69923B4BE310057EA4D /* DemoModePopUpViewController.swift in Sources */,
 				A944E483237031A90003E201 /* DirectoryEndPoint.swift in Sources */,
 				A9DE7DC1232390A300B5EE03 /* DocumentsView.swift in Sources */,
+				A9B6FB4E23CFFF8D00EC8D27 /* RecentView.swift in Sources */,
 				A9EB265B2373F83400FF66E5 /* SettingsTab.swift in Sources */,
 				A9F74125234B359A00C8513D /* NetworkAlertController.swift in Sources */,
 				A944E48123702D890003E201 /* Data.swift in Sources */,
@@ -841,6 +848,7 @@
 				A9DE7DCF2323BDAB00B5EE03 /* ParameterEncoding.swift in Sources */,
 				A9BA332C22EEAA25004FCE5E /* Protocols.swift in Sources */,
 				A94EB87F2373BCD50083C0C8 /* Base.swift in Sources */,
+				A9B6FB4C23CFFEEA00EC8D27 /* RecentViewController.swift in Sources */,
 				A977555E22E5359500407385 /* Theme.swift in Sources */,
 				A9DE7DA223231A4800B5EE03 /* BubbleTabBar.swift in Sources */,
 				A9DE7DB92323792E00B5EE03 /* DetailPhotoViewController.swift in Sources */,
