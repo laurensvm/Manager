@@ -17,7 +17,10 @@ class LoginViewController: ViewController<LoginView> {
     private let loginCompletion: (() -> ())!
     
     override var preferredStatusBarStyle: UIStatusBarStyle {
-        return .lightContent
+        if #available(iOS 13, *) {
+            return .darkContent
+        }
+        return .default
     }
     
     override func viewDidLoad() {
@@ -61,6 +64,7 @@ extension LoginViewController: LoginViewDelegate {
 //                            demoModeVC.dismiss(animated: true, completion: nil)
 //                        })
 //                    }
+                
                     
                     self.dismiss(animated: true, completion: nil)
                     

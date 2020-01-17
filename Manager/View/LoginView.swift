@@ -34,10 +34,17 @@ class LoginView: View {
     private lazy var usernameTextField: UITextField = {
         let tf = UITextField()
         tf.translatesAutoresizingMaskIntoConstraints = false
-        tf.placeholder = "Username"
+        tf.backgroundColor = .white
         tf.font = Theme.fonts.avenirLight(size: 14)
-        tf.tintColor = UIColor.lightGray
+        tf.tintColor = .lightGray
         tf.setIcon(#imageLiteral(resourceName: "user"))
+        
+        if #available(iOS 13, *) {
+            tf.overrideUserInterfaceStyle = UIUserInterfaceStyle.light
+        }
+        
+        let placeholderString = NSAttributedString.init(string: "Username", attributes: [NSAttributedString.Key.foregroundColor : UIColor.lightGray])
+        tf.attributedPlaceholder = placeholderString
         
         tf.autocorrectionType = UITextAutocorrectionType.no
         tf.keyboardType = UIKeyboardType.emailAddress
@@ -51,11 +58,17 @@ class LoginView: View {
     private lazy var passwordTextField: UITextField = {
         let tf = UITextField()
         tf.translatesAutoresizingMaskIntoConstraints = false
-        tf.placeholder = "Password"
+        tf.backgroundColor = .white
         tf.font = Theme.fonts.avenirLight(size: 14)
-        tf.tintColor = UIColor.lightGray
+        tf.tintColor = .lightGray
         tf.setIcon(#imageLiteral(resourceName: "password"))
         
+        let placeholderString = NSAttributedString.init(string: "Password", attributes: [NSAttributedString.Key.foregroundColor : UIColor.lightGray])
+        tf.attributedPlaceholder = placeholderString
+        
+        if #available(iOS 13, *) {
+            tf.overrideUserInterfaceStyle = UIUserInterfaceStyle.light
+        }
         tf.isSecureTextEntry = true
         tf.autocorrectionType = UITextAutocorrectionType.no
         tf.autocapitalizationType = UITextAutocapitalizationType.none
