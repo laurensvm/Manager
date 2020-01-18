@@ -20,5 +20,7 @@ struct AppConfig {
     			authenticationMethod: NSURLAuthenticationMethodHTTPBasic
     )
     static var isDemoUser = false
+    static let username = TestCredentials.username
+    static let password = TestCredentials.password
     
 }
