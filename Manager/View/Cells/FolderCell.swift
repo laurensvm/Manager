@@ -10,7 +10,7 @@ import UIKit
 
 class FolderCell: CollectionViewCell {
     
-    private let folderImageView: UIImageView = {
+    let folderImageView: UIImageView = {
         let iv = UIImageView()
         iv.clipsToBounds = true
         iv.contentMode = UIView.ContentMode.scaleAspectFit

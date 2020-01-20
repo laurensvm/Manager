@@ -16,7 +16,8 @@ struct Session {
     
     var user: User? {
         didSet {
-//            print(self.user)
+//            guard let u = self.user else { return }
+//            AppConfig.isDemoUser = u.isDemoUser
         }
     }
 }

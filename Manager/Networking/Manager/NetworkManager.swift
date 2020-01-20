@@ -152,6 +152,43 @@ class NetworkManager: NSObject {
         })
     }
     
+    func getChildren(inDirectory directoryId: Int, completion: @escaping (_ children: [Base]?, _ error: String?) -> ()) {
+        self.directoryRouter.request(.getChildren(id: directoryId, amount: 20), completion: { data, response, error in
+            if error != nil {
+                completion(nil, "\(NetworkError.noConnection)")
+            }
+            
+            if let response = response as? HTTPURLResponse {
+                let result = self.handleNetworkResponse(response)
+                switch result {
+                case .success:
+                    
+                    guard let responseData = data else {
+                        return completion(nil, NetworkResponse.noData.rawValue)
+                    }
+                    
+                    let json = try? JSON(data: responseData)
+                    
+                    if let json = json {
+                        var items: [Base] = []
+                        for (_, entry) in json["children"] {
+                            if entry["type"].string != nil {
+                                items.append(File(entry))
+                            } else {
+                                items.append(Directory(entry))
+                            }
+                        }
+                        
+                        completion(items, nil)
+                    }
+                    
+                case .failure(let networkFailureError):
+                    completion(nil, networkFailureError)
+                }
+            }
+        })
+    }
+    
     func createDirectory(withName name: String, andParentId parentId: Int, completion: @escaping (_ success: Bool, _ error: String?) -> ()) {
         self.directoryRouter.request(.createDirectory(name: name, parentId: parentId), completion: { data, response, error in
             if error != nil {

@@ -10,9 +10,23 @@ import UIKit
 
 class DocumentsViewController: CollectionViewController<DocumentsView> {
     
-    lazy var directories: [Directory] = []
+    var _children: [Base] = [] {
+        didSet {
+            DispatchQueue.main.async {
+                self.v.containsSubDirectories = !self._children.isEmpty
+                self.v.collectionView.reloadData()
+            }
+        }
+    }
     
-    private var directory: Directory?
+    private var directory: Directory? {
+        didSet {
+            guard let directory = directory else { return }
+            self.getChildrenFromDirectory(withId: directory.id) { (children) in
+                self._children = children
+            }
+        }
+    }
     private var networkManager: NetworkManager?
 
     private lazy var addBarButtonItem: UIBarButtonItem = {
@@ -30,36 +44,35 @@ class DocumentsViewController: CollectionViewController<DocumentsView> {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+//        self.getDirectories()
+        
+        if directory == nil {
+            getDirectoryFromId(id: 1)
+        }
         
         populateBreadCrumbTrail()
-        getDirectories()
         
         // Add the add bar button
         self.navigationItem.setRightBarButton(self.addBarButtonItem, animated: true)
     }
     
-    private func getDirectories() {
-        networkManager?.getDirectories(inDirectory: "", completion: { directories, error in
-            if let directories = directories {
-                self.directories = directories
-            }
-            DispatchQueue.main.async {
-                self.v.containsSubDirectories = !self.directories.isEmpty
-                self.v.collectionView.reloadData()
-            }
-        })
-    }
+//    private func getDirectories() {
+//        networkManager?.getDirectories(inDirectory: "", completion: { directories, error in
+//            if let directories = directories {
+//                self._children = directories
+//            }
+//            DispatchQueue.main.async {
+//                self.v.containsSubDirectories = !self._children.isEmpty
+//                self.v.collectionView.reloadData()
+//            }
+//        })
+//    }
     
-    init(withControllerTitle controllerTitle: String = "Documents", andDirectories directories: [Directory]) {
-        super.init()
-        self.controllerTitle = controllerTitle
-        self.directories = directories
-    }
-    
-    init(withNetworkManager networkManager: NetworkManager?, andControllerTitle controllerTitle: String = "Documents", andId: Int) {
+    init(withNetworkManager networkManager: NetworkManager?, andControllerTitle controllerTitle: String = "Documents", andDirectory directory: Directory? = nil) {
         super.init()
         self.networkManager = networkManager
         self.controllerTitle = controllerTitle
+        self.directory = directory
     }
     
     private func getDirectoryFromId(id: Int) {
@@ -67,6 +80,13 @@ class DocumentsViewController: CollectionViewController<DocumentsView> {
             if let directory = directory {
                 self.directory = directory
             }
+        })
+    }
+    
+    private func getChildrenFromDirectory(withId id: Int, completion: @escaping (_ children: [Base]) -> ()) {
+        self.networkManager?.getChildren(inDirectory: id, completion: { children, error in
+            guard let children = children else { return }
+            completion(children)
         })
     }
     
@@ -84,12 +104,33 @@ class DocumentsViewController: CollectionViewController<DocumentsView> {
     }
     
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return directories.count
+        return _children.count
     }
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: self.v.baseCellId, for: indexPath) as! FolderCell
-        cell.folderName.text = directories[indexPath.item].name
+        let child = _children[indexPath.item]
+        
+        // Switch statement was more obscure
+        if let child = child as? File {
+            cell.folderName.text = child.name
+            switch child.type {
+            case .image:
+                cell.folderImageView.image = #imageLiteral(resourceName: "image")
+            case .pdf:
+                cell.folderImageView.image = #imageLiteral(resourceName: "pdf")
+            case .video:
+                cell.folderImageView.image = #imageLiteral(resourceName: "video")
+            case .txt:
+                cell.folderImageView.image = #imageLiteral(resourceName: "txt")
+            default:
+                cell.folderImageView.image = #imageLiteral(resourceName: "file")
+            }
+            
+        } else if let child = child as? Directory {
+            cell.folderName.text = child.name
+        }
+        
         return cell
     }
     
@@ -100,9 +141,12 @@ class DocumentsViewController: CollectionViewController<DocumentsView> {
     }
     
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let directory = directories[indexPath.item]
-        let documentsViewController = DocumentsViewController(withNetworkManager: self.networkManager, andControllerTitle: directory.name, andId: 1)
-        self.navigationController?.pushViewController(documentsViewController, animated: true)
+        let child = _children[indexPath.item]
+        
+        if let child = child as? Directory {
+            let documentsViewController = DocumentsViewController(withNetworkManager: self.networkManager, andControllerTitle: child.name, andDirectory: child)
+            self.navigationController?.pushViewController(documentsViewController, animated: true)
+        }
     }
     
     
@@ -110,7 +154,8 @@ class DocumentsViewController: CollectionViewController<DocumentsView> {
 
 extension DocumentsViewController {
     @objc func addDirectory(_ button: UIButton) {
-        let createDirectoryViewController = CreateDirectoryViewController(directory: 1)
+        guard let directory = self.directory else { return }
+        let createDirectoryViewController = CreateDirectoryViewController(directory: directory.id)
         createDirectoryViewController.networkManager = self.networkManager
         createDirectoryViewController.presentationController?.delegate = self
         
@@ -120,6 +165,9 @@ extension DocumentsViewController {
 
 extension DocumentsViewController: UIAdaptivePresentationControllerDelegate {
     func presentationControllerDidDismiss(_ presentationController: UIPresentationController) {
-        getDirectories()
+        guard let directory = self.directory else { return }
+        getChildrenFromDirectory(withId: directory.id) { (children) in
+            self._children = children
+        }
     }
 }

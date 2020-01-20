@@ -55,19 +55,23 @@ extension LoginViewController: LoginViewDelegate {
                 if successful {
                     self.loginCompletion()
                     
-//                    if false {
-//                        let demoModeVC = DemoModePopUpViewController()
-//                        demoModeVC.transitioningDelegate = self.transitionDelegate
-//                        self.present(demoModeVC, animated: true, completion: nil)
-//
-//                        // Dismiss
-//                        DispatchQueue.main.asyncAfter(deadline: .now() + self.transitionDelegate.seconds, execute: {
-//                            demoModeVC.dismiss(animated: true, completion: nil)
-//                        })
-//                    }
+                    if AppConfig.isDemoUser {
+                        let demoModeVC = DemoModePopUpViewController()
+                        demoModeVC.transitioningDelegate = self.transitionDelegate
+                        self.present(demoModeVC, animated: true, completion: nil)
+
+                        // Dismiss
+                        DispatchQueue.main.asyncAfter(deadline: .now() + self.transitionDelegate.seconds, execute: {
+                            demoModeVC.dismiss(animated: true, completion: {
+                            	self.dismiss(animated: true, completion: nil)
+                            })
+                        })
+                    } else {
+                         self.dismiss(animated: true, completion: nil)
+                    }
                 
                     
-                    self.dismiss(animated: true, completion: nil)
+                   
                     
                 } else {
                     let alertViewController = AlertViewController(withType: .error, andMessage: error)

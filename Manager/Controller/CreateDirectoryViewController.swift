@@ -11,12 +11,12 @@ import UIKit
 class CreateDirectoryViewController: ViewController<CreateDirectoryView> {
     
     var networkManager: NetworkManager?
-	private var directory: Int!
+	private var directory: Int
     
     init(directory: Int) {
+		self.directory = directory		
         super.init()
         self.modalPresentationStyle = .overCurrentContext
-        self.directory = directory
     }
     
     override func viewDidLoad() {

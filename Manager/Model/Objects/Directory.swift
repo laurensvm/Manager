@@ -10,8 +10,8 @@ import Foundation
 import SwiftyJSON
 
 class Directory: Base, CollectionViewItem {
-    var children: [String]?
-    var files: [String]?
+    var children: [Int]?
+    var files: [Int]?
     var name: String!
     var parentId: Int?
     var path: String!
@@ -25,8 +25,8 @@ class Directory: Base, CollectionViewItem {
     
     override func append(_ json: JSON) {
         super.append(json)
-        self.children = json["children"].arrayValue.map({ $0.stringValue })
-        self.files = json["files"].arrayValue.map({ $0.stringValue })
+        self.children = json["children"].arrayValue.map({ $0.intValue })
+        self.files = json["files"].arrayValue.map({ $0.intValue })
         self.name = json["name"].stringValue
         self.parentId = json["parent_id"].int
         self.path = json["path"].stringValue
