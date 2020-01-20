@@ -92,7 +92,7 @@ class CreateDirectoryView: View {
         // Set titlelabel text
         if let dir = self.directory,
             let name = dir.name {
-            titleLabel.text = "Creating new directory inside of directory '\(name)'"
+            titleLabel.text = "Create new directory inside of directory '\(name)'"
         }
 //        titleLabel.text = "Create Directory inside\n'root'"
     }

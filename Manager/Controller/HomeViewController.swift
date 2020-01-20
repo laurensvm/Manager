@@ -51,6 +51,12 @@ class HomeViewController: CollectionViewController<HomeView> {
                 }
             })
             navigationController?.pushViewController(vc, animated: true)
+        } else if indexPath.item == 1 {
+            let vc = VideoViewController(withNetworkManager: networkManager)
+            navigationController?.pushViewController(vc, animated: true)
+        } else {
+            let vc = MusicViewController(withNetworkManager: networkManager)
+            navigationController?.pushViewController(vc, animated: true)
         }
     }
 }

@@ -59,6 +59,10 @@
 		A997E69923D54AD300E71240 /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A997E69823D54AD300E71240 /* ProfileView.swift */; };
 		A997E69B23D55BD300E71240 /* ProfileViewTransitionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A997E69A23D55BD300E71240 /* ProfileViewTransitionController.swift */; };
 		A997E69D23D55C0100E71240 /* ProfileViewTransition.swift in Sources */ = {isa = PBXBuildFile; fileRef = A997E69C23D55C0100E71240 /* ProfileViewTransition.swift */; };
+		A9A0A0B123D65E0D00F5DFD9 /* VideoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9A0A0B023D65E0D00F5DFD9 /* VideoViewController.swift */; };
+		A9A0A0B323D65E9C00F5DFD9 /* VideoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9A0A0B223D65E9C00F5DFD9 /* VideoView.swift */; };
+		A9A0A0B523D65F1E00F5DFD9 /* MusicViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9A0A0B423D65F1E00F5DFD9 /* MusicViewController.swift */; };
+		A9A0A0B723D65F6600F5DFD9 /* MusicView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9A0A0B623D65F6600F5DFD9 /* MusicView.swift */; };
 		A9B6FB4C23CFFEEA00EC8D27 /* RecentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9B6FB4B23CFFEEA00EC8D27 /* RecentViewController.swift */; };
 		A9B6FB4E23CFFF8D00EC8D27 /* RecentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9B6FB4D23CFFF8D00EC8D27 /* RecentView.swift */; };
 		A9BA332A22EEA7E6004FCE5E /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9BA332922EEA7E6004FCE5E /* ViewController.swift */; };
@@ -193,6 +197,10 @@
 		A997E69823D54AD300E71240 /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
 		A997E69A23D55BD300E71240 /* ProfileViewTransitionController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewTransitionController.swift; sourceTree = "<group>"; };
 		A997E69C23D55C0100E71240 /* ProfileViewTransition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewTransition.swift; sourceTree = "<group>"; };
+		A9A0A0B023D65E0D00F5DFD9 /* VideoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoViewController.swift; sourceTree = "<group>"; };
+		A9A0A0B223D65E9C00F5DFD9 /* VideoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoView.swift; sourceTree = "<group>"; };
+		A9A0A0B423D65F1E00F5DFD9 /* MusicViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MusicViewController.swift; sourceTree = "<group>"; };
+		A9A0A0B623D65F6600F5DFD9 /* MusicView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MusicView.swift; sourceTree = "<group>"; };
 		A9B6FB4B23CFFEEA00EC8D27 /* RecentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecentViewController.swift; sourceTree = "<group>"; };
 		A9B6FB4D23CFFF8D00EC8D27 /* RecentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecentView.swift; sourceTree = "<group>"; };
 		A9BA332922EEA7E6004FCE5E /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -396,6 +404,8 @@
 				A9E3C69A23B4BE710057EA4D /* DemoModePopUpView.swift */,
 				A9B6FB4D23CFFF8D00EC8D27 /* RecentView.swift */,
 				A997E69823D54AD300E71240 /* ProfileView.swift */,
+				A9A0A0B223D65E9C00F5DFD9 /* VideoView.swift */,
+				A9A0A0B623D65F6600F5DFD9 /* MusicView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -418,6 +428,8 @@
 				A9E3C69823B4BE310057EA4D /* DemoModePopUpViewController.swift */,
 				A9B6FB4B23CFFEEA00EC8D27 /* RecentViewController.swift */,
 				A997E69623D54AB300E71240 /* ProfileViewController.swift */,
+				A9A0A0B023D65E0D00F5DFD9 /* VideoViewController.swift */,
+				A9A0A0B423D65F1E00F5DFD9 /* MusicViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -834,6 +846,7 @@
 				A944E483237031A90003E201 /* DirectoryEndPoint.swift in Sources */,
 				A9DE7DC1232390A300B5EE03 /* DocumentsView.swift in Sources */,
 				A9B6FB4E23CFFF8D00EC8D27 /* RecentView.swift in Sources */,
+				A9A0A0B323D65E9C00F5DFD9 /* VideoView.swift in Sources */,
 				A9EB265B2373F83400FF66E5 /* SettingsTab.swift in Sources */,
 				A9F74125234B359A00C8513D /* NetworkAlertController.swift in Sources */,
 				A944E48123702D890003E201 /* Data.swift in Sources */,
@@ -845,6 +858,7 @@
 				A9DE7DBF2323907C00B5EE03 /* DocumentsViewController.swift in Sources */,
 				A944E4872370F6120003E201 /* Image.swift in Sources */,
 				A944E48B237113260003E201 /* AssetDetailView.swift in Sources */,
+				A9A0A0B723D65F6600F5DFD9 /* MusicView.swift in Sources */,
 				A997E69B23D55BD300E71240 /* ProfileViewTransitionController.swift in Sources */,
 				A97A83CF237918A500E71747 /* AlertType.swift in Sources */,
 				A92473EE237420B00007AAF2 /* Float.swift in Sources */,
@@ -862,8 +876,10 @@
 				A9DE7DC92323BC7000B5EE03 /* EndPointType.swift in Sources */,
 				A9BA332A22EEA7E6004FCE5E /* ViewController.swift in Sources */,
 				A977556422E5547E00407385 /* UITextField.swift in Sources */,
+				A9A0A0B123D65E0D00F5DFD9 /* VideoViewController.swift in Sources */,
 				A9DE7DAD2323392500B5EE03 /* PhotoView.swift in Sources */,
 				A9F74127234B43D500C8513D /* PhotoManager.swift in Sources */,
+				A9A0A0B523D65F1E00F5DFD9 /* MusicViewController.swift in Sources */,
 				A9DE7DCF2323BDAB00B5EE03 /* ParameterEncoding.swift in Sources */,
 				A9BA332C22EEAA25004FCE5E /* Protocols.swift in Sources */,
 				A94EB87F2373BCD50083C0C8 /* Base.swift in Sources */,
