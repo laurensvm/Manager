@@ -190,9 +190,12 @@ class PhotoViewController: CollectionViewController<PhotoView> {
             guard let guardedCellAttributes = self.v.collectionView.layoutAttributesForItem(at: self.currentIndexPath) else {
                 return CGRect(x: UIScreen.main.bounds.midX, y: UIScreen.main.bounds.midY, width: 100.0, height: 100.0)
             }
+            
             //The cell was found successfully
+            let shifting: CGFloat = (self.tabBarController?.tabBar.frame.size.height ?? 88) + 5
+            
             let cell = CGRect(x: guardedCellAttributes.frame.origin.x,
-                              y: guardedCellAttributes.frame.origin.y + 64,
+                			  y: guardedCellAttributes.frame.origin.y + shifting,
                               width: guardedCellAttributes.frame.size.width,
                               height: guardedCellAttributes.frame.size.height
             )

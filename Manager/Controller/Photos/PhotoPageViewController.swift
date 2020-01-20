@@ -112,7 +112,8 @@ extension PhotoPageViewController: PhotoDetailViewTransitionDelegate  {
         
         // Dirty workaround because tabBar shifts the view up
         let shiftedRect = CGRect(x: imageRect.origin.x,
-                          y: imageRect.origin.y + 64,
+//                          y: imageRect.origin.y + 64,
+                          y: imageRect.origin.y + 88,
                           width: imageRect.size.width,
                           height: imageRect.size.height
         )
