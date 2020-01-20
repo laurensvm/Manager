@@ -11,6 +11,7 @@ import UIKit
 class SettingsViewController: CollectionViewController<SettingsView> {
     
     private let networkManager: NetworkManager
+    private let profileTransitioningDelegate = ProfileViewTransitionController()
     
     private let sections: [String] = ["General", ""]
     
@@ -32,7 +33,7 @@ class SettingsViewController: CollectionViewController<SettingsView> {
     override func collectionViewBehaviour() {
         self.items = [
             [
-                SettingsTab(name: "User", image: #imageLiteral(resourceName: "user-50-filled"), arrow: true, type: .User),
+                SettingsTab(name: "Profile", image: #imageLiteral(resourceName: "user-50-filled"), arrow: true, type: .User),
                 SettingsTab(name: "Photos", image: #imageLiteral(resourceName: "photos-50"), arrow: true, type: .Photos),
                 SettingsTab(name: "Network", image: #imageLiteral(resourceName: "cloud-50-filled"), arrow: true, type: .Network)
             ],
@@ -61,7 +62,9 @@ class SettingsViewController: CollectionViewController<SettingsView> {
         guard let settingsTab = items[indexPath.section][indexPath.item] as? SettingsTab else { return }
         switch settingsTab.type {
         case .User:
-    		break
+    		let profileViewController = ProfileViewController()
+            self.navigationController?.delegate = profileTransitioningDelegate
+            self.navigationController?.pushViewController(profileViewController, animated: true)
         case .Photos:
             let photosSettingsViewController = PhotoSettingsViewController(withNetworkManager: self.networkManager)
             self.navigationController?.pushViewController(photosSettingsViewController, animated: true)
