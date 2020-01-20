@@ -19,7 +19,7 @@ class DocumentsViewController: CollectionViewController<DocumentsView> {
         }
     }
     
-    private var directory: Directory? {
+    var directory: Directory? {
         didSet {
             guard let directory = directory else { return }
             self.getChildrenFromDirectory(withId: directory.id) { (children) in
@@ -55,18 +55,6 @@ class DocumentsViewController: CollectionViewController<DocumentsView> {
         // Add the add bar button
         self.navigationItem.setRightBarButton(self.addBarButtonItem, animated: true)
     }
-    
-//    private func getDirectories() {
-//        networkManager?.getDirectories(inDirectory: "", completion: { directories, error in
-//            if let directories = directories {
-//                self._children = directories
-//            }
-//            DispatchQueue.main.async {
-//                self.v.containsSubDirectories = !self._children.isEmpty
-//                self.v.collectionView.reloadData()
-//            }
-//        })
-//    }
     
     init(withNetworkManager networkManager: NetworkManager?, andControllerTitle controllerTitle: String = "Documents", andDirectory directory: Directory? = nil) {
         super.init()
@@ -144,7 +132,8 @@ class DocumentsViewController: CollectionViewController<DocumentsView> {
         let child = _children[indexPath.item]
         
         if let child = child as? Directory {
-            let documentsViewController = DocumentsViewController(withNetworkManager: self.networkManager, andControllerTitle: child.name, andDirectory: child)
+            let documentsViewController = DocumentsViewController(withNetworkManager: self.networkManager, andControllerTitle: child.name)
+            documentsViewController.directory = child
             self.navigationController?.pushViewController(documentsViewController, animated: true)
         }
     }
