@@ -11,9 +11,9 @@ import UIKit
 class CreateDirectoryViewController: ViewController<CreateDirectoryView> {
     
     var networkManager: NetworkManager?
-	private var directory: Int
+	private var directory: Directory
     
-    init(directory: Int) {
+    init(directory: Directory) {
 		self.directory = directory		
         super.init()
         self.modalPresentationStyle = .overCurrentContext
@@ -23,8 +23,8 @@ class CreateDirectoryViewController: ViewController<CreateDirectoryView> {
         super.viewDidLoad()
         
         self.v.delegate = self
-        self.v.didLoadDelegate()
         self.v.directory = self.directory
+        self.v.didLoadDelegate()
     }
     
     required init?(coder: NSCoder) {
@@ -47,7 +47,7 @@ extension CreateDirectoryViewController: CreateDirectoryDelegate {
         
         let name = v.directoryName.text ?? ""
         if  name != "" {
-            self.networkManager?.createDirectory(withName: name, andParentId: directory, completion: { (success, error) in
+            self.networkManager?.createDirectory(withName: name, andParentId: directory.id, completion: { (success, error) in
                 if success {
                     DispatchQueue.main.async {
                         self.v.accept(completion: {

@@ -11,7 +11,7 @@ import Photos
 
 class PhotoManager: NSObject, PHPhotoLibraryChangeObserver {
     
-    private var networkManager: NetworkManager!
+    private var networkManager: NetworkManager
     private let imageManager: PHImageManager = PHImageManager.default()
     private let options: PHImageRequestOptions = {
         let options = PHImageRequestOptions()
@@ -20,8 +20,8 @@ class PhotoManager: NSObject, PHPhotoLibraryChangeObserver {
     }()
     
     init(withNetworkManager networkManager: NetworkManager) {
-        super.init()
         self.networkManager = networkManager
+        super.init()
         
         PHPhotoLibrary.requestAuthorization { (status) in
             if status == PHAuthorizationStatus.authorized {
@@ -54,9 +54,9 @@ class PhotoManager: NSObject, PHPhotoLibraryChangeObserver {
     
     public func photoLibraryDidChange(_ changeInstance: PHChange) {
         DispatchQueue.main.async {
-            print("WWWWW")
+            print("Is Not Getting Called")
         }
-        print("DID CHANGE MONNN")
+        print("Observer Bug")
     }
     
     private func processImage(asset: PHAsset) {
@@ -81,9 +81,9 @@ class PhotoManager: NSObject, PHPhotoLibraryChangeObserver {
             
             parameters["file"] = PHAssetImageWrapper(image: image, name: name)
             
-            self.networkManager.uploadImage(parameters: parameters, completion: { json, error in                
+//            self.networkManager.uploadImage(parameters: parameters, completion: { json, error in                
 //                print(json!, error!)
-            })
+//            })
         })
     }
 }

@@ -11,7 +11,7 @@ import UIKit
 class CreateDirectoryView: View {
     
     var delegate: CreateDirectoryDelegate?
-    var directory: Int?
+    var directory: Directory?
     
     private var containerViewConstraints: [NSLayoutConstraint]!
     
@@ -90,8 +90,11 @@ class CreateDirectoryView: View {
         directoryName.delegate = delegate
         
         // Set titlelabel text
-//        titleLabel.text = "Creating new directory inside of directory \(directory)"
-        titleLabel.text = "Create Directory inside\n'root'"
+        if let dir = self.directory,
+            let name = dir.name {
+            titleLabel.text = "Creating new directory inside of directory '\(name)'"
+        }
+//        titleLabel.text = "Create Directory inside\n'root'"
     }
     
     override init(frame: CGRect) {

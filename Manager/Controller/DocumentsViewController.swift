@@ -144,7 +144,7 @@ class DocumentsViewController: CollectionViewController<DocumentsView> {
 extension DocumentsViewController {
     @objc func addDirectory(_ button: UIButton) {
         guard let directory = self.directory else { return }
-        let createDirectoryViewController = CreateDirectoryViewController(directory: directory.id)
+        let createDirectoryViewController = CreateDirectoryViewController(directory: directory)
         createDirectoryViewController.networkManager = self.networkManager
         createDirectoryViewController.presentationController?.delegate = self
         
