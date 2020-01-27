@@ -11,46 +11,46 @@ import UIKit
 class HomeView: CollectionView {
     
     private lazy var viewTitleLabel: UILabel = {
-        let lb = UILabel()
-        lb.translatesAutoresizingMaskIntoConstraints = false
-        lb.font = Theme.fonts.avenirBlack(size: 40)
-        lb.textColor = Theme.colors.baseBlack
-        lb.numberOfLines = 0
+        let lb = Label()
         lb.text = "Home"
         return lb
     }()
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        self.backgroundColor = .white
-        self.translatesAutoresizingMaskIntoConstraints = true
+        backgroundColor = .white
+        translatesAutoresizingMaskIntoConstraints = true
         setupViews()
     }
     
     override func collectionViewBehaviour() {
-        self.collectionView.register(HomeCell.self, forCellWithReuseIdentifier: baseCellId)
-        self.collectionView.isScrollEnabled = false
+        collectionView.register(HomeCell.self, forCellWithReuseIdentifier: baseCellId)
+        collectionView.isScrollEnabled = false
     }
     
     override func didLoadDelegate() {
         super.didLoadDelegate()
         
-        // Collection View
-        self.collectionView.topAnchor.constraint(equalTo: viewTitleLabel.bottomAnchor, constant: 64).isActive = true
-        self.collectionView.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 16).isActive = true
-        self.collectionView.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -16).isActive = true
-        self.collectionView.heightAnchor.constraint(equalToConstant: delegate.collectionViewHeight()).isActive = true
+        NSLayoutConstraint.activate([
+            // Collection View
+            collectionView.topAnchor.constraint(equalTo: viewTitleLabel.bottomAnchor, constant: 64),
+            collectionView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16),
+            collectionView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -16),
+            collectionView.heightAnchor.constraint(equalToConstant: delegate.collectionViewHeight()),
+        ])
     }
 	
     override func setupViews() {
         super.setupViews()
         
-        self.addSubview(viewTitleLabel)
+        addSubview(viewTitleLabel)
         
-        // View Title label
-        self.viewTitleLabel.topAnchor.constraint(equalTo: self.topAnchor, constant: 50).isActive = true
-        self.viewTitleLabel.leftAnchor.constraint(equalTo: self.leftAnchor, constant: 32).isActive = true
-        self.viewTitleLabel.rightAnchor.constraint(equalTo: self.rightAnchor, constant: 16).isActive = true
+        NSLayoutConstraint.activate([
+            // View Title label
+            viewTitleLabel.topAnchor.constraint(equalTo: topAnchor, constant: 50),
+            viewTitleLabel.leftAnchor.constraint(equalTo: leftAnchor, constant: 32),
+            viewTitleLabel.rightAnchor.constraint(equalTo: rightAnchor, constant: 16),
+        ])
         
     }
     

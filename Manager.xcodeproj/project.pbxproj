@@ -11,6 +11,7 @@
 		7C59CE6051A1A6DAB7816489 /* libPods-ManagerTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 17635363A3CCC8C41F968343 /* libPods-ManagerTests.a */; };
 		A90707DC2367CFD000CE5AED /* AlertViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A90707DB2367CFD000CE5AED /* AlertViewController.swift */; };
 		A90707DE2367D00200CE5AED /* AlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A90707DD2367D00200CE5AED /* AlertView.swift */; };
+		A912AF6F23DFA73100C00385 /* Label.swift in Sources */ = {isa = PBXBuildFile; fileRef = A912AF6E23DFA73100C00385 /* Label.swift */; };
 		A9164F97237A671B00AE96A7 /* PhotoDetailViewTransitionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9164F96237A671B00AE96A7 /* PhotoDetailViewTransitionController.swift */; };
 		A9164F99237A677400AE96A7 /* PhotoDetailViewDismissalInterationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9164F98237A677400AE96A7 /* PhotoDetailViewDismissalInterationController.swift */; };
 		A916FEAC23D2AD0C00C11D32 /* TestCredentials.swift in Sources */ = {isa = PBXBuildFile; fileRef = A916FEAB23D2AD0C00C11D32 /* TestCredentials.swift */; };
@@ -143,6 +144,7 @@
 		A243F3FC2102FE24B30C0B4B /* Pods-Manager.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Manager.release.xcconfig"; path = "Target Support Files/Pods-Manager/Pods-Manager.release.xcconfig"; sourceTree = "<group>"; };
 		A90707DB2367CFD000CE5AED /* AlertViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertViewController.swift; sourceTree = "<group>"; };
 		A90707DD2367D00200CE5AED /* AlertView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertView.swift; sourceTree = "<group>"; };
+		A912AF6E23DFA73100C00385 /* Label.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Label.swift; sourceTree = "<group>"; };
 		A9164F96237A671B00AE96A7 /* PhotoDetailViewTransitionController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoDetailViewTransitionController.swift; sourceTree = "<group>"; };
 		A9164F98237A677400AE96A7 /* PhotoDetailViewDismissalInterationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoDetailViewDismissalInterationController.swift; sourceTree = "<group>"; };
 		A916FEAB23D2AD0C00C11D32 /* TestCredentials.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestCredentials.swift; sourceTree = "<group>"; };
@@ -475,6 +477,7 @@
 				A98A40492378E2C9000C6AB9 /* CollectionView.swift */,
 				A98A404D2378E592000C6AB9 /* CollectionViewCell.swift */,
 				A9DE7DB223235F5400B5EE03 /* CollectionViewHeader.swift */,
+				A912AF6E23DFA73100C00385 /* Label.swift */,
 			);
 			path = Base;
 			sourceTree = "<group>";
@@ -858,6 +861,7 @@
 				A9DE7DBF2323907C00B5EE03 /* DocumentsViewController.swift in Sources */,
 				A944E4872370F6120003E201 /* Image.swift in Sources */,
 				A944E48B237113260003E201 /* AssetDetailView.swift in Sources */,
+				A912AF6F23DFA73100C00385 /* Label.swift in Sources */,
 				A9A0A0B723D65F6600F5DFD9 /* MusicView.swift in Sources */,
 				A997E69B23D55BD300E71240 /* ProfileViewTransitionController.swift in Sources */,
 				A97A83CF237918A500E71747 /* AlertType.swift in Sources */,

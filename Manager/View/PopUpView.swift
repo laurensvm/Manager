@@ -14,12 +14,10 @@ class PopUpView: View {
     private var inactivatedConstraints: [NSLayoutConstraint]?
     
     private lazy var titleLabel: UILabel = {
-        let lb = UILabel()
-        lb.translatesAutoresizingMaskIntoConstraints = false
+        let lb = Label()
         lb.font = Theme.fonts.avenirBlack(size: 18)
         lb.textColor = Theme.colors.lightGrey
         lb.textAlignment = .center
-        lb.numberOfLines = 0
         lb.alpha = 0
         return lb
     }()
@@ -69,19 +67,19 @@ class PopUpView: View {
         ]
         
         
-        NSLayoutConstraint.activate(self.inactivatedConstraints!)
+        NSLayoutConstraint.activate(inactivatedConstraints!)
         NSLayoutConstraint.activate([
             heightAnchor.constraint(equalToConstant: 100),
             leftAnchor.constraint(equalTo: sv.leftAnchor, constant: 16),
             rightAnchor.constraint(equalTo: sv.rightAnchor, constant: -16),
             
-            titleLabel.topAnchor.constraint(equalTo: self.topAnchor, constant: 8),
-            titleLabel.leftAnchor.constraint(equalTo: self.leftAnchor, constant: 8),
-            titleLabel.rightAnchor.constraint(equalTo: self.rightAnchor, constant: -8),
+            titleLabel.topAnchor.constraint(equalTo: topAnchor, constant: 8),
+            titleLabel.leftAnchor.constraint(equalTo: leftAnchor, constant: 8),
+            titleLabel.rightAnchor.constraint(equalTo: rightAnchor, constant: -8),
             
             completed.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 8),
-            completed.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -8),
-            completed.centerXAnchor.constraint(equalTo: self.centerXAnchor, constant: -8),
+            completed.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -8),
+            completed.centerXAnchor.constraint(equalTo: centerXAnchor, constant: -8),
             completed.widthAnchor.constraint(equalToConstant: completed.frame.height)
         ])
         

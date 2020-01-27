@@ -99,33 +99,38 @@ class AlertView: View {
         alertView.addSubview(okButton)
         
         
-        // Alert View
-        bottomConstraint = alertView.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: calculateConstant(active: false))
-        bottomConstraint.isActive = true
-        
-        alertView.heightAnchor.constraint(equalToConstant: height).isActive = true
-        alertView.leftAnchor.constraint(equalTo: self.leftAnchor, constant: 16).isActive = true
-        
         // Somehow this constraint breaks the system constraints. Setting priorities fixes it
         let rightConstraint = alertView.rightAnchor.constraint(equalTo: self.rightAnchor, constant: -16)
         rightConstraint.isActive = true
         rightConstraint.priority = UILayoutPriority(800)
         
-        // Message Label
-        messageLabel.topAnchor.constraint(equalTo: alertView.topAnchor, constant: 16).isActive = true
-        messageLabel.centerXAnchor.constraint(equalTo: alertView.centerXAnchor, constant: 0).isActive = true
-        messageLabel.heightAnchor.constraint(equalToConstant: 16).isActive = true
+        // Alert View
+        bottomConstraint = alertView.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: calculateConstant(active: false))
+        bottomConstraint.isActive = true
         
-        // Description Label
-        descriptionLabel.topAnchor.constraint(equalTo: messageLabel.bottomAnchor, constant: 0).isActive = true
-        descriptionLabel.centerXAnchor.constraint(equalTo: alertView.centerXAnchor, constant: 0).isActive = true
-        descriptionLabel.bottomAnchor.constraint(equalTo: okButton.topAnchor, constant: -8).isActive = true
         
-        // Ok Button
-        okButton.bottomAnchor.constraint(equalTo: alertView.bottomAnchor, constant: 0).isActive = true
-        okButton.heightAnchor.constraint(equalToConstant: 60).isActive = true
-        okButton.leftAnchor.constraint(equalTo: alertView.leftAnchor, constant: 0).isActive = true
-        okButton.rightAnchor.constraint(equalTo: alertView.rightAnchor, constant: 0).isActive = true
+        NSLayoutConstraint.activate([
+
+            
+            alertView.heightAnchor.constraint(equalToConstant: height),
+            alertView.leftAnchor.constraint(equalTo: self.leftAnchor, constant: 16),
+            
+            // Message Label
+            messageLabel.topAnchor.constraint(equalTo: alertView.topAnchor, constant: 16),
+            messageLabel.centerXAnchor.constraint(equalTo: alertView.centerXAnchor, constant: 0),
+            messageLabel.heightAnchor.constraint(equalToConstant: 16),
+            
+            // Description Label
+            descriptionLabel.topAnchor.constraint(equalTo: messageLabel.bottomAnchor, constant: 0),
+            descriptionLabel.centerXAnchor.constraint(equalTo: alertView.centerXAnchor, constant: 0),
+            descriptionLabel.bottomAnchor.constraint(equalTo: okButton.topAnchor, constant: -8),
+            
+            // Ok Button
+            okButton.bottomAnchor.constraint(equalTo: alertView.bottomAnchor, constant: 0),
+            okButton.heightAnchor.constraint(equalToConstant: 60),
+            okButton.leftAnchor.constraint(equalTo: alertView.leftAnchor, constant: 0),
+            okButton.rightAnchor.constraint(equalTo: alertView.rightAnchor, constant: 0),
+        ])
         
         self.layoutIfNeeded()        
     }

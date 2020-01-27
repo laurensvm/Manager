@@ -32,12 +32,9 @@ class CreateDirectoryView: View {
     }()
     
     private lazy var titleLabel: UILabel = {
-        let lb = UILabel()
-        lb.translatesAutoresizingMaskIntoConstraints = false
+        let lb = Label()
         lb.font = Theme.fonts.avenirBlack(size: 18)
-        lb.textColor = Theme.colors.baseBlack
         lb.textAlignment = .center
-        lb.numberOfLines = 0
         return lb
     }()
     

@@ -11,32 +11,32 @@ import UIKit
 class SettingsView: CollectionView {
     
     private lazy var viewTitleLabel: UILabel = {
-        let lb = UILabel()
-        lb.translatesAutoresizingMaskIntoConstraints = false
-        lb.font = Theme.fonts.avenirBlack(size: 40)
-        lb.textColor = Theme.colors.baseBlack
-        lb.numberOfLines = 0
+        let lb = Label()
         lb.text = "Settings"
         return lb
     }()
     
     override func collectionViewBehaviour() {
-        self.collectionView.register(SettingsSectionHeader.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: sectionHeaderId)
-        self.collectionView.register(SettingsCell.self, forCellWithReuseIdentifier: baseCellId)
+        collectionView.register(SettingsSectionHeader.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: sectionHeaderId)
+        collectionView.register(SettingsCell.self, forCellWithReuseIdentifier: baseCellId)
     }
     
     override func setupViews() {
         super.setupViews()
-        self.addSubview(viewTitleLabel)
+        addSubview(viewTitleLabel)
         
-        // View Title label
-        self.viewTitleLabel.topAnchor.constraint(equalTo: self.topAnchor, constant: 50).isActive = true
-        self.viewTitleLabel.leftAnchor.constraint(equalTo: self.leftAnchor, constant: 32).isActive = true
-        self.viewTitleLabel.rightAnchor.constraint(equalTo: self.rightAnchor, constant: 16).isActive = true
-        
-        self.collectionView.topAnchor.constraint(equalTo: viewTitleLabel.bottomAnchor, constant: 48).isActive = true
-        self.collectionView.leftAnchor.constraint(equalTo: self.leftAnchor, constant: 16).isActive = true
-        self.collectionView.rightAnchor.constraint(equalTo: self.rightAnchor, constant: -16).isActive = true
-        self.collectionView.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -16).isActive = true
+        NSLayoutConstraint.activate([
+            // View Title label
+            viewTitleLabel.topAnchor.constraint(equalTo: topAnchor, constant: 50),
+            viewTitleLabel.leftAnchor.constraint(equalTo: leftAnchor, constant: 32),
+            viewTitleLabel.rightAnchor.constraint(equalTo: rightAnchor, constant: 16),
+            
+            // CollectionView
+            collectionView.topAnchor.constraint(equalTo: viewTitleLabel.bottomAnchor, constant: 48),
+            collectionView.leftAnchor.constraint(equalTo: leftAnchor, constant: 16),
+            collectionView.rightAnchor.constraint(equalTo: rightAnchor, constant: -16),
+            collectionView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -16),
+        ])
+
     }
 }

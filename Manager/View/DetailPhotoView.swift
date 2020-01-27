@@ -44,9 +44,9 @@ class DetailPhotoView: UIView {
     
     var mapPin: MapPin! {
         didSet {
-            self.detailView.map.addAnnotation(mapPin)
+            detailView.map.addAnnotation(mapPin)
             
-            self.detailView.map.setCenter(mapPin.coordinate, animated: true)
+            detailView.map.setCenter(mapPin.coordinate, animated: true)
         }
     }
     
@@ -89,10 +89,10 @@ class DetailPhotoView: UIView {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        self.backgroundColor = .white
-        self.translatesAutoresizingMaskIntoConstraints = true
+        backgroundColor = .white
+        translatesAutoresizingMaskIntoConstraints = true
         
-        self.scrollView.delegate = self
+        scrollView.delegate = self
         
         setupViews()
         setConstraints()
@@ -100,16 +100,16 @@ class DetailPhotoView: UIView {
     
     func didLoadDelegate() {
         // Add gesture recognizer
-        self.tapGestureRecognizer.addTarget(delegate!, action: #selector(delegate!.didTapView(_:)))
-        self.addGestureRecognizer(self.tapGestureRecognizer)
+        tapGestureRecognizer.addTarget(delegate!, action: #selector(delegate!.didTapView(_:)))
+        addGestureRecognizer(tapGestureRecognizer)
         
-        self.swipeUpGestureRecognizer.direction = .up
-        self.swipeUpGestureRecognizer.addTarget(delegate!, action: #selector(delegate!.didSwipeUp(_:)))
-        self.addGestureRecognizer(swipeUpGestureRecognizer)
+        swipeUpGestureRecognizer.direction = .up
+        swipeUpGestureRecognizer.addTarget(delegate!, action: #selector(delegate!.didSwipeUp(_:)))
+        addGestureRecognizer(swipeUpGestureRecognizer)
         
-        self.swipeDownGestureRecognizer.direction = .down
-        self.swipeDownGestureRecognizer.addTarget(delegate!, action: #selector(delegate!.didSwipeDown(_:)))
-        self.addGestureRecognizer(swipeDownGestureRecognizer)
+        swipeDownGestureRecognizer.direction = .down
+        swipeDownGestureRecognizer.addTarget(delegate!, action: #selector(delegate!.didSwipeDown(_:)))
+        addGestureRecognizer(swipeDownGestureRecognizer)
         
     }
     
@@ -122,38 +122,39 @@ class DetailPhotoView: UIView {
     func setConstraints() {
         
         // The value of these constraints depend on the state of the view
-        self.imageLayoutConstraints = [
-            self.scrollView.topAnchor.constraint(equalTo: self.topAnchor, constant: 0),
-            self.scrollView.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: 0),
+        imageLayoutConstraints = [
+            scrollView.topAnchor.constraint(equalTo: topAnchor, constant: 0),
+            scrollView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: 0),
             
-            self.imageView.topAnchor.constraint(equalTo: scrollView.topAnchor, constant: 0),
-            self.imageView.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor, constant: 0),
-            self.detailView.topAnchor.constraint(equalTo: scrollView.bottomAnchor, constant: 0),
-            self.detailView.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: 400)
+            imageView.topAnchor.constraint(equalTo: scrollView.topAnchor, constant: 0),
+            imageView.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor, constant: 0),
+            detailView.topAnchor.constraint(equalTo: scrollView.bottomAnchor, constant: 0),
+            detailView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: 400)
         ]
-        NSLayoutConstraint.activate(self.imageLayoutConstraints)
+        NSLayoutConstraint.activate(imageLayoutConstraints)
         
-        self.detailsLayoutConstraints = [
-            self.scrollView.topAnchor.constraint(equalTo: self.topAnchor, constant: -1000),
-            self.scrollView.bottomAnchor.constraint(equalTo: self.topAnchor, constant: 0),
-//            self.imageView.topAnchor.constraint(equalTo: self.topAnchor, constant: -1000),
-//            self.imageView.bottomAnchor.constraint(equalTo: self.topAnchor, constant: 0),
-            self.detailView.topAnchor.constraint(equalTo: self.topAnchor, constant: 0),
-            self.detailView.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: 0)
+        detailsLayoutConstraints = [
+            scrollView.topAnchor.constraint(equalTo: topAnchor, constant: -1000),
+            scrollView.bottomAnchor.constraint(equalTo: topAnchor, constant: 0),
+            
+            detailView.topAnchor.constraint(equalTo: topAnchor, constant: 0),
+            detailView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: 0)
         ]
         
         
-		// These constraints should always be active
-        scrollView.leftAnchor.constraint(equalTo: self.leftAnchor, constant: 0).isActive = true
-        scrollView.rightAnchor.constraint(equalTo: self.rightAnchor, constant: 0).isActive = true
-        
-        imageView.leftAnchor.constraint(equalTo: scrollView.leftAnchor, constant: 0).isActive = true
-        imageView.rightAnchor.constraint(equalTo: scrollView.rightAnchor, constant: 0).isActive = true
-        imageView.centerXAnchor.constraint(equalTo: scrollView.centerXAnchor, constant: 0).isActive = true
-        imageView.centerYAnchor.constraint(equalTo: scrollView.centerYAnchor, constant: 0).isActive = true
-        
-        detailView.leftAnchor.constraint(equalTo: self.leftAnchor, constant: 0).isActive = true
-        detailView.rightAnchor.constraint(equalTo: self.rightAnchor, constant: 0).isActive = true
+        NSLayoutConstraint.activate([
+            // These constraints should always be active
+            scrollView.leftAnchor.constraint(equalTo: leftAnchor, constant: 0),
+            scrollView.rightAnchor.constraint(equalTo: rightAnchor, constant: 0),
+            
+            imageView.leftAnchor.constraint(equalTo: scrollView.leftAnchor, constant: 0),
+            imageView.rightAnchor.constraint(equalTo: scrollView.rightAnchor, constant: 0),
+            imageView.centerXAnchor.constraint(equalTo: scrollView.centerXAnchor, constant: 0),
+            imageView.centerYAnchor.constraint(equalTo: scrollView.centerYAnchor, constant: 0),
+            
+            detailView.leftAnchor.constraint(equalTo: leftAnchor, constant: 0),
+            detailView.rightAnchor.constraint(equalTo: rightAnchor, constant: 0),
+        ])
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -161,30 +162,30 @@ class DetailPhotoView: UIView {
     }
     
     func didSwipeUp() {
-        NSLayoutConstraint.deactivate(self.imageLayoutConstraints)
-        NSLayoutConstraint.activate(self.detailsLayoutConstraints)
+        NSLayoutConstraint.deactivate(imageLayoutConstraints)
+        NSLayoutConstraint.activate(detailsLayoutConstraints)
         
         UIView.animate(withDuration: 0.4, delay: 0, options: .curveEaseInOut, animations: {
             self.layoutIfNeeded()
         }, completion: nil)
         
-        self.detailsViewIsActive = true
+        detailsViewIsActive = true
     }
     
     func didSwipeDown() {
-        NSLayoutConstraint.deactivate(self.detailsLayoutConstraints)
-        NSLayoutConstraint.activate(self.imageLayoutConstraints)
+        NSLayoutConstraint.deactivate(detailsLayoutConstraints)
+        NSLayoutConstraint.activate(imageLayoutConstraints)
         
         UIView.animate(withDuration: 0.4, delay: 0, options: .curveEaseInOut, animations: {
             self.layoutIfNeeded()
         }, completion: nil)
         
-        self.detailsViewIsActive = false
+        detailsViewIsActive = false
     }
 }
 
 extension DetailPhotoView: UIScrollViewDelegate {
     func viewForZooming(in scrollView: UIScrollView) -> UIView? {
-        return self.imageView
+        return imageView
     }
 }

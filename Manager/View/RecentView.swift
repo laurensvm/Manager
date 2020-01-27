@@ -11,31 +11,29 @@ import UIKit
 class RecentView: CollectionView {
     
     private lazy var viewTitleLabel: UILabel = {
-        let lb = UILabel()
-        lb.translatesAutoresizingMaskIntoConstraints = false
-        lb.font = Theme.fonts.avenirBlack(size: 40)
-        lb.textColor = Theme.colors.baseBlack
-        lb.numberOfLines = 0
+        let lb = Label()
         lb.text = "Recent"
         return lb
     }()
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        self.backgroundColor = .white
-        self.translatesAutoresizingMaskIntoConstraints = true
+        backgroundColor = .white
+        translatesAutoresizingMaskIntoConstraints = true
         setupViews()
     }
     
     override func setupViews() {
         super.setupViews()
         
-        self.addSubview(viewTitleLabel)
+        addSubview(viewTitleLabel)
         
-        // View Title label
-        self.viewTitleLabel.topAnchor.constraint(equalTo: self.topAnchor, constant: 50).isActive = true
-        self.viewTitleLabel.leftAnchor.constraint(equalTo: self.leftAnchor, constant: 32).isActive = true
-        self.viewTitleLabel.rightAnchor.constraint(equalTo: self.rightAnchor, constant: 16).isActive = true
+        NSLayoutConstraint.activate([
+            // View Title label
+            viewTitleLabel.topAnchor.constraint(equalTo: topAnchor, constant: 50),
+            viewTitleLabel.leftAnchor.constraint(equalTo: leftAnchor, constant: 32),
+            viewTitleLabel.rightAnchor.constraint(equalTo: rightAnchor, constant: 16),
+        ])
         
     }
     

@@ -25,26 +25,28 @@ class PhotoSettingsView: CollectionView {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        self.translatesAutoresizingMaskIntoConstraints = true
+        translatesAutoresizingMaskIntoConstraints = true
     }
     
     override func collectionViewBehaviour() {
-        self.collectionView.collectionViewLayout = collectionViewLayout
-        self.collectionView.register(TrackChangesSettingsCell.self, forCellWithReuseIdentifier: trackChangesCellId)
-        self.collectionView.register(ImportSettingsCell.self, forCellWithReuseIdentifier: importCellId)
-        self.collectionView.register(CollectionViewHeader.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: headerId)
-        self.collectionView.clipsToBounds = true
+        collectionView.collectionViewLayout = collectionViewLayout
+        collectionView.register(TrackChangesSettingsCell.self, forCellWithReuseIdentifier: trackChangesCellId)
+        collectionView.register(ImportSettingsCell.self, forCellWithReuseIdentifier: importCellId)
+        collectionView.register(CollectionViewHeader.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: headerId)
+        collectionView.clipsToBounds = true
         
     }
     
     override func didLoadDelegate() {
         super.didLoadDelegate()
         
-        // Collection View
-        self.collectionView.topAnchor.constraint(equalTo: self.topAnchor, constant: 0).isActive = true
-        self.collectionView.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 8).isActive = true
-        self.collectionView.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -8).isActive = true
-        self.collectionView.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: 0).isActive = true
+        NSLayoutConstraint.activate([
+            // Collection View
+            collectionView.topAnchor.constraint(equalTo: topAnchor, constant: 0),
+            collectionView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 8),
+            collectionView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -8),
+            collectionView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: 0),
+        ])
     }
     
     required init?(coder aDecoder: NSCoder) {

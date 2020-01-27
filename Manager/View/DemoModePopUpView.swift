@@ -24,8 +24,7 @@ class DemoModePopUpView: View {
     }()
     
     private let demoLabel: UILabel = {
-        let lb = UILabel()
-        lb.translatesAutoresizingMaskIntoConstraints = false
+        let lb = Label()
         lb.font = Theme.fonts.avenirBlack(size: 30)
         lb.textColor = Theme.colors.baseBlack
         lb.text = "Demo Mode"
@@ -33,11 +32,9 @@ class DemoModePopUpView: View {
     }()
     
     private let infoLabel: UILabel = {
-        let lb = UILabel()
-        lb.translatesAutoresizingMaskIntoConstraints = false
+        let lb = Label()
         lb.font = UIFont.systemFont(ofSize: 13)
         lb.textColor = .lightGray
-        lb.numberOfLines = 0
         lb.textAlignment = .center
         lb.text = "I noticed that you logged in as a demo user." +
         	" This means that all POST notifications to the server," +
@@ -57,7 +54,7 @@ class DemoModePopUpView: View {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        self.backgroundColor = .clear
+        backgroundColor = .clear
         setupViews()
         setupConstraints()
     
@@ -71,26 +68,27 @@ class DemoModePopUpView: View {
     }
     
     private func setupConstraints() {
-        popOverView.leftAnchor.constraint(equalTo: self.leftAnchor, constant: 8).isActive = true
-        popOverView.rightAnchor.constraint(equalTo: self.rightAnchor, constant: -8).isActive = true
-//        popOverView.bottomAnchor.constraint(equalTo: infoLabel.bottomAnchor, constant: 32).isActive = true
-        popOverView.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: 16).isActive = true
-        popOverView.topAnchor.constraint(equalTo: robotImage.topAnchor, constant: -8).isActive = true
-//        popOverView.centerXAnchor.constraint(equalTo: self.centerXAnchor, constant: 0).isActive = true
-//        popOverView.centerYAnchor.constraint(equalTo: self.centerYAnchor, constant: 0).isActive = true
         
-        robotImage.centerXAnchor.constraint(equalTo: popOverView.centerXAnchor, constant: 0).isActive = true
-        robotImage.bottomAnchor.constraint(equalTo: demoLabel.topAnchor, constant: -8).isActive = true
-        robotImage.widthAnchor.constraint(equalToConstant: 150).isActive = true
-        NSLayoutConstraint.init(item: robotImage, attribute: .height, relatedBy: .equal, toItem: robotImage, attribute: .width, multiplier: 1, constant: 0).isActive = true
-        
-        demoLabel.bottomAnchor.constraint(equalTo: infoLabel.topAnchor, constant: -8).isActive = true
-        demoLabel.centerXAnchor.constraint(equalTo: popOverView.centerXAnchor, constant: 0).isActive = true
+        NSLayoutConstraint.activate([
+            popOverView.leftAnchor.constraint(equalTo: leftAnchor, constant: 8),
+            popOverView.rightAnchor.constraint(equalTo: rightAnchor, constant: -8),
+            popOverView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: 16),
+            popOverView.topAnchor.constraint(equalTo: robotImage.topAnchor, constant: -8),
 
-        infoLabel.bottomAnchor.constraint(equalTo: popOverView.bottomAnchor, constant: -16).isActive = true
-        infoLabel.centerXAnchor.constraint(equalTo: popOverView.centerXAnchor, constant: 0).isActive = true
-        infoLabel.leftAnchor.constraint(equalTo: popOverView.leftAnchor, constant: 16).isActive = true
-        infoLabel.rightAnchor.constraint(equalTo: popOverView.rightAnchor, constant: -16).isActive = true
+            
+            robotImage.centerXAnchor.constraint(equalTo: popOverView.centerXAnchor, constant: 0),
+            robotImage.bottomAnchor.constraint(equalTo: demoLabel.topAnchor, constant: -8),
+            robotImage.widthAnchor.constraint(equalToConstant: 150),
+            NSLayoutConstraint.init(item: robotImage, attribute: .height, relatedBy: .equal, toItem: robotImage, attribute: .width, multiplier: 1, constant: 0),
+            
+            demoLabel.bottomAnchor.constraint(equalTo: infoLabel.topAnchor, constant: -8),
+            demoLabel.centerXAnchor.constraint(equalTo: popOverView.centerXAnchor, constant: 0),
+
+            infoLabel.bottomAnchor.constraint(equalTo: popOverView.bottomAnchor, constant: -16),
+            infoLabel.centerXAnchor.constraint(equalTo: popOverView.centerXAnchor, constant: 0),
+            infoLabel.leftAnchor.constraint(equalTo: popOverView.leftAnchor, constant: 16),
+            infoLabel.rightAnchor.constraint(equalTo: popOverView.rightAnchor, constant: -16),
+        ])
         
         
     }

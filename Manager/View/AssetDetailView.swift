@@ -13,11 +13,9 @@ import CoreLocation
 class AssetDetailView: View {
     
     private let titleLabel: UILabel = {
-        let lb = UILabel()
-        lb.translatesAutoresizingMaskIntoConstraints = false
+        let lb = Label()
         lb.font = Theme.fonts.avenirBlack(size: 30)
         lb.textColor = Theme.colors.baseBlack
-        lb.numberOfLines = 0
         lb.text = "Details"
         return lb
     }()
@@ -25,39 +23,28 @@ class AssetDetailView: View {
     lazy var nameLabel: UILabel = {
         let lb = UILabel()
         lb.translatesAutoresizingMaskIntoConstraints = false
-        lb.font = Theme.fonts.avenir(size: 16)
-        lb.textColor = Theme.colors.lightGrey
         lb.numberOfLines = 0
         lb.text = "Name: "
         return lb
     }()
     
     lazy var dateLabel: UILabel = {
-        let lb = UILabel()
-        lb.translatesAutoresizingMaskIntoConstraints = false
-        lb.font = Theme.fonts.avenir(size: 16)
-        lb.textColor = Theme.colors.lightGrey
-        lb.numberOfLines = 0
+        let lb = Label()
+        lb.setDetailLabel()
         lb.text = "Date: "
         return lb
     }()
     
     lazy var descriptionLabel: UILabel = {
-        let lb = UILabel()
-        lb.translatesAutoresizingMaskIntoConstraints = false
-        lb.font = Theme.fonts.avenir(size: 16)
-        lb.textColor = Theme.colors.lightGrey
-        lb.numberOfLines = 0
+        let lb = Label()
+        lb.setDetailLabel()
         lb.text = "Description: "
         return lb
     }()
     
     lazy var sizeLabel: UILabel = {
-        let lb = UILabel()
-        lb.translatesAutoresizingMaskIntoConstraints = false
-        lb.font = Theme.fonts.avenir(size: 16)
-        lb.textColor = Theme.colors.lightGrey
-        lb.numberOfLines = 0
+        let lb = Label()
+        lb.setDetailLabel()
         lb.text = "Size: Unknown"
         return lb
     }()
@@ -71,8 +58,8 @@ class AssetDetailView: View {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        self.backgroundColor = .white
-        self.translatesAutoresizingMaskIntoConstraints = false
+        backgroundColor = .white
+        translatesAutoresizingMaskIntoConstraints = false
         
         setupViews()
         setupConstraints()
@@ -88,37 +75,41 @@ class AssetDetailView: View {
     }
     
     private func setupConstraints() {
-        // Add titleLabel
-        titleLabel.topAnchor.constraint(equalTo: self.topAnchor, constant: 16).isActive = true
-        titleLabel.rightAnchor.constraint(equalTo: self.rightAnchor, constant: -16).isActive = true
-        titleLabel.leftAnchor.constraint(equalTo: self.leftAnchor, constant: 16).isActive = true
         
-        // Add namelabel
-        nameLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 8).isActive = true
-        nameLabel.rightAnchor.constraint(equalTo: self.rightAnchor, constant: -16).isActive = true
-        nameLabel.leftAnchor.constraint(equalTo: self.leftAnchor, constant: 16).isActive = true
-        
-        // Add Date Label
-        dateLabel.topAnchor.constraint(equalTo: nameLabel.bottomAnchor, constant: 8).isActive = true
-        dateLabel.rightAnchor.constraint(equalTo: self.rightAnchor, constant: -16).isActive = true
-        dateLabel.leftAnchor.constraint(equalTo: self.leftAnchor, constant: 16).isActive = true
-        
-        // Add size label
-        sizeLabel.topAnchor.constraint(equalTo: dateLabel.bottomAnchor, constant: 8).isActive = true
-        sizeLabel.rightAnchor.constraint(equalTo: self.rightAnchor, constant: -16).isActive = true
-        sizeLabel.leftAnchor.constraint(equalTo: self.leftAnchor, constant: 16).isActive = true
-        
-        // Add Description Label
-        descriptionLabel.topAnchor.constraint(equalTo: sizeLabel.bottomAnchor, constant: 8).isActive = true
-        descriptionLabel.rightAnchor.constraint(equalTo: self.rightAnchor, constant: -16).isActive = true
-        descriptionLabel.leftAnchor.constraint(equalTo: self.leftAnchor, constant: 16).isActive = true
-        
-        // Add map
-//        map.topAnchor.constraint(equalTo: nameLabel.bottomAnchor, constant: 32).isActive = true
-        map.heightAnchor.constraint(equalToConstant: 250).isActive = true
-        map.rightAnchor.constraint(equalTo: self.rightAnchor, constant: -16).isActive = true
-        map.leftAnchor.constraint(equalTo: self.leftAnchor, constant: 16).isActive = true
-        map.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -16).isActive = true
+        NSLayoutConstraint.activate([
+          // Add titleLabel
+            titleLabel.topAnchor.constraint(equalTo: topAnchor, constant: 16),
+            titleLabel.rightAnchor.constraint(equalTo: rightAnchor, constant: -16),
+            titleLabel.leftAnchor.constraint(equalTo: leftAnchor, constant: 16),
+            
+            // Add namelabel
+            nameLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 8),
+            nameLabel.rightAnchor.constraint(equalTo: rightAnchor, constant: -16),
+            nameLabel.leftAnchor.constraint(equalTo: leftAnchor, constant: 16),
+            
+            // Add Date Label
+            dateLabel.topAnchor.constraint(equalTo: nameLabel.bottomAnchor, constant: 8),
+            dateLabel.rightAnchor.constraint(equalTo: rightAnchor, constant: -16),
+            dateLabel.leftAnchor.constraint(equalTo: leftAnchor, constant: 16),
+            
+            // Add size label
+            sizeLabel.topAnchor.constraint(equalTo: dateLabel.bottomAnchor, constant: 8),
+            sizeLabel.rightAnchor.constraint(equalTo: rightAnchor, constant: -16),
+            sizeLabel.leftAnchor.constraint(equalTo: leftAnchor, constant: 16),
+            
+            // Add Description Label
+            descriptionLabel.topAnchor.constraint(equalTo: sizeLabel.bottomAnchor, constant: 8),
+            descriptionLabel.rightAnchor.constraint(equalTo: rightAnchor, constant: -16),
+            descriptionLabel.leftAnchor.constraint(equalTo: leftAnchor, constant: 16),
+            
+            // Add map
+    //        map.topAnchor.constraint(equalTo: nameLabel.bottomAnchor, constant: 32),
+            map.heightAnchor.constraint(equalToConstant: 250),
+            map.rightAnchor.constraint(equalTo: rightAnchor, constant: -16),
+            map.leftAnchor.constraint(equalTo: leftAnchor, constant: 16),
+            map.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -16),
+        ])
+  
         
         
     }

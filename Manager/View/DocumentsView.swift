@@ -18,21 +18,15 @@ class DocumentsView: CollectionView {
     var breadCrumbTrail: [String] = []
     
     private lazy var viewTitleLabel: UILabel = {
-        let lb = UILabel()
-        lb.translatesAutoresizingMaskIntoConstraints = false
-        lb.font = Theme.fonts.avenirBlack(size: 40)
-        lb.textColor = Theme.colors.baseBlack
-        lb.numberOfLines = 0
+        let lb = Label()
         lb.text = "Documents"
         return lb
     }()
     
     lazy var breadCrumb: UILabel = {
-        let lb = UILabel()
-        lb.translatesAutoresizingMaskIntoConstraints = false
+        let lb = Label()
         lb.font = UIFont.boldSystemFont(ofSize: 16)
         lb.textColor = Theme.colors.lightGrey
-        lb.numberOfLines = 0
         return lb
     }()
     
@@ -63,71 +57,66 @@ class DocumentsView: CollectionView {
     }()
     
     override func collectionViewBehaviour() {
-        self.collectionView.collectionViewLayout = collectionViewLayout
-        self.collectionView.clipsToBounds = true
-        self.collectionView.isScrollEnabled = true
-        self.collectionView.register(FolderCell.self, forCellWithReuseIdentifier: baseCellId)
+        collectionView.collectionViewLayout = collectionViewLayout
+        collectionView.clipsToBounds = true
+        collectionView.isScrollEnabled = true
+        collectionView.register(FolderCell.self, forCellWithReuseIdentifier: baseCellId)
     }
     
     override func didLoadDelegate() {
         super.didLoadDelegate()
         
-        // CollectionView
-        self.collectionView.topAnchor.constraint(equalTo: self.breadCrumb.bottomAnchor, constant: 48).isActive = true
-        self.collectionView.leftAnchor.constraint(equalTo: self.leftAnchor, constant: 32).isActive = true
-        self.collectionView.rightAnchor.constraint(equalTo: self.rightAnchor, constant: -32).isActive = true
-        self.collectionView.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: 16).isActive = true
+        NSLayoutConstraint.activate([
+            // CollectionView
+            collectionView.topAnchor.constraint(equalTo: breadCrumb.bottomAnchor, constant: 48),
+            collectionView.leftAnchor.constraint(equalTo: leftAnchor, constant: 32),
+            collectionView.rightAnchor.constraint(equalTo: rightAnchor, constant: -32),
+            collectionView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: 16),
+        ])
     }
     
     override func setupViews() {
         super.setupViews()
         
-        self.addSubview(viewTitleLabel)
-        self.addSubview(emptyDirectory)
-        self.addSubview(emptyDirectoryImageView)
-        self.addSubview(breadCrumb)
+        addSubview(viewTitleLabel)
+        addSubview(emptyDirectory)
+        addSubview(emptyDirectoryImageView)
+        addSubview(breadCrumb)
         
  		configureActiveViews()
         
-        // View Title label
-        self.viewTitleLabel.topAnchor.constraint(equalTo: self.topAnchor, constant: 50).isActive = true
-        self.viewTitleLabel.leftAnchor.constraint(equalTo: self.leftAnchor, constant: 32).isActive = true
-        self.viewTitleLabel.rightAnchor.constraint(equalTo: self.rightAnchor, constant: 16).isActive = true
-    
+        NSLayoutConstraint.activate([
+            // View Title label
+            viewTitleLabel.topAnchor.constraint(equalTo: topAnchor, constant: 50),
+            viewTitleLabel.leftAnchor.constraint(equalTo: leftAnchor, constant: 32),
+            viewTitleLabel.rightAnchor.constraint(equalTo: rightAnchor, constant: 16),
         
-        // Empty directory
-        self.emptyDirectory.topAnchor.constraint(equalTo: self.emptyDirectoryImageView.bottomAnchor, constant: 16).isActive = true
-        self.emptyDirectory.centerXAnchor.constraint(equalTo: self.centerXAnchor).isActive = true
-        self.emptyDirectory.heightAnchor.constraint(equalToConstant: 50).isActive = true
-        
-        // Empty directory image view
-        self.emptyDirectoryImageView.centerXAnchor.constraint(equalTo: self.centerXAnchor).isActive = true
-        self.emptyDirectoryImageView.centerYAnchor.constraint(equalTo: self.centerYAnchor, constant: 25).isActive = true
-        self.emptyDirectoryImageView.heightAnchor.constraint(equalToConstant: 75).isActive = true
-        self.emptyDirectoryImageView.widthAnchor.constraint(equalToConstant: 75).isActive = true
-        
-        // BreadCrumb
-        self.breadCrumb.topAnchor.constraint(equalTo: viewTitleLabel.bottomAnchor, constant: 16).isActive = true
-        self.breadCrumb.leftAnchor.constraint(equalTo: self.leftAnchor, constant: 32).isActive = true
-        self.breadCrumb.rightAnchor.constraint(equalTo: self.rightAnchor, constant: -32).isActive = true
-//        self.breadCrumb.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: 32)
+            
+            // Empty directory
+            emptyDirectory.topAnchor.constraint(equalTo: emptyDirectoryImageView.bottomAnchor, constant: 16),
+            emptyDirectory.centerXAnchor.constraint(equalTo: centerXAnchor),
+            emptyDirectory.heightAnchor.constraint(equalToConstant: 50),
+            
+            // Empty directory image view
+            emptyDirectoryImageView.centerXAnchor.constraint(equalTo: centerXAnchor),
+            emptyDirectoryImageView.centerYAnchor.constraint(equalTo: centerYAnchor, constant: 25),
+            emptyDirectoryImageView.heightAnchor.constraint(equalToConstant: 75),
+            emptyDirectoryImageView.widthAnchor.constraint(equalToConstant: 75),
+            
+            // BreadCrumb
+            breadCrumb.topAnchor.constraint(equalTo: viewTitleLabel.bottomAnchor, constant: 16),
+            breadCrumb.leftAnchor.constraint(equalTo: leftAnchor, constant: 32),
+            breadCrumb.rightAnchor.constraint(equalTo: rightAnchor, constant: -32),
+        ])
         
     }
     
     private func configureActiveViews() {
-        if containsSubDirectories {
-            self.emptyDirectory.isHidden = true
-            self.emptyDirectoryImageView.isHidden = true
-            
-            self.collectionView.isHidden = false
-            
-        } else {
-            self.collectionView.isHidden = true
-            
-            self.emptyDirectory.isHidden = false
-            self.emptyDirectoryImageView.isHidden = false
-        }
         
-        self.collectionView.reloadData()
+        emptyDirectoryImageView.isHidden = containsSubDirectories ? true : false
+        emptyDirectory.isHidden = containsSubDirectories ? true : false
+        collectionView.isHidden = containsSubDirectories ? false : true
+        
+        collectionView.reloadData()
     }
 }

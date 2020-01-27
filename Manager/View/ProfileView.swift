@@ -13,11 +13,7 @@ class ProfileView: View {
     private let profileImageSize: CGFloat = 128
     
     lazy var viewTitleLabel: UILabel = {
-        let lb = UILabel()
-        lb.translatesAutoresizingMaskIntoConstraints = false
-        lb.font = Theme.fonts.avenirBlack(size: 40)
-        lb.textColor = Theme.colors.baseBlack
-        lb.numberOfLines = 0
+        let lb = Label()
         lb.text = "Profile"
         return lb
     }()
@@ -35,9 +31,7 @@ class ProfileView: View {
     }()
     
     lazy var usernameLabel: UILabel = {
-        let lb = UILabel()
-        lb.translatesAutoresizingMaskIntoConstraints = false
-        lb.numberOfLines = 0
+        let lb = Label()
         lb.textColor = Theme.colors.lightGrey
         lb.font = Theme.fonts.avenirBlack(size: 20)
         lb.textAlignment = .center
@@ -63,21 +57,17 @@ class ProfileView: View {
     }()
     
     let viewFilesTitleLabel: UILabel = {
-        let lb = UILabel()
-        lb.translatesAutoresizingMaskIntoConstraints = false
+        let lb = Label()
         lb.font = Theme.fonts.avenirBlack(size: 24)
         lb.textColor = Theme.colors.baseBlack
-        lb.numberOfLines = 0
         lb.text = "Your Files"
         return lb
     }()
     
     let noFilesUploaded: UILabel = {
-        let lb = UILabel()
-        lb.translatesAutoresizingMaskIntoConstraints = false
+        let lb = Label()
         lb.font = Theme.fonts.avenirBlack(size: 14)
         lb.textColor = Theme.colors.lighterGrey
-        lb.numberOfLines = 0
         lb.text = "NO FILES UPLOADED YET"
         return lb
     }()
@@ -106,15 +96,17 @@ class ProfileView: View {
         addSubview(noFilesUploaded)
         addSubview(line)
         
-        // View Title label
-        viewTitleLabel.topAnchor.constraint(equalTo: self.topAnchor, constant: 50).isActive = true
-        viewTitleLabel.leftAnchor.constraint(equalTo: self.leftAnchor, constant: 32).isActive = true
-		viewTitleLabel.rightAnchor.constraint(equalTo: self.rightAnchor, constant: 16).isActive = true
+        NSLayoutConstraint.activate([
+            // View Title label
+            viewTitleLabel.topAnchor.constraint(equalTo: topAnchor, constant: 50),
+            viewTitleLabel.leftAnchor.constraint(equalTo: leftAnchor, constant: 32),
+            viewTitleLabel.rightAnchor.constraint(equalTo: rightAnchor, constant: 16),
+        ])
         
         // Profile Image View
         NSLayoutConstraint.activate([
             profileImageView.topAnchor.constraint(equalTo: viewTitleLabel.bottomAnchor, constant: 32),
-            profileImageView.centerXAnchor.constraint(equalTo: self.centerXAnchor, constant: 0),
+            profileImageView.centerXAnchor.constraint(equalTo: centerXAnchor, constant: 0),
             profileImageView.heightAnchor.constraint(equalToConstant: profileImageSize),
             NSLayoutConstraint.init(item: profileImageView, attribute: .width, relatedBy: .equal, toItem: profileImageView, attribute: .height, multiplier: 1, constant: 0)
         ])
@@ -124,32 +116,32 @@ class ProfileView: View {
         // Username Label
         NSLayoutConstraint.activate([
             usernameLabel.topAnchor.constraint(equalTo: profileImageView.bottomAnchor, constant: 24),
-            usernameLabel.centerXAnchor.constraint(equalTo: self.centerXAnchor, constant: 0),
+            usernameLabel.centerXAnchor.constraint(equalTo: centerXAnchor, constant: 0),
         ])
         
         // Files containerView
         NSLayoutConstraint.activate([
             filesView.topAnchor.constraint(equalTo: viewTitleLabel.bottomAnchor, constant: 32 + profileImageSize / 2),
-            filesView.leftAnchor.constraint(equalTo: self.leftAnchor, constant: 0),
-            filesView.rightAnchor.constraint(equalTo: self.rightAnchor, constant: 0),
-            filesView.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: 100),
+            filesView.leftAnchor.constraint(equalTo: leftAnchor, constant: 0),
+            filesView.rightAnchor.constraint(equalTo: rightAnchor, constant: 0),
+            filesView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: 100),
         ])
         
         // View Files label
         NSLayoutConstraint.activate([
             viewFilesTitleLabel.topAnchor.constraint(equalTo: usernameLabel.bottomAnchor, constant: 48),
-            viewFilesTitleLabel.leftAnchor.constraint(equalTo: self.leftAnchor, constant: 32),
-            viewFilesTitleLabel.rightAnchor.constraint(equalTo: self.rightAnchor, constant: 16)
+            viewFilesTitleLabel.leftAnchor.constraint(equalTo: leftAnchor, constant: 32),
+            viewFilesTitleLabel.rightAnchor.constraint(equalTo: rightAnchor, constant: 16)
         ])
         
         // No Files Uploaded + Line
         NSLayoutConstraint.activate([
             line.topAnchor.constraint(equalTo: viewFilesTitleLabel.bottomAnchor, constant: 16),
-            line.leftAnchor.constraint(equalTo: self.leftAnchor, constant: 48),
-            line.rightAnchor.constraint(equalTo: self.rightAnchor, constant: -48),
+            line.leftAnchor.constraint(equalTo: leftAnchor, constant: 48),
+            line.rightAnchor.constraint(equalTo: rightAnchor, constant: -48),
             line.heightAnchor.constraint(equalToConstant: 1),
             
-            noFilesUploaded.centerXAnchor.constraint(equalTo: self.centerXAnchor),
+            noFilesUploaded.centerXAnchor.constraint(equalTo: centerXAnchor),
             noFilesUploaded.topAnchor.constraint(equalTo: line.bottomAnchor, constant: 128)
         ])
     }
