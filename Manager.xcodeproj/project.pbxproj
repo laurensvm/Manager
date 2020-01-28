@@ -14,7 +14,6 @@
 		A912AF6F23DFA73100C00385 /* Label.swift in Sources */ = {isa = PBXBuildFile; fileRef = A912AF6E23DFA73100C00385 /* Label.swift */; };
 		A9164F97237A671B00AE96A7 /* PhotoDetailViewTransitionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9164F96237A671B00AE96A7 /* PhotoDetailViewTransitionController.swift */; };
 		A9164F99237A677400AE96A7 /* PhotoDetailViewDismissalInterationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9164F98237A677400AE96A7 /* PhotoDetailViewDismissalInterationController.swift */; };
-		A916FEAC23D2AD0C00C11D32 /* TestCredentials.swift in Sources */ = {isa = PBXBuildFile; fileRef = A916FEAB23D2AD0C00C11D32 /* TestCredentials.swift */; };
 		A92473EE237420B00007AAF2 /* Float.swift in Sources */ = {isa = PBXBuildFile; fileRef = A92473ED237420B00007AAF2 /* Float.swift */; };
 		A92473F0237423A40007AAF2 /* PhotoSettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A92473EF237423A40007AAF2 /* PhotoSettingsViewController.swift */; };
 		A92473F2237423E80007AAF2 /* PhotoSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A92473F1237423E80007AAF2 /* PhotoSettingsView.swift */; };
@@ -828,7 +827,6 @@
 				A9DE7DDE2323C5D900B5EE03 /* ThumbnailImage.swift in Sources */,
 				A997E69523D51E5700E71240 /* File.swift in Sources */,
 				A98A404A2378E2C9000C6AB9 /* CollectionView.swift in Sources */,
-				A916FEAC23D2AD0C00C11D32 /* TestCredentials.swift in Sources */,
 				A9DE7DEA23248C3000B5EE03 /* UserDefaults.swift in Sources */,
 				A92FF2C2237158B300F91C2F /* PHAssetImageWrapper.swift in Sources */,
 				A944E47D237022720003E201 /* AppConfig.swift in Sources */,
