@@ -47,6 +47,7 @@ open class BubbleTabBar: UITabBar {
         super.init(frame: frame)
         self.shadowImage = UIImage()
         self.backgroundImage = UIImage()
+        self.clipsToBounds = true
         configure()
     }
     

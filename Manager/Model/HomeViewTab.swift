@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct HomeViewTab {
+struct HomeViewTab: CollectionViewItem {
     let name: String
     let imageName: String
     let capacity: Float

@@ -8,9 +8,9 @@
 
 import UIKit
 
-class FolderCell: UICollectionViewCell {
+class FolderCell: CollectionViewCell {
     
-    private let folderImageView: UIImageView = {
+    let folderImageView: UIImageView = {
         let iv = UIImageView()
         iv.clipsToBounds = true
         iv.contentMode = UIView.ContentMode.scaleAspectFit
@@ -30,14 +30,9 @@ class FolderCell: UICollectionViewCell {
         return lb
     }()
     
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-        self.translatesAutoresizingMaskIntoConstraints = false
+    override func setupViews() {
+        super.setupViews()
         
-        setupViews()
-    }
-    
-    private func setupViews() {
         self.addSubview(folderImageView)
         self.addSubview(folderName)
         
@@ -51,10 +46,6 @@ class FolderCell: UICollectionViewCell {
         self.folderName.leftAnchor.constraint(equalTo: self.leftAnchor, constant: 4).isActive = true
         self.folderName.rightAnchor.constraint(equalTo: self.rightAnchor, constant: -4).isActive = true
         self.folderName.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -4).isActive = true
-    }
-    
-    required init?(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
     }
     
 }

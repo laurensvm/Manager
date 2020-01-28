@@ -12,20 +12,27 @@ import UIKit
 
 class LoginViewController: ViewController<LoginView> {
     
-    var networkManager: NetworkManager!
+    private let networkManager: NetworkManager
+    private let transitionDelegate: DemoTransitionController = DemoTransitionController()
+    private let loginCompletion: (() -> ())!
     
     override var preferredStatusBarStyle: UIStatusBarStyle {
-        return .lightContent
+        if #available(iOS 13, *) {
+            return .darkContent
+        }
+        return .default
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        customView.delegate = self
+        v.delegate = self
+        v.didLoadDelegate()
     }
     
-    init(networkManager: NetworkManager) {
-        super.init(nibName: nil, bundle: nil)
+    init(networkManager: NetworkManager, onLoginCompletion completion: @escaping () -> ()) {
         self.networkManager = networkManager
+        self.loginCompletion = completion
+        super.init()
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -36,17 +43,54 @@ class LoginViewController: ViewController<LoginView> {
 extension LoginViewController: LoginViewDelegate {
     func loginView(_ view: LoginView, didTapLoginButton button: UIButton) {
         
-        let username = customView.username.lowercased()
-        let password = customView.password
+//        let username = AppConfig.username
+//        let password = AppConfig.password
+        let username = v.username.lowercased()
+        let password = v.password
         
-        networkManager.credentialManager.login(username: username, password: password, completion: { successful in
+        
+        networkManager.credentialManager.login(username: username, password: password, completion: { successful, error in
             DispatchQueue.main.async {
-                self.customView.indicatorView.stopAnimating()
+                self.v.indicatorView.stopAnimating()
                 if successful {
-                    self.dismiss(animated: true, completion: nil)
+                    self.loginCompletion()
+                    
+                    if AppConfig.isDemoUser {
+                        let demoModeVC = DemoModePopUpViewController()
+                        demoModeVC.transitioningDelegate = self.transitionDelegate
+                        self.present(demoModeVC, animated: true, completion: nil)
+
+                        // Dismiss
+                        DispatchQueue.main.asyncAfter(deadline: .now() + self.transitionDelegate.seconds, execute: {
+                            demoModeVC.dismiss(animated: true, completion: {
+                            	self.dismiss(animated: true, completion: nil)
+                            })
+                        })
+                    } else {
+                         self.dismiss(animated: true, completion: nil)
+                    }
+                
+                    
+                   
+                    
+                } else {
+                    let alertViewController = AlertViewController(withType: .error, andMessage: error)
+                    self.present(alertViewController, animated: false, completion: nil)
                 }
             }
         })
+    }
+}
+
+extension LoginViewController {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        self.view.endEditing(true)
+        return false
+    }
+    
+    func dissmissKeyBoard(_ sender: UITapGestureRecognizer) {
+//        customView.usernameTextField.resignFirstResponder()
+//        customView.passwordTextField.resignFirstResponder()
     }
 }
 

@@ -19,12 +19,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         setupApplicationHierarchy()
         
-        // Handle the document uploads from the PHAsset library here
-        DispatchQueue.global(qos: DispatchQoS.QoSClass.background).async {
-            let photoManager = PhotoManager(withNetworkManager: self.networkManager)
-            photoManager.beginImportingAssets()
-        }
-        
         return true
     }
     
@@ -40,11 +34,10 @@ extension AppDelegate {
         BarButtonItemAppearance.setTitleTextAttributes(attributes, for: .highlighted)
         
         // Temporary fill up for the tabbar controller
-        let rootViewController3 = HomeViewController(withNetworkManager: networkManager)
-        rootViewController3.tabBarItem = UITabBarItem(title: "Recent", image: #imageLiteral(resourceName: "clock"), tag: 2)
-        let rootViewController4 = HomeViewController(withNetworkManager: networkManager)
-        rootViewController4.tabBarItem = UITabBarItem(title: "Settings", image: #imageLiteral(resourceName: "menu"), tag: 3)
-        let tabBarController = BubbleTabBarController()
+        let recentViewController = RecentViewController(withNetworkManager: networkManager)
+        recentViewController.tabBarItem = UITabBarItem(title: "Recent", image: #imageLiteral(resourceName: "clock"), tag: 2)
+        let recentViewControllerController = CustomNavigationController(navigationBarClass: CustomNavigationBar.self, toolbarClass: nil)
+        recentViewControllerController.viewControllers = [recentViewController]
         
         // Setup home view with navigation controller
         let homeViewController = HomeViewController(withNetworkManager: networkManager)
@@ -53,27 +46,52 @@ extension AppDelegate {
         homeViewNavigationController.viewControllers = [homeViewController]
         
         // Setup documents view with navigation controller
-        let documentsViewController = DocumentsViewController(withNetworkManager: networkManager, andControllerTitle    : "Documents", andPath: nil)
+        let documentsViewController = DocumentsViewController(withNetworkManager: networkManager, andControllerTitle: "Documents")
         documentsViewController.tabBarItem = UITabBarItem(title: "Documents", image: #imageLiteral(resourceName: "folder"), tag: 1)
         let documentsViewNavigationController = CustomNavigationController(navigationBarClass: CustomNavigationBar.self, toolbarClass: nil)
         documentsViewNavigationController.viewControllers = [documentsViewController]
         
+        // Setup settings view with navigation controller
+        let settingsViewController = SettingsViewController(withNetworkManager: networkManager)
+        settingsViewController.tabBarItem = UITabBarItem(title: "Settings", image: #imageLiteral(resourceName: "menu"), tag: 3)
+        let settingsViewNavigationController = CustomNavigationController(navigationBarClass: CustomNavigationBar.self,
+                                                                          toolbarClass: nil)
+        settingsViewNavigationController.viewControllers = [settingsViewController]
+        
+        let tabBarController = BubbleTabBarController()
         tabBarController.viewControllers = [
             homeViewNavigationController,
             documentsViewNavigationController,
-            rootViewController3,
-            rootViewController4
+            recentViewControllerController,
+            settingsViewNavigationController
         ]
         tabBarController.tabBar.tintColor = Theme.colors.baseOrange
         
         self.window = UIWindow(frame: UIScreen.main.bounds)
+        self.window?.backgroundColor = .white
         self.window?.rootViewController = tabBarController
         self.window?.makeKeyAndVisible()
         
-        if !networkManager.credentialManager.hasValidCredentials() {
-            let loginViewController = LoginViewController(networkManager: networkManager)
-            tabBarController.present(loginViewController, animated: false, completion: nil)
-        }
+        presentLoginScreen(rootViewController: tabBarController)
+    }
+    
+    func setupPhotoManager() {
+        
+        // Handle the document uploads from the PHAsset library here
+//        DispatchQueue.global(qos: DispatchQoS.QoSClass.background).async {
+//            let photoManager = PhotoManager(withNetworkManager: self.networkManager)
+//            photoManager.beginImportingAssets()
+//        }
+    }
+    
+    func presentLoginScreen(rootViewController: UITabBarController, animated: Bool = false) {
+//        if !networkManager.credentialManager.hasValidCredentials() {
+            let loginViewController = LoginViewController(networkManager: networkManager, onLoginCompletion: setupPhotoManager)
+            loginViewController.modalPresentationStyle = .fullScreen
+            rootViewController.present(loginViewController, animated: animated, completion: {
+                rootViewController.selectedIndex = 0
+            })
+//        }
     }
 
 }

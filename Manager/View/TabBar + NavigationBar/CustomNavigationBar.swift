@@ -21,8 +21,18 @@ class CustomNavigationBar: UINavigationBar {
     
     private func configure() {
         self.isTranslucent = false
-        self.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
-        self.shadowImage = UIImage()
         self.tintColor = Theme.colors.baseBlack
+        
+        if #available(iOS 13.3, *) {
+            let navigationBarAppearence = UINavigationBarAppearance()
+            navigationBarAppearence.shadowColor = .clear
+            navigationBarAppearence.backgroundColor = .white
+            self.backgroundColor = .white
+            self.scrollEdgeAppearance = navigationBarAppearence
+            self.standardAppearance = navigationBarAppearence
+        } else {
+            self.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
+            self.shadowImage = UIImage()
+        }
     }
 }

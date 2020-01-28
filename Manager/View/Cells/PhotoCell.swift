@@ -8,7 +8,15 @@
 
 import UIKit
 
-class PhotoCell: UICollectionViewCell {
+class PhotoCell: CollectionViewCell {
+    
+    override var item: CollectionViewItem? {
+        didSet {
+            if let thumbnail = item as? ThumbnailImage {
+                imageView.image = thumbnail.image
+            }
+        }
+    }
     
     let imageView: UIImageView = {
         let iv = UIImageView()
@@ -19,23 +27,12 @@ class PhotoCell: UICollectionViewCell {
         return iv
     }()
     
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-        self.translatesAutoresizingMaskIntoConstraints = false
-        
-        setupViews()
-    }
-    
-    private func setupViews() {
+    override func setupViews() {
         self.addSubview(imageView)
     
         self.imageView.topAnchor.constraint(equalTo: self.topAnchor, constant: 0).isActive = true
         self.imageView.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: 0).isActive = true
         self.imageView.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 0).isActive = true
         self.imageView.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: 0).isActive = true
-    }
-    
-    required init?(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
     }
 }

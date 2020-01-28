@@ -9,8 +9,51 @@
 import UIKit
 
 class DetailPhotoView: UIView {
+    static let KILOBYTE: Int = 1024
+    
+    private let formatter: DateFormatter = {
+        let df = DateFormatter()
+        df.dateFormat = "dd-MM-YYYY"
+        return df
+    }()
     
     var delegate: DetailPhotoDelegate?
+    
+    var image: Image? {
+        didSet {
+            DispatchQueue.main.async {
+                self.imageView.image = self.image?.imageData
+                
+                self.detailView.nameLabel.text? = "Name: \(self.image?.name ?? "Unknown")"
+                
+                if let timestamp = self.image?.timestamp {
+                    self.detailView.dateLabel.text? = "Date: \(self.formatter.string(from: timestamp))"
+                }
+                
+                if let description = self.image?._description {
+                    self.detailView.descriptionLabel.text = "Description: \(description)"
+                }
+                
+                if let size = self.image?.size {
+                    let sizeInMegaBytes = Float(size) / Float(DetailPhotoView.KILOBYTE * DetailPhotoView.KILOBYTE)
+                    self.detailView.sizeLabel.text = "Size: \(sizeInMegaBytes.truncate(places: 2)) MB"
+                }
+            }
+        }
+    }
+    
+    var mapPin: MapPin! {
+        didSet {
+            detailView.map.addAnnotation(mapPin)
+            
+            detailView.map.setCenter(mapPin.coordinate, animated: true)
+        }
+    }
+    
+    private var imageLayoutConstraints: [NSLayoutConstraint] = []
+    private var detailsLayoutConstraints: [NSLayoutConstraint] = []
+    
+    var detailsViewIsActive: Bool = false
     
     var tapGestureRecognizer = UITapGestureRecognizer()
     var swipeUpGestureRecognizer = UISwipeGestureRecognizer()
@@ -28,10 +71,28 @@ class DetailPhotoView: UIView {
         return iv
     }()
     
+    let scrollView: UIScrollView = {
+        let sv = UIScrollView()
+        sv.translatesAutoresizingMaskIntoConstraints = false
+        sv.minimumZoomScale = 1.0
+        sv.maximumZoomScale = 4.0
+        sv.alwaysBounceVertical = false
+        sv.alwaysBounceHorizontal = false
+        sv.showsVerticalScrollIndicator = true
+        return sv
+    }()
+    
+    let detailView: AssetDetailView = {
+        let v = AssetDetailView()
+        return v
+    }()
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
-        self.backgroundColor = .white
-        self.translatesAutoresizingMaskIntoConstraints = true
+        backgroundColor = .white
+        translatesAutoresizingMaskIntoConstraints = true
+        
+        scrollView.delegate = self
         
         setupViews()
         setConstraints()
@@ -39,32 +100,61 @@ class DetailPhotoView: UIView {
     
     func didLoadDelegate() {
         // Add gesture recognizer
-        self.tapGestureRecognizer.addTarget(delegate!, action: #selector(delegate!.didTapView(_:)))
-        self.addGestureRecognizer(self.tapGestureRecognizer)
+        tapGestureRecognizer.addTarget(delegate!, action: #selector(delegate!.didTapView(_:)))
+        addGestureRecognizer(tapGestureRecognizer)
         
-        self.swipeUpGestureRecognizer.direction = .up
-        self.swipeUpGestureRecognizer.addTarget(delegate!, action: #selector(delegate!.didSwipeUp(_:)))
-        self.addGestureRecognizer(swipeUpGestureRecognizer)
+        swipeUpGestureRecognizer.direction = .up
+        swipeUpGestureRecognizer.addTarget(delegate!, action: #selector(delegate!.didSwipeUp(_:)))
+        addGestureRecognizer(swipeUpGestureRecognizer)
         
-        self.swipeDownGestureRecognizer.direction = .down
-        self.swipeDownGestureRecognizer.addTarget(delegate!, action: #selector(delegate!.didSwipeDown(_:)))
-        self.addGestureRecognizer(swipeDownGestureRecognizer)
+        swipeDownGestureRecognizer.direction = .down
+        swipeDownGestureRecognizer.addTarget(delegate!, action: #selector(delegate!.didSwipeDown(_:)))
+        addGestureRecognizer(swipeDownGestureRecognizer)
         
     }
     
     private func setupViews() {
-        self.addSubview(imageView)
+        addSubview(scrollView)
+        scrollView.addSubview(imageView)
+        addSubview(detailView)
     }
     
     func setConstraints() {
-        self.imageView.leftAnchor.constraint(equalTo: self.leftAnchor, constant: 0).isActive = true
-        self.imageView.rightAnchor.constraint(equalTo: self.rightAnchor, constant: 0).isActive = true
         
-        topConstraint = self.imageView.topAnchor.constraint(equalTo: self.topAnchor, constant: 0)
-        topConstraint.isActive = true
-        bottomConstraint = self.imageView.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: 0)
-        bottomConstraint.isActive = true
-//        heightConstraint = self.imageView.heightAnchor.constraint(equalToConstant: 250)
+        // The value of these constraints depend on the state of the view
+        imageLayoutConstraints = [
+            scrollView.topAnchor.constraint(equalTo: topAnchor, constant: 0),
+            scrollView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: 0),
+            
+            imageView.topAnchor.constraint(equalTo: scrollView.topAnchor, constant: 0),
+            imageView.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor, constant: 0),
+            detailView.topAnchor.constraint(equalTo: scrollView.bottomAnchor, constant: 0),
+            detailView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: 400)
+        ]
+        NSLayoutConstraint.activate(imageLayoutConstraints)
+        
+        detailsLayoutConstraints = [
+            scrollView.topAnchor.constraint(equalTo: topAnchor, constant: -1000),
+            scrollView.bottomAnchor.constraint(equalTo: topAnchor, constant: 0),
+            
+            detailView.topAnchor.constraint(equalTo: topAnchor, constant: 0),
+            detailView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: 0)
+        ]
+        
+        
+        NSLayoutConstraint.activate([
+            // These constraints should always be active
+            scrollView.leftAnchor.constraint(equalTo: leftAnchor, constant: 0),
+            scrollView.rightAnchor.constraint(equalTo: rightAnchor, constant: 0),
+            
+            imageView.leftAnchor.constraint(equalTo: scrollView.leftAnchor, constant: 0),
+            imageView.rightAnchor.constraint(equalTo: scrollView.rightAnchor, constant: 0),
+            imageView.centerXAnchor.constraint(equalTo: scrollView.centerXAnchor, constant: 0),
+            imageView.centerYAnchor.constraint(equalTo: scrollView.centerYAnchor, constant: 0),
+            
+            detailView.leftAnchor.constraint(equalTo: leftAnchor, constant: 0),
+            detailView.rightAnchor.constraint(equalTo: rightAnchor, constant: 0),
+        ])
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -72,22 +162,30 @@ class DetailPhotoView: UIView {
     }
     
     func didSwipeUp() {
-        bottomConstraint.constant = -250
-        topConstraint.constant = -250
+        NSLayoutConstraint.deactivate(imageLayoutConstraints)
+        NSLayoutConstraint.activate(detailsLayoutConstraints)
         
-        UIView.animate(withDuration: 0.3, delay: 0, options: .curveEaseInOut, animations: {
+        UIView.animate(withDuration: 0.4, delay: 0, options: .curveEaseInOut, animations: {
             self.layoutIfNeeded()
         }, completion: nil)
+        
+        detailsViewIsActive = true
     }
     
     func didSwipeDown() {
-        bottomConstraint.constant = 0
-        topConstraint.constant = 0
+        NSLayoutConstraint.deactivate(detailsLayoutConstraints)
+        NSLayoutConstraint.activate(imageLayoutConstraints)
         
-        UIView.animate(withDuration: 0.3, delay: 0, options: .curveEaseInOut, animations: {
+        UIView.animate(withDuration: 0.4, delay: 0, options: .curveEaseInOut, animations: {
             self.layoutIfNeeded()
         }, completion: nil)
+        
+        detailsViewIsActive = false
     }
-    
-    
+}
+
+extension DetailPhotoView: UIScrollViewDelegate {
+    func viewForZooming(in scrollView: UIScrollView) -> UIView? {
+        return imageView
+    }
 }

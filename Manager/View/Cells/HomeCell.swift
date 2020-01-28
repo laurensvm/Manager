@@ -9,7 +9,18 @@
 
 import UIKit
 
-class HomeCell: UICollectionViewCell {
+class HomeCell: CollectionViewCell {
+    
+    override var item: CollectionViewItem? {
+        didSet {
+            if let item = item as? HomeViewTab {
+                title.text = item.name
+                storageLabel.text = "\(Int(item.size)) GB"
+                progressView.setProgress(item.size / item.capacity, animated: true)
+                pictureImageView.image = UIImage(named: item.imageName)
+            }
+        }
+    }
     
     private lazy var pictureView: UIView = {
         let v = UIView()
@@ -54,19 +65,16 @@ class HomeCell: UICollectionViewCell {
         return lb
     }()
     
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-
-        setupViews()
+    override func setupViews() {
+        super.setupViews()
         
-    }
-    
-    
-    private func setupViews() {
-        // Configure superview
-        self.translatesAutoresizingMaskIntoConstraints = false
-        self.backgroundColor = Theme.colors.superLightGrey
+        // Setup shadow
         self.layer.cornerRadius = 15
+        self.layer.masksToBounds = false
+        self.layer.shadowColor = Theme.colors.lightGrey.cgColor
+        self.layer.shadowOpacity = 0.8
+        self.layer.shadowOffset = .zero
+        self.layer.shadowRadius = 5
         
         
         self.addSubview(pictureView)
@@ -97,9 +105,5 @@ class HomeCell: UICollectionViewCell {
         self.storageLabel.topAnchor.constraint(equalTo: self.topAnchor, constant: 16).isActive = true
         self.storageLabel.leftAnchor.constraint(equalTo: title.rightAnchor, constant: 16).isActive = true
         
-    }
-    
-    required init?(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
     }
 }

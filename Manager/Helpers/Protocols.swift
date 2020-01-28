@@ -8,19 +8,40 @@
 
 import UIKit
 
-protocol LoginViewDelegate: class {
+@objc protocol LoginViewDelegate: UITextFieldDelegate {
     func loginView(_ view: LoginView, didTapLoginButton button: UIButton)
+    @objc func dissmissKeyBoard(_ sender: UITapGestureRecognizer)
 }
 
-@objc protocol DocumentsDelegate: class {
-    @objc func addDirectory(_ button: UIButton)
+protocol CollectionViewItem {}
+
+protocol AlertViewDelegate: class {
+    func dismissViewController()
 }
 
-protocol CollectionViewDelegate: UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
+protocol SwitchDelegate {
+    func didTapSwitch(_ sender: UISwitch)
+}
+
+protocol PhotoDetailViewTransitionDelegate: class {
+    func transitionWillStartWith(animator: PhotoDetailViewTransition)
+    func transitionDidEndWith(animator: PhotoDetailViewTransition)
+    func referenceImageView(for animator: PhotoDetailViewTransition) -> UIImageView?
+    func referenceImageViewFrameInTransitioningView(for animator: PhotoDetailViewTransition) -> CGRect?
+}
+
+protocol PhotoPageViewControllerDelegate: class {
+    func containerViewController(_ containerViewController: PhotoPageViewController, indexDidUpdate currentIndex: Int)
+}
+
+
+@objc protocol CreateDirectoryDelegate: UITextFieldDelegate {
+    @objc func didTapCreateDirectory(_: UIButton)
+    @objc func removeSelf(_ sender: UITapGestureRecognizer?)
+}
+
+protocol CollectionViewDelegate: UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, UICollectionViewDataSourcePrefetching {
     func collectionViewHeight() -> CGFloat
-}
-
-protocol PhotoViewDelegate: UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
 }
 
 protocol BreadCrumbViewController {

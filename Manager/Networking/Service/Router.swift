@@ -51,14 +51,21 @@ class Router<EndPoint: EndPointType>: NetworkRouter {
             case .requestParameters(bodyParameters: let bodyParameters, urlParameters: let urlParameters):
                 try self.configureParameters(bodyParameters: bodyParameters,
                                              urlParameters: urlParameters,
+                                             formDataParameters: nil,
                                              request: &request)
             case .requestParametersAndHeaders(bodyParameters: let bodyParameters, urlParameters: let urlParameters, additionalHeaders: let additionalHeaders):
                 self.addAdditionalHeaders(additionalHeaders, request: &request)
                 try self.configureParameters(bodyParameters: bodyParameters,
                                              urlParameters: urlParameters,
+                                             formDataParameters: nil,
                                              request: &request)
             case .requestHeaders(headers: let headers):
                 self.addAdditionalHeaders(headers, request: &request)
+            case .requestFormDataParameters(formDataParameters: let formDataParameters):
+                try self.configureParameters(bodyParameters: nil,
+                                             urlParameters: nil,
+                                             formDataParameters: formDataParameters,
+                                             request: &request)
             }
             return request
             
@@ -67,13 +74,16 @@ class Router<EndPoint: EndPointType>: NetworkRouter {
         }
     }
     
-    fileprivate func configureParameters(bodyParameters: Parameters?, urlParameters: Parameters?, request: inout URLRequest) throws {
+    fileprivate func configureParameters(bodyParameters: Parameters?, urlParameters: Parameters?, formDataParameters: Parameters?, request: inout URLRequest) throws {
         do {
             if let bodyParameters = bodyParameters {
                 try JSONParameterEncoder.encode(urlRequest: &request, with: bodyParameters)
             }
             if let urlParameters = urlParameters {
                 try URLParameterEncoder.encode(urlRequest: &request, with: urlParameters)
+            }
+            if let formDataParamters = formDataParameters {
+                try FormDataEncoding.encode(urlRequest: &request, with: formDataParamters)
             }
         } catch {
             throw error

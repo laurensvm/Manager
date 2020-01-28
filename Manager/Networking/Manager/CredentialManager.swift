@@ -20,12 +20,7 @@ class CredentialManager: NSObject {
     
     private var token: Token?
     
-    private let protectionSpace = URLProtectionSpace(
-        host: "127.0.0.1:5000",
-        port: 5000,
-        protocol: "http",
-        realm: nil,
-        authenticationMethod: NSURLAuthenticationMethodHTTPBasic)
+    private let protectionSpace = AppConfig.protectionSpace
     
     override init() {
         super.init()
@@ -63,22 +58,30 @@ class CredentialManager: NSObject {
         refreshTokenIfNeeded()
     }
     
-    func login(username: String, password: String, completion: @escaping (Bool) -> ()) {
+    func login(username: String, password: String, completion: @escaping (Bool, String?) -> ()) {
         
         setCredentials(username: username, password: password)
         
         delegate?.getToken(completion: { error, token in
             if error != nil {
-                print("Error: \(error!)")
+                completion(false, error)
             }
             
             if let token = token {
                 self.token = token
-                completion(true)
+                self.getUserObject()
+                completion(true, nil)
             } else {
-                completion(false)
+                completion(false, error)
             }
             
+        })
+    }
+    
+    private func getUserObject() {
+        guard let username = storage.defaultCredential(for: protectionSpace)?.user else { return }
+        delegate?.getUser(byUsername: username, completion: { user, error in
+            Session.shared.user = user
         })
     }
     
@@ -120,5 +123,11 @@ class CredentialManager: NSObject {
             return true
         }
         return false
+    }
+    
+    func signOut() {
+        self.removeCredentials()
+        Session.shared.user = nil
+        
     }
 }
