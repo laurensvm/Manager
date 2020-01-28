@@ -43,10 +43,10 @@ class LoginViewController: ViewController<LoginView> {
 extension LoginViewController: LoginViewDelegate {
     func loginView(_ view: LoginView, didTapLoginButton button: UIButton) {
         
-        let username = AppConfig.username
-        let password = AppConfig.password
-//        let username = customView.username.lowercased()
-//        let passsword = customView.password
+//        let username = AppConfig.username
+//        let password = AppConfig.password
+        let username = v.username.lowercased()
+        let password = v.password
         
         
         networkManager.credentialManager.login(username: username, password: password, completion: { successful, error in
